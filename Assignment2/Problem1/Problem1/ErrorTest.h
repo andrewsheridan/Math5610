@@ -18,6 +18,7 @@ void testRealAbsolute() {
 
 void testRealAbsolute(double number, double approximation) {
 	double result = realAbsolute(number, approximation);
+	std::cout << "|" << number << " - " << approximation << "|" << std::endl;
 	std::cout << "Result: " << result << std::endl << std::endl;
 }
 
@@ -47,6 +48,7 @@ void testImaginaryAbsolute(double real, double imaginary, double realApproximati
 	Complex complexApproximation(realApproximation, imaginaryApproximation);
 
 	double result = imaginaryAbsolute(complex, complexApproximation);
+	std::cout << "|(" << real << "+" << imaginary << "i) - (" << realApproximation << "+" << imaginaryApproximation << "i)|" << std::endl;
 	std::cout << "Result: " << result << std::endl << std::endl;
 }
 
@@ -64,6 +66,7 @@ void testRealRelative() {
 
 void testRealRelative(double number, double approximation) {
 	double result = realRelative(number, approximation);
+	std::cout << "|" << number << " - " << approximation << "| / |" << number << "|" << std::endl;
 	std::cout << "Result: " << result << std::endl << std::endl;
 }
 
@@ -89,9 +92,11 @@ void testImaginaryRelative() {
 	std::cout << "Result: " << result << std::endl << std::endl;
 }
 
-double testImaginaryRelative(double real, double imaginary, double realApproximation, double imaginaryApproximation) {
+void testImaginaryRelative(double real, double imaginary, double realApproximation, double imaginaryApproximation) {
 	Complex complex(real, imaginary);
 	Complex complexApproximation(realApproximation, imaginaryApproximation);
 
-	return imaginaryRelative(complex, complexApproximation);
+	double result = imaginaryRelative(complex, complexApproximation);
+	std::cout << "|(" << real << "+" << imaginary << "i) - (" << realApproximation << "+" << imaginaryApproximation << "i)| / |" << real << "+" << imaginary << "i|" << std::endl;
+	std::cout << "Result: " << result << std::endl << std::endl;
 }
