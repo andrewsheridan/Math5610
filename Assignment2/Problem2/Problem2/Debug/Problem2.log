@@ -1,0 +1,5 @@
+﻿  Main.cpp
+c:\users\labuser\math5610\assignment2\problem2\problem2\euclidean.h(7): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\math5610\assignment2\problem2\problem2\euclideantest.h(8): warning C4018: '<': signed/unsigned mismatch
+  Problem2.vcxproj -> C:\Users\labuser\Math5610\Assignment2\Problem2\Debug\Problem2.exe
+  Problem2.vcxproj -> C:\Users\labuser\Math5610\Assignment2\Problem2\Debug\Problem2.pdb (Partial PDB)
