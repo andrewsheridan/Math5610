@@ -1,5 +1,8 @@
-﻿  Main.cpp
+﻿cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
+  Main.cpp
 c:\users\labuser\math5610\assignment2\problem2\problem2\euclidean.h(7): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\math5610\assignment2\problem2\problem2\euclideantest.h(8): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\math5610\assignment2\problem2\problem2\euclidean.h(15): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\math5610\assignment2\problem2\problem2\euclidean.h(23): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\math5610\assignment2\problem2\problem2\euclideantest.h(20): warning C4018: '<': signed/unsigned mismatch
   Problem2.vcxproj -> C:\Users\labuser\Math5610\Assignment2\Problem2\Debug\Problem2.exe
   Problem2.vcxproj -> C:\Users\labuser\Math5610\Assignment2\Problem2\Debug\Problem2.pdb (Partial PDB)

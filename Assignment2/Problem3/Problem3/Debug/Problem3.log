@@ -1,0 +1,4 @@
+﻿  Problem3.cpp
+c:\users\labuser\math5610\assignment2\problem3\problem3\dotproduct.h(41): warning C4018: '<': signed/unsigned mismatch
+  Problem3.vcxproj -> C:\Users\labuser\Math5610\Assignment2\Problem3\Debug\Problem3.exe
+  Problem3.vcxproj -> C:\Users\labuser\Math5610\Assignment2\Problem3\Debug\Problem3.pdb (Partial PDB)

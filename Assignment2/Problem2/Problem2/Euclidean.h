@@ -17,3 +17,13 @@ double manhattanNorm(std::vector<double> list) {
 	}
 	return sum;
 }
+
+double infinityNorm(std::vector<double> list) {
+	double max = 0;
+	for (int i = 0; i < list.size(); i++) {
+		if (std::abs(list[i]) > max) {
+			max = std::abs(list[i]);
+		}
+	}
+	return max;
+}
