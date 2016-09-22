@@ -54,6 +54,19 @@ void testDotProduct() {
 	std::cout << "Result: " << result << std::endl;
 }
 
+void testDotProduct(std::vector<double> one, std::vector<double> two) {
+	std::cout << "Numbers in list one: " << std::endl;
+	for (int i = 0; i < one.size(); i++) {
+		std::cout << one[i] << std::endl;
+	}
+	std::cout << "Numbers in list two: " << std::endl;
+	for (int i = 0; i < two.size(); i++) {
+		std::cout << two[i] << std::endl;
+	}
+	double result = dotProduct(one, two);
+	std::cout << "Result: " << result << std::endl;
+}
+
 std::vector<double> crossProduct(std::vector<double> one, std::vector<double> two) {
 	std::vector<double> result;
 	if (one.size() != two.size()) {
@@ -79,4 +92,20 @@ void testCrossProduct() {
 
 	std::cout << "Result: " << std::endl;
 	std::cout << "<" << result[0] << ", " << result[1] << ", " << result[2] << ">" << std::endl;
+}
+
+void testCrossProduct(std::vector<double> one, std::vector<double> two) {
+	std::cout << "Numbers in list one: " << std::endl;
+	for (int i = 0; i < one.size(); i++) {
+		std::cout << one[i] << std::endl;
+	}
+	std::cout << "Numbers in list two: " << std::endl;
+	for (int i = 0; i < two.size(); i++) {
+		std::cout << two[i] << std::endl;
+	}
+	std::vector<double> result = crossProduct(one, two);
+	std::cout << "Result: " << std::endl;
+	for (int i = 0; i < result.size(); i++) {
+		std::cout << result[i] << std::endl;
+	}
 }

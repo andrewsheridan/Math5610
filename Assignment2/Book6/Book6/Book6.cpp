@@ -3,7 +3,7 @@
 #include <cmath>
 #include "VectorInput.h"
 
-double foobar(double x, int n) {
+double doRound(double x, int n) {
 	double result = x * pow(10, n);
 	result += 0.5;
 	result = std::floor(result);
@@ -14,7 +14,7 @@ double foobar(double x, int n) {
 std::vector<double> myRound(std::vector<double> list, int n) {
 	std::vector<double> result;
 	for (int i = 0; i < list.size(); i++) {
-		double aThing = foobar(list[i], n);
+		double aThing = doRound(list[i], n);
 		result.push_back(aThing);
 	}
 	return result;

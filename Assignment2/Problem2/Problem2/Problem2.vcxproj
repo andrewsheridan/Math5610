@@ -113,8 +113,8 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Euclidean.h" />
-    <ClInclude Include="EuclideanTest.h" />
+    <ClInclude Include="Norm.h" />
+    <ClInclude Include="NormTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

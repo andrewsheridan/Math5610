@@ -20,10 +20,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Euclidean.h">
+    <ClInclude Include="Norm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EuclideanTest.h">
+    <ClInclude Include="NormTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

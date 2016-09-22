@@ -4,7 +4,7 @@
 
 double euclideanLength(std::vector<double> list) {
 	double sum = 0;
-	for (int i = 0; i < list.size(); i++) {
+	for (unsigned i = 0; i < list.size(); i++) {
 		sum += (list[i] * list[i]);
 	}
 	return std::sqrt(sum);
@@ -12,7 +12,7 @@ double euclideanLength(std::vector<double> list) {
 
 double manhattanNorm(std::vector<double> list) {
 	double sum = 0;
-	for (int i = 0; i < list.size(); i++) {
+	for (unsigned i = 0; i < list.size(); i++) {
 		sum += std::abs(list[i]);
 	}
 	return sum;
@@ -20,7 +20,7 @@ double manhattanNorm(std::vector<double> list) {
 
 double infinityNorm(std::vector<double> list) {
 	double max = 0;
-	for (int i = 0; i < list.size(); i++) {
+	for (unsigned i = 0; i < list.size(); i++) {
 		if (std::abs(list[i]) > max) {
 			max = std::abs(list[i]);
 		}

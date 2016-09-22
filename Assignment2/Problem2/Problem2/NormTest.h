@@ -1,5 +1,5 @@
 #pragma once
-#include "Euclidean.h"
+#include "Norm.h"
 #include <iostream>
 
 std::vector<double> getVectorInput() {
@@ -22,26 +22,46 @@ void testEuclideanLength(std::vector<double> list) {
 	}
 
 	double result = euclideanLength(list);
-	std::cout << "Result: " << result << std::endl;
+	std::cout << "Result: " << result << std::endl << std::endl;
 }
 
 void testEuclideanLength() {
 	std::vector<double> list = getVectorInput();
 	
 	double result = euclideanLength(list);
-	std::cout << "Result: " << result << std::endl;
+	std::cout << "Result: " << result << std::endl << std::endl;
+}
+
+void testManhattanNorm(std::vector<double> list) {
+	std::cout << "Numbers in list: " << std::endl;
+	for (int i = 0; i < list.size(); i++) {
+		std::cout << list[i] << std::endl;
+	}
+
+	double result = manhattanNorm(list);
+	std::cout << "Result: " << result << std::endl << std::endl;
 }
 
 void testManhattanNorm() {
 	std::vector<double> list = getVectorInput();
 
 	double result = manhattanNorm(list);
-	std::cout << "Result: " << result << std::endl;
+	std::cout << "Result: " << result << std::endl << std::endl;
+}
+
+void testInfinityNorm(std::vector<double> list) {
+	std::cout << "Numbers in list: " << std::endl;
+	for (int i = 0; i < list.size(); i++) {
+		std::cout << list[i] << std::endl;
+	}
+
+	double result = infinityNorm(list);
+	std::cout << "Result: " << result << std::endl << std::endl;
 }
 
 void testInfinityNorm() {
 	std::vector<double> list = getVectorInput();
 
 	double result = infinityNorm(list);
-	std::cout << "Result: " << result << std::endl;
+	std::cout << "Result: " << result << std::endl << std::endl;
 }

@@ -1,4 +1,9 @@
 ﻿  Problem3.cpp
-c:\users\labuser\math5610\assignment2\problem3\problem3\dotproduct.h(41): warning C4018: '<': signed/unsigned mismatch
-  Problem3.vcxproj -> C:\Users\labuser\Math5610\Assignment2\Problem3\Debug\Problem3.exe
-  Problem3.vcxproj -> C:\Users\labuser\Math5610\Assignment2\Problem3\Debug\Problem3.pdb (Partial PDB)
+d:\sheri\box sync\numericalanalysis\repo\assignment2\problem3\problem3\dotproduct.h(41): warning C4018: '<': signed/unsigned mismatch
+d:\sheri\box sync\numericalanalysis\repo\assignment2\problem3\problem3\dotproduct.h(59): warning C4018: '<': signed/unsigned mismatch
+d:\sheri\box sync\numericalanalysis\repo\assignment2\problem3\problem3\dotproduct.h(63): warning C4018: '<': signed/unsigned mismatch
+d:\sheri\box sync\numericalanalysis\repo\assignment2\problem3\problem3\dotproduct.h(99): warning C4018: '<': signed/unsigned mismatch
+d:\sheri\box sync\numericalanalysis\repo\assignment2\problem3\problem3\dotproduct.h(103): warning C4018: '<': signed/unsigned mismatch
+d:\sheri\box sync\numericalanalysis\repo\assignment2\problem3\problem3\dotproduct.h(108): warning C4018: '<': signed/unsigned mismatch
+  Problem3.vcxproj -> D:\sheri\Box Sync\NumericalAnalysis\Repo\Assignment2\Problem3\Debug\Problem3.exe
+  Problem3.vcxproj -> D:\sheri\Box Sync\NumericalAnalysis\Repo\Assignment2\Problem3\Debug\Problem3.pdb (Partial PDB)
