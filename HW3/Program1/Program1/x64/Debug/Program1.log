@@ -1,0 +1,4 @@
+﻿  1.cpp
+c:\users\labuser\math5610\hw3\program1\program1\bisection.h(18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Program1.vcxproj -> C:\Users\labuser\Math5610\HW3\Program1\x64\Debug\Program1.exe
+  Program1.vcxproj -> C:\Users\labuser\Math5610\HW3\Program1\x64\Debug\Program1.pdb (Partial PDB)
