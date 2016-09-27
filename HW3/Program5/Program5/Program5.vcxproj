@@ -110,6 +110,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Program1\Program1\Bisection.h" />
+    <ClInclude Include="..\..\Program3\Program3\Newton_Method.h" />
+    <ClInclude Include="Hybrid_Method.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

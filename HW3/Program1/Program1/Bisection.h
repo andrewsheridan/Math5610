@@ -1,11 +1,12 @@
 #pragma once
 
 #include <math.h>
+#include <iostream>
 
 using namespace std;
 
 double bisection(double (*f)(double), double a, double b, double atol) {
-	if (a > b) {
+	if (a > b) { // If a is greater than b, switch them.
 		double temp = b;
 		b = a;
 		a = temp;
@@ -13,9 +14,12 @@ double bisection(double (*f)(double), double a, double b, double atol) {
 	double fa = f(a);
 	double fb = f(b);
 	if (a >= b || (fa * fb >= 0) || atol <= 0) // Validate input
-		throw;
+	{
+		std::cout << "This input is not valid." << std::endl;
+		return 0;
+	}
 
-	int n = ceil(log2(b - a) - log2(2 * atol));
+	int n = ceil(log2(b - a) - log2(2 * atol)); //Computer number of iterations.
 
 	for (int k = 0; k < n; k++) { //Iterate n times, each iteration bisecting once.
 		double p = (a + b) / 2;
