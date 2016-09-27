@@ -1,3 +1,8 @@
+// Andrew Sheridan
+// Math 5610
+// 09/26/15
+
+//Newton_Method.h
 #pragma once
 #include <cmath>
 

@@ -2,6 +2,7 @@
 //Math 5610
 //Written in C++
 
+// Main.cpp
 #include <iostream>
 #include "Secant_Method.h"
 #include <cmath>
@@ -14,5 +15,6 @@ double f(double x) {
 int main(void) {
 	double result = secant_method(f, 2, 1, std::pow(10, -8), 10);
 	std::cout << "result: " << result << std::endl;
+	std::cin >> result;
 	return 0;
 }

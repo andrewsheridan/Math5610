@@ -1,5 +1,5 @@
 ﻿  1.cpp
-c:\users\labuser\math5610\hw3\program1\program1\bisection.h(18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\labuser\math5610\hw3\program1\program1\bisection.h(52): warning C4715: 'bisect_recursive': not all control paths return a value
-  Program1.vcxproj -> C:\Users\labuser\Math5610\HW3\Program1\x64\Debug\Program1.exe
-  Program1.vcxproj -> C:\Users\labuser\Math5610\HW3\Program1\x64\Debug\Program1.pdb (Partial PDB)
+d:\sheri\github\math5610\hw3\program1\program1\bisection.h(22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\sheri\github\math5610\hw3\program1\program1\bisection.h(56): warning C4715: 'bisect_recursive': not all control paths return a value
+  Program1.vcxproj -> D:\sheri\GitHub\Math5610\HW3\Program1\x64\Debug\Program1.exe
+  Program1.vcxproj -> D:\sheri\GitHub\Math5610\HW3\Program1\x64\Debug\Program1.pdb (Partial PDB)

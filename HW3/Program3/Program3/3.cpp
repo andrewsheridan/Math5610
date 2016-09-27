@@ -2,6 +2,7 @@
 //Math 5610
 //Written in C++
 
+//Main.cpp
 #include <iostream>
 #include "Newton_Method.h"
 #include <cmath>
@@ -16,8 +17,21 @@ double df(double x) {
 	return 2 * x;
 }
 
+// Functions from Example 3.7
+double g(double x) {
+	return 2 * cosh(x / 4) - x;
+}
+
+double dg(double x) {
+	return 0.5 * sinh(x / 4) - 1;
+}
+
 int main(void) {
 	double result = newton(f, df, 1, 0.0000001, 10);
 	std::cout << "result: " << result << std::endl;
+
+	double result2 = newton(g, dg, 2, pow(10, -8), 10);
+	std::cout << "result2: " << result2 << std::endl;
+	std::cin >> result;
 	return 0;
 }

@@ -1,13 +1,19 @@
+// Andrew Sheridan
+// Math 5610
+// 09/26/15
+
 #include <iostream>
 #include <array>
 #include "Bisection.h"
 
 using namespace std;
 
-double func(double x) {
+//First function from example 3.3
+double func(double x) { 
 	return pow(x, 3) - (30 * x * x) + 2552;
 }
 
+//Second function from example 3.3
 double func2(double x) {
 	return 2.5*sinh(x / 4) - 1;
 }
