@@ -38,7 +38,7 @@ double bisection(double (*f)(double), double a, double b, double atol) {
 		}
 		k++;
 	}
-	std::cout << "Iterations: " << k;
+	std::cout << "Iterations: " << k << std::endl;
 	return (a + b) / 2;
 }
 

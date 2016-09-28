@@ -3,7 +3,6 @@
 // 09/26/15
 
 #include <iostream>
-#include <array>
 #include "Bisection.h"
 
 using namespace std;
@@ -18,12 +17,19 @@ double func2(double x) {
 	return 2.5*sinh(x / 4) - 1;
 }
 
+double problem6(double x) {
+	return std::sqrt(x) - 1.1;
+}
+
 int main() {
 	cout << "Testing our bisect method with formulas in Example 3.3." << std::endl;
 	double result = bisection(func, 0.0, 20.0, 1 * pow(10, -8));
 	cout << "Result 1: " << result << std::endl;
 	double result2 = bisection(func2, -10.0, 10.0, 1 * pow(10, -10));
 	cout << "Result 2: " << result2 << std::endl;
+
+	double result3 = bisection(problem6, 0, 2, 1 * pow(10, -8));
+	cout << "Result 3: " << result3 << std::endl;
 	cin >> result;
 
 	return 0;
