@@ -39,16 +39,17 @@ double* BackSubstitution(double **A, double *b, unsigned n) {
  //a: the nxn lower-triangular coefficient matrix
  //b: right-hand-side
  //n: the size of the matrices
-double* forwardsubstitution(double** A, double* b, unsigned n) {
+double* ForwardSubstitution(double** A, double* b, unsigned n) {
 	double* x;
 	x = new double[n];
 	try {
 		x[0] = b[0];
-		for (int k = 1; k < n; k++) {
+		for (int k = 0; k < n; k++) {
 			x[k] = b[k];
-			for(int j = 1; j < k-1; j++){
+			for(int j = 0; j < k; j++){
 				x[k] = x[k] - A[k][j] * x[j];
 			}
+			x[k] = x[k] / A[k][k];
 		}
 	}
 	catch (std::exception& e)
@@ -64,9 +65,26 @@ double* forwardsubstitution(double** A, double* b, unsigned n) {
 // A: The nxn coefficient matrix
 // b: Right-Hand-Side
 // n: The size of the matrices
-//double** GaussianElimination(double** A, double* b, unsigned n) {
-//
-//}
+double** GaussianElimination(double** A, double* b, unsigned n) {
+	double** matrix;
+	matrix = new double*[n];
+	try {
+		for (int i = 0; i < n; i++) {
+			matrix[i] = new double[n];
+			for (int j = 0; j < n; j++) {
+				
+			}
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "These matrices are not the correct size." << std::endl;
+		return new double*[n];
+	}
+
+	return matrix;
+}
 
 /// Generates a random square matrix of size n
 // n: The size of the matrix

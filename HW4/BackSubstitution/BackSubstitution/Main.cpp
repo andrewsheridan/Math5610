@@ -27,6 +27,21 @@ int main(void) {
 	PrintVector(result, size);
 
 
+	//Problem 2
+	matrix = CreateLowerTriangularMatrix(size);
+	vector = CreateOnesVector(size);
+	vector = VectorMatrixMultiply(matrix, vector, size);
+	matrixCopy = CopyMatrix(matrix, size);
+	result = ForwardSubstitution(matrixCopy, vector, size);
+
+	std::cout << "Problem 2" << std::endl;
+	std::cout << "Lower triangular matrix" << std::endl;
+	PrintMatrix(matrix, size);
+	std::cout << "Test vector " << std::endl;
+	PrintVector(vector, size);
+	std::cout << "Result of forward substition " << std::endl;
+	PrintVector(result, size);
+
 	//Problem 5
 	
 	matrix = CreateMatrix(size);
