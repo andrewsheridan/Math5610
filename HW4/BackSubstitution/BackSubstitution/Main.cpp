@@ -16,15 +16,15 @@ int main(void) {
 	double* vector = CreateOnesVector(size);
 	vector = VectorMatrixMultiply(matrix, vector, size);
 	double** matrixCopy = CopyMatrix(matrix, size);
-	double* result = BackSubstitution(matrixCopy, vector, size);
+	double* resultVector = BackSubstitution(matrixCopy, vector, size);
 
-	std::cout << "Problem 1" << std::endl;
+	std::cout << "Problem 1: Back Substitution" << std::endl;
 	std::cout << "Upper triangular matrix" << std::endl;
 	PrintMatrix(matrix, size);
 	std::cout << "Test vector " << std::endl;
 	PrintVector(vector, size);
 	std::cout << "Result of back substition " << std::endl;
-	PrintVector(result, size);
+	PrintVector(resultVector, size);
 
 
 	//Problem 2
@@ -32,18 +32,51 @@ int main(void) {
 	vector = CreateOnesVector(size);
 	vector = VectorMatrixMultiply(matrix, vector, size);
 	matrixCopy = CopyMatrix(matrix, size);
-	result = ForwardSubstitution(matrixCopy, vector, size);
+	resultVector = ForwardSubstitution(matrixCopy, vector, size);
 
-	std::cout << "Problem 2" << std::endl;
+	std::cout << "Problem 2: Forward Substitution" << std::endl;
 	std::cout << "Lower triangular matrix" << std::endl;
 	PrintMatrix(matrix, size);
 	std::cout << "Test vector " << std::endl;
 	PrintVector(vector, size);
 	std::cout << "Result of forward substition " << std::endl;
-	PrintVector(result, size);
+	PrintVector(resultVector, size);
+
+	//Problem 3
+	matrix = CreateMatrix(size);
+	vector = CreateOnesVector(size);
+	vector = VectorMatrixMultiply(matrix, vector, size);
+	matrixCopy = CopyMatrix(matrix, size);
+	resultVector = CopyVector(vector, size);
+	double** resultMatrix = GaussianElimination(matrixCopy, resultVector, size);
+
+	std::cout << "Problem 3: Gaussian Elimination" << std::endl;
+	std::cout << "Test Matrix" << std::endl;
+	PrintMatrix(matrix, size);
+	std::cout << "Test vector " << std::endl;
+	PrintVector(vector, size);
+	std::cout << "Result of gaussian elimination " << std::endl;
+	PrintAugmentedMatrix(resultMatrix, resultVector, size);
+
+	//Problem 4
+	matrix = CreateMatrix(size);
+	vector = CreateOnesVector(size);
+	vector = VectorMatrixMultiply(matrix, vector, size);
+	matrixCopy = CopyMatrix(matrix, size);
+	resultVector = CopyVector(vector, size);
+	resultMatrix = GaussianElimination(matrixCopy, resultVector, size);
+
+	double* finalVector = BackSubstitution(resultMatrix, resultVector, size);
+
+	std::cout << "Problem 4: Gaussian Elimination w/ Back Substitution" << std::endl;
+	std::cout << "Test Matrix" << std::endl;
+	PrintMatrix(matrix, size);
+	std::cout << "Test vector " << std::endl;
+	PrintVector(vector, size);
+	std::cout << "Result of gaussian elimination and back substitution" << std::endl;
+	PrintAugmentedMatrix(resultMatrix, finalVector, size); //TODO Working here
 
 	//Problem 5
-	
 	matrix = CreateMatrix(size);
 	vector = new double[size];
 	vector[0] = 1;
@@ -52,7 +85,7 @@ int main(void) {
 
 
 	double* fivePartOne = VectorMatrixMultiply(matrix, vector, size);
-	std::cout << "Problem 5" << std::endl;
+	std::cout << "Problem 5: Testing" << std::endl;
 	std::cout << "5.1" << std::endl;
 	PrintMatrix(matrix, size);
 	PrintVector(vector, size);
@@ -62,7 +95,7 @@ int main(void) {
 	double* onesVector = CreateOnesVector(size);
 	double* fivePartThree = VectorMatrixMultiply(matrix, onesVector, size);
 
-	std::cout << "Results from 5.3" << std::endl;
+	std::cout << "5.3" << std::endl;
 	PrintVector(onesVector, size);
 	PrintVector(fivePartThree, size);
 
