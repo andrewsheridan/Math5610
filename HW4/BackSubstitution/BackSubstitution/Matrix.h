@@ -5,6 +5,7 @@
 //Matrix.h
 #pragma once
 #include <iostream>
+#include <iomanip>
 #include <cmath>
 #include <random>
 
@@ -66,24 +67,23 @@ double* ForwardSubstitution(double** A, double* b, unsigned n) {
 // b: Right-Hand-Side
 // n: The size of the matrices
 double** GaussianElimination(double** A, double* b, unsigned n) {
-	double** matrix;
-	matrix = new double*[n];
 	try {
-		for (int i = 0; i < n; i++) {
-			matrix[i] = new double[n];
-			for (int j = 0; j < n; j++) {
-				
+		for (int k = 0; k < n; k++) {
+			for (int i = k+1; i < n; i++) {
+				double factor = A[i][k] / A[k][k]; 
+				for (int j = 0; j < n; j++) {
+					A[i][j] = A[i][j] - factor*A[k][j];
+				}
+				b[i] = b[i] - factor*b[k];
 			}
 		}
-
 	}
 	catch (std::exception& e)
 	{
 		std::cout << "These matrices are not the correct size." << std::endl;
-		return new double*[n];
 	}
 
-	return matrix;
+	return A;
 }
 
 /// Generates a random square matrix of size n
@@ -207,7 +207,7 @@ double* CreateOnesVector(unsigned n) {
 void PrintMatrix(double** matrix, unsigned size) {
 	for (unsigned i = 0; i < size; i++) {
 		for (unsigned j = 0; j < size; j++) {
-			std::cout << matrix[i][j] << " ";
+			std::cout << std::setw(10) << std::left << matrix[i][j];
 		}
 		std::cout << std::endl;
 	}
@@ -217,9 +217,20 @@ void PrintMatrix(double** matrix, unsigned size) {
 ///Outputs a size n vector to the console
 void PrintVector(double* vector, unsigned size) {
 	for (unsigned i = 0; i < size; i++) {
-		std::cout << vector[i] << " ";
+		std::cout << std::setw(10) << std::left << vector[i];
 	}
 	std::cout << std::endl << std::endl;
+}
+
+///Outputs an augmented coefficient matrix to the console
+void PrintAugmentedMatrix(double** matrix, double* vector, unsigned size) {
+	for (unsigned i = 0; i < size; i++) {
+		for (unsigned j = 0; j < size; j++) {
+			std::cout << std::setw(10) << std::left << matrix[i][j];
+		}
+		std::cout << "| " << vector[i] << std::endl;
+	}
+	std::cout << std::endl;
 }
 
 ///Returns a copy of the input nxn matrix
@@ -230,6 +241,15 @@ double** CopyMatrix(double** matrix, unsigned size) {
 		for (unsigned j = 0; j < size; j++) {
 			result[i][j] = matrix[i][j];
 		}
+	}
+	return result;
+}
+
+///Returns a copy of the input vector
+double* CopyVector(double* vector, unsigned size) {
+	double* result = new double[size];
+	for (unsigned i = 0; i < size; i++) {
+		result[i] = vector[i];
 	}
 	return result;
 }

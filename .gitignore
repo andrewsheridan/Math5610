@@ -3,3 +3,5 @@
 ################################################################################
 
 /HW4/BackSubstitution/BackSubstitution.VC.VC.opendb
+*.db
+*.suo

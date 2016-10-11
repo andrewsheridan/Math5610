@@ -1,0 +1,12 @@
+﻿  Main.cpp
+c:\users\labuser\math5610\hw4\backsubstitution\backsubstitution\matrix.h(24): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\math5610\hw4\backsubstitution\backsubstitution\matrix.h(30): warning C4101: 'e': unreferenced local variable
+c:\users\labuser\math5610\hw4\backsubstitution\backsubstitution\matrix.h(48): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\math5610\hw4\backsubstitution\backsubstitution\matrix.h(56): warning C4101: 'e': unreferenced local variable
+c:\users\labuser\math5610\hw4\backsubstitution\backsubstitution\matrix.h(71): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\math5610\hw4\backsubstitution\backsubstitution\matrix.h(72): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\math5610\hw4\backsubstitution\backsubstitution\matrix.h(74): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\math5610\hw4\backsubstitution\backsubstitution\matrix.h(81): warning C4101: 'e': unreferenced local variable
+c:\users\labuser\math5610\hw4\backsubstitution\backsubstitution\matrix.h(192): warning C4101: 'e': unreferenced local variable
+  BackSubstitution.vcxproj -> C:\Users\labuser\Math5610\HW4\BackSubstitution\Debug\BackSubstitution.exe
+  BackSubstitution.vcxproj -> C:\Users\labuser\Math5610\HW4\BackSubstitution\Debug\BackSubstitution.pdb (Partial PDB)
