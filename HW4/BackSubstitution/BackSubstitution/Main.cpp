@@ -4,9 +4,7 @@
 
 //Main.cpp
 #include<iostream>
-
 #include "Matrix.h"
-
 
 int main(void) {
 	const unsigned size = 3;
