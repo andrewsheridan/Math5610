@@ -285,19 +285,3 @@ double* CopyVector(double* vector, unsigned size) {
 	}
 	return result;
 }
-
-//bool checkArraySize(double *A, unsigned size) {
-//	if (sizeof((A)) / sizeof((A[0])) == size)
-//		return true;
-//	else
-//		return false;
-//}
-//
-//bool checkNByNMatrixSize(double **A, unsigned size) {
-//	if (sizeof((A)) / sizeof((A[0])) != size)
-//		return false;
-//	
-//	for (unsigned i = 0; i < size; i++) {
-//
-//	}
-//}
