@@ -194,6 +194,25 @@ double* VectorMatrixMultiply(double** A, double* x, unsigned n) {
 	}
 }
 
+///Multiplies an nxn matrix A by another nxn matrix B
+double** MatrixMultiply(double** A, double** B, unsigned n) {
+	double** result = new double*[n];
+	for (unsigned i = 0; i < n; i++) {
+		result[i] = new double[n];
+	}
+	try {
+		for (unsigned i = 0; i < n; i++) {
+			for (unsigned j = 0; j < n; j++) {
+				result[i][j] = A[i][j] * B[j][i];
+			}
+		}
+		return result;
+	}
+	catch (std::exception& e) {
+		std::cout << "These matrices are not the correct size." << std::endl;
+	}
+}
+
 ///Creates a vector of all ones of size n
 double* CreateOnesVector(unsigned n) {
 	double* vector = new double[n];
@@ -201,6 +220,19 @@ double* CreateOnesVector(unsigned n) {
 		vector[i] = 1;
 	}
 	return vector;
+}
+
+///Creates the identity matrix of size n
+double** CreateIdentityMatrix(unsigned n) {
+	double** matrix = new double*[n];
+	for (unsigned i = 0; i < n; i++) {
+		matrix[i] = new double[n];
+		for (unsigned j = 0; j < n; j++) {
+			matrix[i][j] = 0;
+		}
+		matrix[i][i] = 1;
+	}
+	return matrix;
 }
 
 ///Outputs an nxn matrix to the console

@@ -74,7 +74,7 @@ int main(void) {
 	std::cout << "Test vector " << std::endl;
 	PrintVector(vector, size);
 	std::cout << "Result of gaussian elimination and back substitution" << std::endl;
-	PrintAugmentedMatrix(resultMatrix, finalVector, size); //TODO Working here
+	PrintAugmentedMatrix(resultMatrix, finalVector, size);
 
 	//Problem 5
 	matrix = CreateMatrix(size);
@@ -86,7 +86,7 @@ int main(void) {
 
 	double* fivePartOne = VectorMatrixMultiply(matrix, vector, size);
 	std::cout << "Problem 5: Testing" << std::endl;
-	std::cout << "5.1" << std::endl;
+	std::cout << "--------------5.1--------------" << std::endl;
 	PrintMatrix(matrix, size);
 	PrintVector(vector, size);
 	PrintVector(fivePartOne, size);
@@ -95,9 +95,47 @@ int main(void) {
 	double* onesVector = CreateOnesVector(size);
 	double* fivePartThree = VectorMatrixMultiply(matrix, onesVector, size);
 
-	std::cout << "5.3" << std::endl;
+	std::cout << "--------------5.3--------------" << std::endl;
 	PrintVector(onesVector, size);
 	PrintVector(fivePartThree, size);
+
+	std::cout << "--------------5.4--------------" << std::endl;	
+	for (int i = 10; i *= 2; i <= 160) {
+		matrix = CreateMatrix(i);
+		vector = CreateOnesVector(i);
+		vector = VectorMatrixMultiply(matrix, vector, i);
+		matrixCopy = CopyMatrix(matrix, i);
+		resultMatrix = GaussianElimination(matrixCopy, vector, i);
+		resultVector = BackSubstitution(resultMatrix, vector, i);
+
+		/*std::cout << "Problem 5: Testing" << std::endl;
+		std::cout << "Start matrix" << std::endl;
+		PrintMatrix(matrix, i);
+		std::cout << "Test vector " << std::endl;
+		PrintVector(vector, i);*/
+		std::cout << "Result of GE and Back Substitution " << std::endl;
+		PrintVector(resultVector, i);
+	}
+
+	//Problem 4
+	matrix = CreateMatrix(size);
+	double** matrixTwo = CreateIdentityMatrix(size);
+
+	vector = CreateOnesVector(size);
+	vector = VectorMatrixMultiply(matrix, vector, size);
+	matrixCopy = CopyMatrix(matrix, size);
+	resultVector = CopyVector(vector, size);
+	resultMatrix = GaussianElimination(matrixCopy, resultVector, size);
+
+	double* finalVector = BackSubstitution(resultMatrix, resultVector, size);
+
+	std::cout << "Problem 4: Gaussian Elimination w/ Back Substitution" << std::endl;
+	std::cout << "Test Matrix" << std::endl;
+	PrintMatrix(matrix, size);
+	std::cout << "Test vector " << std::endl;
+	PrintVector(vector, size);
+	std::cout << "Result of gaussian elimination and back substitution" << std::endl;
+	PrintAugmentedMatrix(resultMatrix, finalVector, size); //TODO Working here
 
 	//Stop console from closing
 	int input;
