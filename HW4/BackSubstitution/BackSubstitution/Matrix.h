@@ -26,7 +26,7 @@ double** CreateIdentityMatrix(unsigned n) {
 void PrintMatrix(double** matrix, unsigned size) {
 	for (unsigned i = 0; i < size; i++) {
 		for (unsigned j = 0; j < size; j++) {
-			std::cout << std::setw(10) << std::left << matrix[i][j];
+			std::cout << std::setw(13) << std::left << matrix[i][j];
 		}
 		std::cout << std::endl;
 	}
@@ -36,7 +36,7 @@ void PrintMatrix(double** matrix, unsigned size) {
 ///Outputs a size n vector to the console
 void PrintVector(double* vector, unsigned size) {
 	for (unsigned i = 0; i < size; i++) {
-		std::cout << std::setw(10) << std::left << vector[i];
+		std::cout << std::setw(13) << std::left << vector[i];
 	}
 	std::cout << std::endl << std::endl;
 }
@@ -45,7 +45,7 @@ void PrintVector(double* vector, unsigned size) {
 void PrintAugmentedMatrix(double** matrix, double* vector, unsigned size) {
 	for (unsigned i = 0; i < size; i++) {
 		for (unsigned j = 0; j < size; j++) {
-			std::cout << std::setw(10) << std::left << matrix[i][j];
+			std::cout << std::setw(13) << std::left << matrix[i][j];
 		}
 		std::cout << "| " << vector[i] << std::endl;
 	}
@@ -187,29 +187,28 @@ double** ScaledLUFactorization(double** A, double* b, unsigned n) {
 	double** L = CreateIdentityMatrix(n);
 
 	for (int k = 0; k < n; k++) {
-		double* ratios = new double[n - k];
+		double* ratios = new double[n - k]; // New vector of size n - k to store the ratios
 		for (int i = k; i < n; i++) {
 			double rowMax = FindArrayMax(A[i], k, n);
 			ratios[i - k] = rowMax / A[i][k];
 		}
-		int newPivot = FindMaxIndex(ratios, n - k);
+		int newPivot = FindMaxIndex(ratios, n - k) + k; //Find the best row for this iteration
 
-		std::cout << "Before: " << std::endl;
-		PrintAugmentedMatrix(A, b, n);
-
-		double* temp = A[k];
-		A[k] = A[newPivot];
-		A[newPivot] = temp;
-
-		std::cout << "After: " << std::endl;
-		PrintAugmentedMatrix(A, b, n);
+		double* temp = A[k]; //
+		A[k] = A[newPivot];  // Switch the current row with the best row for this iteration
+		A[newPivot] = temp;  //
+		
+		double tempEntry = b[k];
+		b[k] = b[newPivot];
+		b[newPivot] = tempEntry;
 
 		for (int i = k + 1; i < n; i++) {
 			double factor = A[i][k] / A[k][k];
 			L[i][k] = factor;
-			for (int j = 0; j < n; j++) {
+			for (int j = k + 1; j < n; j++) {
 				A[i][j] = A[i][j] - factor*A[k][j];
 			}
+			A[i][k] = 0;
 			b[i] = b[i] - factor*b[k];
 		}
 	}
@@ -217,9 +216,9 @@ double** ScaledLUFactorization(double** A, double* b, unsigned n) {
 	return L;
 }
 
-/// Generates a random square matrix of size n
+/// Generates a random diagonally dominant square matrix of size n.
 // n: The size of the matrix
-double** CreateMatrix(unsigned n) {
+double** CreateDiagonallyDominantMatrix(unsigned n) {
 	std::mt19937 generator(123); //Random number generator
 	std::uniform_real_distribution<double> dis(0.0, 1.0); //Desired distribution
 	
@@ -234,6 +233,28 @@ double** CreateMatrix(unsigned n) {
 
 	for (unsigned k = 0; k < n; k++) {
 		matrix[k][k] += 10*n; //Add 10*n to all diagonal entries
+	}
+
+	return matrix;
+}
+
+/// Generates a random  square matrix of size n.
+// n: The size of the matrix
+double** CreateMatrix(unsigned n) {
+	std::mt19937 generator(123); //Random number generator
+	std::uniform_real_distribution<double> dis(0.0, 1.0); //Desired distribution
+
+	double** matrix;
+	matrix = new double *[n];
+	for (unsigned i = 0; i < n; i++) {
+		matrix[i] = new double[n];
+		for (unsigned j = 0; j < n; j++) {
+			matrix[i][j] = dis(generator); //Assign each entry in matrix to random number between 0 and 1
+		}
+	}
+
+	for (unsigned k = 0; k < n; k++) {
+		matrix[k][k] += 10 * n; //Add 10*n to all diagonal entries
 	}
 
 	return matrix;

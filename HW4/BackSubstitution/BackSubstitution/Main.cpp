@@ -41,7 +41,7 @@ int main(void) {
 	PrintVector(resultVector, size);
 
 	//Problem 3
-	matrix = CreateMatrix(size);
+	matrix = CreateDiagonallyDominantMatrix(size);
 	vector = CreateOnesVector(size);
 	vector = VectorMatrixMultiply(matrix, vector, size);
 	matrixCopy = CopyMatrix(matrix, size);
@@ -57,7 +57,7 @@ int main(void) {
 	PrintAugmentedMatrix(resultMatrix, resultVector, size);
 
 	//Problem 4
-	matrix = CreateMatrix(size);
+	matrix = CreateDiagonallyDominantMatrix(size);
 	vector = CreateOnesVector(size);
 	vector = VectorMatrixMultiply(matrix, vector, size);
 	matrixCopy = CopyMatrix(matrix, size);
@@ -75,7 +75,7 @@ int main(void) {
 	PrintAugmentedMatrix(resultMatrix, finalVector, size);
 
 	//Problem 5
-	matrix = CreateMatrix(size);
+	matrix = CreateDiagonallyDominantMatrix(size);
 	vector = new double[size];
 	vector[0] = 1;
 	vector[1] = 2;
@@ -99,7 +99,7 @@ int main(void) {
 
 	std::cout << "--------------5.4--------------" << std::endl;	
 	for (int i = 10; i *= 2; i <= 160) {
-		matrix = CreateMatrix(i);
+		matrix = CreateDiagonallyDominantMatrix(i);
 		vector = CreateOnesVector(i);
 		vector = VectorMatrixMultiply(matrix, vector, i);
 		matrixCopy = CopyMatrix(matrix, i);
@@ -116,7 +116,7 @@ int main(void) {
 	}
 
 	//Problem 4
-	matrix = CreateMatrix(size);
+	matrix = CreateDiagonallyDominantMatrix(size);
 	double** matrixTwo = CreateIdentityMatrix(size);
 
 	vector = CreateOnesVector(size);
