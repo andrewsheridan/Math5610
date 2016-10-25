@@ -9,6 +9,49 @@
 #include <cmath>
 #include <random>
 
+///Creates the identity matrix of size n
+double** CreateIdentityMatrix(unsigned n) {
+	double** matrix = new double*[n];
+	for (unsigned i = 0; i < n; i++) {
+		matrix[i] = new double[n];
+		for (unsigned j = 0; j < n; j++) {
+			matrix[i][j] = 0;
+		}
+		matrix[i][i] = 1;
+	}
+	return matrix;
+}
+
+///Outputs an nxn matrix to the console
+void PrintMatrix(double** matrix, unsigned size) {
+	for (unsigned i = 0; i < size; i++) {
+		for (unsigned j = 0; j < size; j++) {
+			std::cout << std::setw(10) << std::left << matrix[i][j];
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+}
+
+///Outputs a size n vector to the console
+void PrintVector(double* vector, unsigned size) {
+	for (unsigned i = 0; i < size; i++) {
+		std::cout << std::setw(10) << std::left << vector[i];
+	}
+	std::cout << std::endl << std::endl;
+}
+
+///Outputs an augmented coefficient matrix to the console
+void PrintAugmentedMatrix(double** matrix, double* vector, unsigned size) {
+	for (unsigned i = 0; i < size; i++) {
+		for (unsigned j = 0; j < size; j++) {
+			std::cout << std::setw(10) << std::left << matrix[i][j];
+		}
+		std::cout << "| " << vector[i] << std::endl;
+	}
+	std::cout << std::endl;
+}
+
 /// Solves an nxn set of linear equations using back substitution
 // A: The nxn upper-triangular coefficient matrix
 // b: Right-Hand-Side
@@ -84,6 +127,94 @@ double** GaussianElimination(double** A, double* b, unsigned n) {
 	}
 
 	return A;
+}
+
+//Finds the entry in V (a size n vector) with the largest magnitude, starting with entry "start".
+double FindArrayMax(double* V, unsigned start, unsigned size) {
+	double max = 0;
+	for (int i = start; i < size; i++) {
+		double value = std::abs(V[i]);
+		if (value > max) max = value;
+	}
+	return max;
+}
+
+//Finds the index of the value with the largest magnitude in a vector V with size n
+int FindMaxIndex(double* V, unsigned n) {
+	double max = 0;
+	int index = -1;
+	for (int i = 0; i < n; i++) {
+		double value = std::abs(V[i]);
+		if (value > max) {
+			max = value;
+			index = i;
+		}
+	}
+	return index;
+}
+
+/// Finds the LU factorization of matrix A. A becomes the upper triangular matrix U, and the lower triangular matrix L is returned. 
+// A: The nxn coefficient matrix
+// b: Right-Hand-Side
+// n: The size of the matrices
+double** LUFactorization(double** A, double* b, unsigned n) {
+	double** L = CreateIdentityMatrix(n);
+	try {
+		for (int k = 0; k < n; k++) {
+			for (int i = k + 1; i < n; i++) {
+				double factor = A[i][k] / A[k][k];
+				L[i][k] = factor;
+				for (int j = 0; j < n; j++) {
+					A[i][j] = A[i][j] - factor*A[k][j];
+				}
+				b[i] = b[i] - factor*b[k];
+			}
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "These matrices are not the correct size." << std::endl;
+	}
+
+	return L;
+}
+
+/// Finds the LU factorization of matrix A. A becomes the upper triangular matrix U, and the lower triangular matrix L is returned. 
+// A: The nxn coefficient matrix
+// b: Right-Hand-Side
+// n: The size of the matrices
+double** ScaledLUFactorization(double** A, double* b, unsigned n) {
+	double** L = CreateIdentityMatrix(n);
+
+	for (int k = 0; k < n; k++) {
+		double* ratios = new double[n - k];
+		for (int i = k; i < n; i++) {
+			double rowMax = FindArrayMax(A[i], k, n);
+			ratios[i - k] = rowMax / A[i][k];
+		}
+		int newPivot = FindMaxIndex(ratios, n - k);
+
+		std::cout << "Before: " << std::endl;
+		PrintAugmentedMatrix(A, b, n);
+
+		double* temp = A[k];
+		A[k] = A[newPivot];
+		A[newPivot] = temp;
+
+		std::cout << "After: " << std::endl;
+		PrintAugmentedMatrix(A, b, n);
+
+		for (int i = k + 1; i < n; i++) {
+			double factor = A[i][k] / A[k][k];
+			L[i][k] = factor;
+			for (int j = 0; j < n; j++) {
+				A[i][j] = A[i][j] - factor*A[k][j];
+			}
+			b[i] = b[i] - factor*b[k];
+		}
+	}
+
+	return L;
 }
 
 /// Generates a random square matrix of size n
@@ -222,49 +353,6 @@ double* CreateOnesVector(unsigned n) {
 	return vector;
 }
 
-///Creates the identity matrix of size n
-double** CreateIdentityMatrix(unsigned n) {
-	double** matrix = new double*[n];
-	for (unsigned i = 0; i < n; i++) {
-		matrix[i] = new double[n];
-		for (unsigned j = 0; j < n; j++) {
-			matrix[i][j] = 0;
-		}
-		matrix[i][i] = 1;
-	}
-	return matrix;
-}
-
-///Outputs an nxn matrix to the console
-void PrintMatrix(double** matrix, unsigned size) {
-	for (unsigned i = 0; i < size; i++) {
-		for (unsigned j = 0; j < size; j++) {
-			std::cout << std::setw(10) << std::left << matrix[i][j];
-		}
-		std::cout << std::endl;
-	}
-	std::cout << std::endl;
-}
-
-///Outputs a size n vector to the console
-void PrintVector(double* vector, unsigned size) {
-	for (unsigned i = 0; i < size; i++) {
-		std::cout << std::setw(10) << std::left << vector[i];
-	}
-	std::cout << std::endl << std::endl;
-}
-
-///Outputs an augmented coefficient matrix to the console
-void PrintAugmentedMatrix(double** matrix, double* vector, unsigned size) {
-	for (unsigned i = 0; i < size; i++) {
-		for (unsigned j = 0; j < size; j++) {
-			std::cout << std::setw(10) << std::left << matrix[i][j];
-		}
-		std::cout << "| " << vector[i] << std::endl;
-	}
-	std::cout << std::endl;
-}
-
 ///Returns a copy of the input nxn matrix
 double** CopyMatrix(double** matrix, unsigned size) {
 	double** result = new double*[size];
@@ -284,4 +372,16 @@ double* CopyVector(double* vector, unsigned size) {
 		result[i] = vector[i];
 	}
 	return result;
+}
+
+///Compares two nxn matrices, A and B. Returns true if they are identital, and false if they differ.
+bool CompareMatrices(double** A, double** B, unsigned n) {
+	for (unsigned i = 0; i < n; i++) {
+		for (unsigned j = 0; j < n; j++) {
+			if (A[i][j] != B[i][j]) {
+				return false;
+			}
+		}
+	}
+	return true;
 }
