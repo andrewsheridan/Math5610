@@ -52,6 +52,30 @@ void PrintAugmentedMatrix(double** matrix, double* vector, unsigned size) {
 	std::cout << std::endl;
 }
 
+//Finds the entry in V (a size n vector) with the largest magnitude, starting with entry "start".
+double FindArrayMax(double* V, unsigned start, unsigned size) {
+	double max = 0;
+	for (int i = start; i < size; i++) {
+		double value = std::abs(V[i]);
+		if (value > max) max = value;
+	}
+	return max;
+}
+
+//Finds the index of the value with the largest magnitude in a vector V with size n
+int FindMaxIndex(double* V, unsigned n) {
+	double max = 0;
+	int index = -1;
+	for (int i = 0; i < n; i++) {
+		double value = std::abs(V[i]);
+		if (value > max) {
+			max = value;
+			index = i;
+		}
+	}
+	return index;
+}
+
 /// Solves an nxn set of linear equations using back substitution
 // A: The nxn upper-triangular coefficient matrix
 // b: Right-Hand-Side
@@ -79,10 +103,10 @@ double* BackSubstitution(double **A, double *b, unsigned n) {
 	return x;
 }
 
- /// Solves a set of linear equations using forward substitution
- //a: the nxn lower-triangular coefficient matrix
- //b: right-hand-side
- //n: the size of the matrices
+/// Solves a set of linear equations using forward substitution
+//a: the nxn lower-triangular coefficient matrix
+//b: right-hand-side
+//n: the size of the matrices
 double* ForwardSubstitution(double** A, double* b, unsigned n) {
 	double* x;
 	x = new double[n];
@@ -90,7 +114,7 @@ double* ForwardSubstitution(double** A, double* b, unsigned n) {
 		x[0] = b[0];
 		for (int k = 0; k < n; k++) {
 			x[k] = b[k];
-			for(int j = 0; j < k; j++){
+			for (int j = 0; j < k; j++) {
 				x[k] = x[k] - A[k][j] * x[j];
 			}
 			x[k] = x[k] / A[k][k];
@@ -112,8 +136,8 @@ double* ForwardSubstitution(double** A, double* b, unsigned n) {
 double** GaussianElimination(double** A, double* b, unsigned n) {
 	try {
 		for (int k = 0; k < n; k++) {
-			for (int i = k+1; i < n; i++) {
-				double factor = A[i][k] / A[k][k]; 
+			for (int i = k + 1; i < n; i++) {
+				double factor = A[i][k] / A[k][k];
 				for (int j = 0; j < n; j++) {
 					A[i][j] = A[i][j] - factor*A[k][j];
 				}
@@ -129,28 +153,43 @@ double** GaussianElimination(double** A, double* b, unsigned n) {
 	return A;
 }
 
-//Finds the entry in V (a size n vector) with the largest magnitude, starting with entry "start".
-double FindArrayMax(double* V, unsigned start, unsigned size) {
-	double max = 0;
-	for (int i = start; i < size; i++) {
-		double value = std::abs(V[i]);
-		if (value > max) max = value;
-	}
-	return max;
-}
+/// Reduces an nxn matrix A and right-hand-side b to upper-triangular form using Gaussian Elimination
+// A: The nxn coefficient matrix
+// b: Right-Hand-Side
+// n: The size of the matrices
+double** GaussianEliminationWithScaledPivoting(double** A, double* b, unsigned n) {
+	try {
+		for (int k = 0; k < n; k++) {
+			double* ratios = new double[n - k]; // New vector of size n - k to store the ratios
+			for (int i = k; i < n; i++) {
+				double rowMax = FindArrayMax(A[i], k, n);
+				ratios[i - k] = rowMax / A[i][k];
+			}
+			int newPivot = FindMaxIndex(ratios, n - k) + k; //Find the best row for this iteration
 
-//Finds the index of the value with the largest magnitude in a vector V with size n
-int FindMaxIndex(double* V, unsigned n) {
-	double max = 0;
-	int index = -1;
-	for (int i = 0; i < n; i++) {
-		double value = std::abs(V[i]);
-		if (value > max) {
-			max = value;
-			index = i;
+			double* temp = A[k]; //
+			A[k] = A[newPivot];  // Switch the current row with the best row for this iteration
+			A[newPivot] = temp;  //
+
+			double tempEntry = b[k];
+			b[k] = b[newPivot];
+			b[newPivot] = tempEntry;
+
+			for (int i = k + 1; i < n; i++) {
+				double factor = A[i][k] / A[k][k];
+				for (int j = 0; j < n; j++) {
+					A[i][j] = A[i][j] - factor*A[k][j];
+				}
+				b[i] = b[i] - factor*b[k];
+			}
 		}
 	}
-	return index;
+	catch (std::exception& e)
+	{
+		std::cout << "These matrices are not the correct size." << std::endl;
+	}
+
+	return A;
 }
 
 /// Finds the LU factorization of matrix A. A becomes the upper triangular matrix U, and the lower triangular matrix L is returned. 
@@ -201,6 +240,9 @@ double** ScaledLUFactorization(double** A, double* b, unsigned n) {
 		double tempEntry = b[k];
 		b[k] = b[newPivot];
 		b[newPivot] = tempEntry;
+		if (newPivot != k) {
+			std::cout << "Exchanged rows " << k << " and " << newPivot << std::endl;
+		}
 
 		for (int i = k + 1; i < n; i++) {
 			double factor = A[i][k] / A[k][k];

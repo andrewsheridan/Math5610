@@ -32,7 +32,7 @@ int main(void) {
 	double** resultMatrix;
 	double* resultVector;
 
-	for (int i = 10; i *= 2; i <= 160) {
+	for (int i = 10; i <= 160;  i *= 2) {
 		matrix = CreateDiagonallyDominantMatrix(i);
 		vector = CreateOnesVector(i);
 		vector = VectorMatrixMultiply(matrix, vector, i);
@@ -49,6 +49,48 @@ int main(void) {
 		PrintAugmentedMatrix(matrixCopy, resultVector, i);*/
 
 		std::cout << "Result of LU Factorization and Back Substitution with size " << i <<  std::endl;
+		PrintVector(resultVector, i);
+	}
+
+	//Problem 2
+	for (int i = 10; i <= 160; i *= 2) {
+		matrix = CreateDiagonallyDominantMatrix(i);
+		vector = CreateOnesVector(i);
+		vector = VectorMatrixMultiply(matrix, vector, i);
+		matrixCopy = CopyMatrix(matrix, i);
+		matrixCopy = GaussianEliminationWithScaledPivoting(matrixCopy, vector, i);
+		resultVector = BackSubstitution(matrixCopy, vector, i);
+
+		/*std::cout << "Problem 5: Testing" << std::endl;
+		std::cout << "Start matrix" << std::endl;
+		PrintMatrix(matrix, i);
+		std::cout << "Test vector " << std::endl;
+		PrintVector(vector, i);
+		std::cout << "Result of LU Factorization and Back Substitution " << std::endl;
+		PrintAugmentedMatrix(matrixCopy, resultVector, i);*/
+
+		std::cout << "Result of GE with Scaled Pivoting and Back Substitution with size " << i << std::endl;
+		PrintVector(resultVector, i);
+	}
+
+	//Problem 3
+	for (int i = 10; i <= 160; i *= 2) {
+		matrix = CreateMatrix(i);
+		vector = CreateOnesVector(i);
+		vector = VectorMatrixMultiply(matrix, vector, i);
+		matrixCopy = CopyMatrix(matrix, i);
+		ScaledLUFactorization(matrixCopy, vector, i);
+		resultVector = BackSubstitution(matrixCopy, vector, i);
+
+		/*std::cout << "Problem 5: Testing" << std::endl;
+		std::cout << "Start matrix" << std::endl;
+		PrintMatrix(matrix, i);
+		std::cout << "Test vector " << std::endl;
+		PrintVector(vector, i);
+		std::cout << "Result of LU Factorization and Back Substitution " << std::endl;
+		PrintAugmentedMatrix(matrixCopy, resultVector, i);*/
+
+		std::cout << "Result of LU Factorization and Back Substitution with size " << i << std::endl;
 		PrintVector(resultVector, i);
 	}
 
