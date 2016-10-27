@@ -240,9 +240,9 @@ double** ScaledLUFactorization(double** A, double* b, unsigned n) {
 		double tempEntry = b[k];
 		b[k] = b[newPivot];
 		b[newPivot] = tempEntry;
-		if (newPivot != k) {
+		/*if (newPivot != k) {
 			std::cout << "Exchanged rows " << k << " and " << newPivot << std::endl;
-		}
+		}*/
 
 		for (int i = k + 1; i < n; i++) {
 			double factor = A[i][k] / A[k][k];
@@ -351,6 +351,28 @@ double** CreateLowerTriangularMatrix(unsigned n) {
 
 	for (unsigned k = 0; k < n; k++) {
 		matrix[k][k] += 10 * n; //Add 10*n to all diagonal entries
+	}
+
+	return matrix;
+}
+
+/// Generates a symmetric square matrix of size n.
+// n: The size of the matrix
+double** CreateSymmetricMatrix(unsigned n) {
+	std::mt19937 generator(123); //Random number generator
+	std::uniform_real_distribution<double> dis(0.0, 1.0); //Desired distribution
+
+	double** matrix;
+	matrix = new double *[n];
+	for (unsigned i = 0; i < n; i++) {
+		matrix[i] = new double[n]; //Must do this before our second loop, so that all rows are initialized.
+	}
+	for (unsigned i = 0; i < n; i++) {
+		for (unsigned j = i; j < n; j++) {
+			double value = dis(generator); //Assign each entry in matrix to random number between 0 and 1
+			matrix[i][j] = value;
+			matrix[j][i] = value;
+		}
 	}
 
 	return matrix;

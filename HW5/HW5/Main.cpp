@@ -75,11 +75,11 @@ int main(void) {
 
 	//Problem 3
 	for (int i = 10; i <= 160; i *= 2) {
-		matrix = CreateMatrix(i);
+		matrix = CreateSymmetricMatrix(i);
 		vector = CreateOnesVector(i);
 		vector = VectorMatrixMultiply(matrix, vector, i);
 		matrixCopy = CopyMatrix(matrix, i);
-		ScaledLUFactorization(matrixCopy, vector, i);
+		GaussianElimination(matrixCopy, vector, i);
 		resultVector = BackSubstitution(matrixCopy, vector, i);
 
 		/*std::cout << "Problem 5: Testing" << std::endl;
@@ -90,7 +90,7 @@ int main(void) {
 		std::cout << "Result of LU Factorization and Back Substitution " << std::endl;
 		PrintAugmentedMatrix(matrixCopy, resultVector, i);*/
 
-		std::cout << "Result of LU Factorization and Back Substitution with size " << i << std::endl;
+		std::cout << "Result of Gaussian Elimination and Back Substitution with size " << i << std::endl;
 		PrintVector(resultVector, i);
 	}
 
