@@ -429,14 +429,7 @@ double** MatrixMultiply(double** A, double** B, unsigned n) {
 	}
 }
 
-///Creates a vector of all ones of size n
-double* CreateOnesVector(unsigned n) {
-	double* vector = new double[n];
-	for (unsigned i = 0; i < n; i++) {
-		vector[i] = 1;
-	}
-	return vector;
-}
+
 
 ///Returns a copy of the input nxn matrix
 double** CopyMatrix(double** matrix, unsigned size) {
@@ -450,15 +443,26 @@ double** CopyMatrix(double** matrix, unsigned size) {
 	return result;
 }
 
-///Returns a copy of the input vector
-double* CopyVector(double* vector, unsigned size) {
-	double* result = new double[size];
-	for (unsigned i = 0; i < size; i++) {
-		result[i] = vector[i];
-	}
-	return result;
-}
 
+
+
+
+#pragma region Initalization Operations
+
+#pragma endregion
+
+#pragma region Vector Operations
+
+
+#pragma endregion
+
+#pragma region Printing
+
+
+#pragma endregion
+
+
+#pragma region Comparison Operations
 ///Compares two nxn matrices, A and B. Returns true if they are identital, and false if they differ.
 bool CompareMatrices(double** A, double** B, unsigned n) {
 	for (unsigned i = 0; i < n; i++) {
@@ -470,3 +474,4 @@ bool CompareMatrices(double** A, double** B, unsigned n) {
 	}
 	return true;
 }
+#pragma endregion
