@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <cmath>
 #include <random>
+#include "Vector.h"
 
 #pragma region Initalization Operations
 ///Creates the identity matrix of size n
@@ -145,7 +146,21 @@ double** CreateSymmetricMatrix(unsigned n) {
 	return matrix;
 }
 
+double** CreateMinifiedTridiagonalMatrix(unsigned n) {
+	double** newMatrix = new double*[3];
+	newMatrix[0] = new double[n - 1];
+	newMatrix[1] = new double[n];
+	newMatrix[2] = new double[n - 1];
 
+	for (int i = 0; i < n - 1; i++) {
+		newMatrix[0][i] = 1;
+		newMatrix[1][i] = -2;
+		newMatrix[2][i] = 1;
+	}
+	newMatrix[1][n - 1] = -2;
+	
+	return newMatrix;
+}
 #pragma endregion
 
 #pragma region HW4
@@ -353,6 +368,14 @@ double* VectorMatrixMultiply(double** A, double* x, unsigned n) {
 #pragma endregion
 
 #pragma region HW6
+///Computes the Cholesky Decomposition of an n by n matrix A
+double*** CholeskyDecomposition(double** A, unsigned int n) {
+	if (!IsMatrixSymmetric(A, n))
+		return NULL;
+
+	
+}
+
 ///Computes the 1-norm of an n by n matrix A
 double OneNorm(double** A, unsigned int n) {
 	double columnMax = 0;
@@ -380,9 +403,6 @@ double InfinityNorm(double** A, unsigned int n) {
 	}
 	return rowMax;
 }
-
-
-
 #pragma endregion
 
 #pragma region Printing
@@ -436,4 +456,17 @@ bool CompareMatrices(double** A, double** B, unsigned n) {
 	}
 	return true;
 }
+
+//Checks to see if nxn matrix A is symmetric
+bool IsMatrixSymmetric(double** A, unsigned n) {
+	for (unsigned int i = 0; i < n; i++) {
+		for (unsigned int j = 0; j <= i; j++) {
+			if (A[i][j] != A[j][i])
+				return false;
+		}
+	}
+	return true;
+}
+
+
 #pragma endregion
