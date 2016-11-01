@@ -40,10 +40,6 @@ double** CreateMatrix(unsigned n) {
 		}
 	}
 
-	for (unsigned k = 0; k < n; k++) {
-		matrix[k][k] += 10 * n; //Add 10*n to all diagonal entries
-	}
-
 	return matrix;
 }
 
@@ -161,6 +157,59 @@ double** CreateMinifiedTridiagonalMatrix(unsigned n) {
 	
 	return newMatrix;
 }
+
+double** CreateTridiagonalMatrix(unsigned n) {
+	double** newMatrix = new double*[n];
+
+	for (int i = 0; i < n - 1; i++) {
+		newMatrix[i] = new double[n];
+		newMatrix[i][i] = -2;
+		newMatrix[i][i + 1] = 1;
+		newMatrix[i + 1][i] = 1;
+	}
+	newMatrix[n - 1][n - 1] = -2;
+
+	return newMatrix;
+}
+#pragma endregion
+
+
+#pragma region Comparison Operations
+///Returns a copy of the input nxn matrix
+double** CopyMatrix(double** matrix, unsigned size) {
+	double** result = new double*[size];
+	for (unsigned i = 0; i < size; i++) {
+		result[i] = new double[size];
+		for (unsigned j = 0; j < size; j++) {
+			result[i][j] = matrix[i][j];
+		}
+	}
+	return result;
+}
+///Compares two nxn matrices, A and B. Returns true if they are identital, and false if they differ.
+bool CompareMatrices(double** A, double** B, unsigned n) {
+	for (unsigned i = 0; i < n; i++) {
+		for (unsigned j = 0; j < n; j++) {
+			if (A[i][j] != B[i][j]) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+//Checks to see if nxn matrix A is symmetric
+bool IsMatrixSymmetric(double** A, unsigned n) {
+	for (unsigned int i = 0; i < n; i++) {
+		for (unsigned int j = 0; j <= i; j++) {
+			if (A[i][j] != A[j][i])
+				return false;
+		}
+	}
+	return true;
+}
+
+
 #pragma endregion
 
 #pragma region HW4
@@ -370,10 +419,14 @@ double* VectorMatrixMultiply(double** A, double* x, unsigned n) {
 #pragma region HW6
 ///Computes the Cholesky Decomposition of an n by n matrix A
 double*** CholeskyDecomposition(double** A, unsigned int n) {
-	if (!IsMatrixSymmetric(A, n))
+	if (IsMatrixSymmetric(A, n) == false)
 		return NULL;
 
-	
+	double** L = new double*[n];
+
+	double*** result = new double**[2];
+	result[0] = L;
+	return result;
 }
 
 ///Computes the 1-norm of an n by n matrix A
@@ -432,41 +485,3 @@ void PrintAugmentedMatrix(double** matrix, double* vector, unsigned size) {
 }
 #pragma endregion
 
-
-#pragma region Comparison Operations
-///Returns a copy of the input nxn matrix
-double** CopyMatrix(double** matrix, unsigned size) {
-	double** result = new double*[size];
-	for (unsigned i = 0; i < size; i++) {
-		result[i] = new double[size];
-		for (unsigned j = 0; j < size; j++) {
-			result[i][j] = matrix[i][j];
-		}
-	}
-	return result;
-}
-///Compares two nxn matrices, A and B. Returns true if they are identital, and false if they differ.
-bool CompareMatrices(double** A, double** B, unsigned n) {
-	for (unsigned i = 0; i < n; i++) {
-		for (unsigned j = 0; j < n; j++) {
-			if (A[i][j] != B[i][j]) {
-				return false;
-			}
-		}
-	}
-	return true;
-}
-
-//Checks to see if nxn matrix A is symmetric
-bool IsMatrixSymmetric(double** A, unsigned n) {
-	for (unsigned int i = 0; i < n; i++) {
-		for (unsigned int j = 0; j <= i; j++) {
-			if (A[i][j] != A[j][i])
-				return false;
-		}
-	}
-	return true;
-}
-
-
-#pragma endregion
