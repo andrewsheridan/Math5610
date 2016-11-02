@@ -418,15 +418,37 @@ double* VectorMatrixMultiply(double** A, double* x, unsigned n) {
 
 #pragma region HW6
 ///Computes the Cholesky Decomposition of an n by n matrix A
-double*** CholeskyDecomposition(double** A, unsigned int n) {
+double** CholeskyDecomposition(double** A, unsigned int n) {
 	if (IsMatrixSymmetric(A, n) == false)
 		return NULL;
 
-	double** L = new double*[n];
+	double** L = new double*[n]; //Initialize the new matrix
+	for (int i = 0; i < n; i++) {  
+		L[i] = new double[n];
+		for (int j = 0; j < n; j++) {
+			L[i][j] = 0;
+		}
+	}
+	L[0][0] = std::sqrt(A[0][0]);
+	L[1][0] = A[1][0] / L[0][0];
+	for (int k = 1; k < n; k++) {
+		//Calculate entries below the diagonal
+		for (int i = k; i < n; i++) {
+			double entry = A[i][k];
+			for (int j = 0; j < k; j++) {
 
-	double*** result = new double**[2];
-	result[0] = L;
-	return result;
+			}
+		}
+		
+		//Calculate diagonal entry
+		double diagonal = A[k][k];
+		for (int j = 1; j < k - 1; j++) {
+			diagonal -= (L[k][j] * L[k][j]);
+		}
+		L[k][k] = std::sqrt(diagonal);
+	}
+
+	return L;
 }
 
 ///Computes the 1-norm of an n by n matrix A
