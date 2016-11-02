@@ -9,7 +9,22 @@
 
 int main() 
 {
-	
+	//Problem 1: Cholesky Decomposition
+	int size1 = 4;
+	double** matrix1 = CreateDiagonallyDominantSymmetricMatrix(size1);
+	double** cholesky1 = CholeskyDecomposition(matrix1, size1);
+	if (cholesky1 != NULL) {
+		std::cout << "Our test matrix and the result of computing the Cholesky Decomposition of the matrix." << std::endl;
+		PrintMatrix(matrix1, size1);
+		PrintMatrix(cholesky1, size1);
+
+		double** transpose = Transpose(cholesky1, size1);
+		std::cout << "L Transpose" << std::endl;
+		PrintMatrix(transpose, size1);
+		std::cout << "Multiplying the Cholesky Decomposition by its transpose." << std::endl;
+		double** result = DotProduct(cholesky1, transpose, size1, size1, size1);
+		PrintMatrix(result, size1);
+	}
 
 	//Problem 3: 1-Norm
 	int size3 = 4;

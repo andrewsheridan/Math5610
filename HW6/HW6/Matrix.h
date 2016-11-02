@@ -119,6 +119,32 @@ double** CreateDiagonallyDominantMatrix(unsigned n) {
 	return matrix;
 }
 
+/// Generates a random diagonally dominant square matrix of size n.
+// n: The size of the matrix
+double** CreateDiagonallyDominantSymmetricMatrix(unsigned n) {
+	std::mt19937 generator(123); //Random number generator
+	std::uniform_real_distribution<double> dis(0.0, 1.0); //Desired distribution
+
+	double** matrix;
+	matrix = new double *[n];
+	for (unsigned i = 0; i < n; i++) {
+		matrix[i] = new double[n]; //Must do this before our second loop, so that all rows are initialized.
+	}
+	for (unsigned i = 0; i < n; i++) {
+		for (unsigned j = i; j < n; j++) {
+			double value = dis(generator); //Assign each entry in matrix to random number between 0 and 1
+			matrix[i][j] = value;
+			matrix[j][i] = value;
+		}
+	}
+
+	for (unsigned k = 0; k < n; k++) {
+		matrix[k][k] += 10 * n; //Add 10*n to all diagonal entries
+	}
+
+	return matrix;
+}
+
 
 /// Generates a symmetric square matrix of size n.
 // n: The size of the matrix
@@ -172,7 +198,6 @@ double** CreateTridiagonalMatrix(unsigned n) {
 	return newMatrix;
 }
 #pragma endregion
-
 
 #pragma region Comparison Operations
 ///Returns a copy of the input nxn matrix
@@ -417,6 +442,33 @@ double* VectorMatrixMultiply(double** A, double* x, unsigned n) {
 #pragma endregion
 
 #pragma region HW6
+
+double** Transpose(double** A, unsigned int n) {
+	double** matrix = new double*[n];
+	for (int i = 0; i < n; i++) {
+		matrix[i] = new double[n];
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			matrix[j][i] = A[i][j];
+		}
+	}
+	return matrix;
+}
+
+double** DotProduct(double**A, double** B, unsigned int m, unsigned int n, unsigned int p) {
+	double** matrix = new double*[m];
+	double** bTranspose = Transpose(B, n);
+	for (unsigned i = 0; i < n; i++) {
+		matrix[i] = new double[p];
+		for (unsigned j = 0; j < n; j++) {
+			matrix[i][j] = DotProduct(A[i], bTranspose[j], n);
+		}
+	}
+	return matrix;
+}
+
 ///Computes the Cholesky Decomposition of an n by n matrix A
 double** CholeskyDecomposition(double** A, unsigned int n) {
 	if (IsMatrixSymmetric(A, n) == false)
@@ -429,23 +481,15 @@ double** CholeskyDecomposition(double** A, unsigned int n) {
 			L[i][j] = 0;
 		}
 	}
-	L[0][0] = std::sqrt(A[0][0]);
-	L[1][0] = A[1][0] / L[0][0];
-	for (int k = 1; k < n; k++) {
-		//Calculate entries below the diagonal
-		for (int i = k; i < n; i++) {
-			double entry = A[i][k];
-			for (int j = 0; j < k; j++) {
 
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < (i + 1); j++) {
+			double entry = 0;
+			for (int k = 0; k < j; k++) {
+				entry += L[i][k] * L[j][k];
 			}
+			L[i][j] = i == j ? std::sqrt(A[i][i] - entry) : (1.0 / L[j][j] * (A[i][j] - entry));
 		}
-		
-		//Calculate diagonal entry
-		double diagonal = A[k][k];
-		for (int j = 1; j < k - 1; j++) {
-			diagonal -= (L[k][j] * L[k][j]);
-		}
-		L[k][k] = std::sqrt(diagonal);
 	}
 
 	return L;
