@@ -14,7 +14,7 @@ int main()
 	double** matrix1 = CreateDiagonallyDominantSymmetricMatrix(size1);
 	double** cholesky1 = CholeskyDecomposition(matrix1, size1);
 	if (cholesky1 != NULL) {
-		std::cout << "Our test matrix and the result of computing the Cholesky Decomposition of the matrix." << std::endl;
+		std::cout << "Our diagonally dominant test matrix and the result of computing the Cholesky Decomposition of the matrix." << std::endl;
 		PrintMatrix(matrix1, size1);
 		PrintMatrix(cholesky1, size1);
 
@@ -25,6 +25,42 @@ int main()
 		double** result = DotProduct(cholesky1, transpose, size1, size1, size1);
 		PrintMatrix(result, size1);
 	}
+
+	//Problem 2: 
+	// Testing Positive Definiteness and Symmetry with Cholesky
+	int size2 = 4;
+
+	//Test with a diagonally dominant symmetric matrix. 
+	double** matrix2a = CreateDiagonallyDominantSymmetricMatrix(size2);
+	double** cholesky2a = CholeskyDecomposition(matrix2a, size2);
+	if (cholesky2a == NULL)
+		std::cout << "This matrix is not symmetric and positive definite." << std::endl;
+	else
+		std::cout << "This matrix is symmetric and positive definite. " << std::endl;
+
+	//Test with a diagonally dominant asymmetric matrix
+	double** matrix2b = CreateDiagonallyDominantMatrix(size2);
+	double** cholesky2b = CholeskyDecomposition(matrix2b, size2);
+	if (cholesky2b == NULL)
+		std::cout << "This matrix is not symmetric and positive definite." << std::endl;
+	else
+		std::cout << "This matrix is symmetric and positive definite. " << std::endl;
+	
+	//Test with a symmetric matrix
+	double** matrix2c = CreateSymmetricMatrix(size2);
+	double** cholesky2c = CholeskyDecomposition(matrix2c, size2);
+	if (cholesky2c == NULL)
+		std::cout << "This matrix is not symmetric and positive definite." << std::endl;
+	else
+		std::cout << "This matrix is symmetric and positive definite. " << std::endl;
+
+	//Test with a matrix
+	double** matrix2d = CreateMatrix(size2);
+	double** cholesky2d = CholeskyDecomposition(matrix2d, size2);
+	if (cholesky2d == NULL)
+		std::cout << "This matrix is not symmetric and positive definite." << std::endl;
+	else
+		std::cout << "This matrix is symmetric and positive definite. " << std::endl << std::endl;
 
 	//Problem 3: 1-Norm
 	int size3 = 4;

@@ -470,6 +470,7 @@ double** DotProduct(double**A, double** B, unsigned int m, unsigned int n, unsig
 }
 
 ///Computes the Cholesky Decomposition of an n by n matrix A
+/// Returns NULL if the matrix is not SPD
 double** CholeskyDecomposition(double** A, unsigned int n) {
 	if (IsMatrixSymmetric(A, n) == false)
 		return NULL;
@@ -488,7 +489,10 @@ double** CholeskyDecomposition(double** A, unsigned int n) {
 			for (int k = 0; k < j; k++) {
 				entry += L[i][k] * L[j][k];
 			}
-			L[i][j] = i == j ? std::sqrt(A[i][i] - entry) : (1.0 / L[j][j] * (A[i][j] - entry));
+			double sqrtValue = A[i][i] - entry;
+			if (sqrtValue < 0)
+				return NULL;
+			L[i][j] = i == j ? std::sqrt(sqrtValue) : (1.0 / L[j][j] * (A[i][j] - entry));
 		}
 	}
 
