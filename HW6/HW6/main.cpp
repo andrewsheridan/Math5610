@@ -103,16 +103,38 @@ int main()
 		//std::cout << "Condition Number: " << conditionNumber << std::endl << std::endl;
 	}
 
-	int size7 = 4;
-	double** matrix7 = CreateTridiagonalMatrix(size7);
-	double** U7 = CopyMatrix(matrix7, size7);
-	double** L7 = BandedMatrixLUDecomposition(U7, size7, 2, 2);
 
-	std::cout << "Tridiagonal matrix and LU Decomposition" << std::endl;
+	//Problem 7: Tridiagonal Matrices
+	int size7 = 5;
 
-	PrintMatrix(matrix7, size7);
-	PrintMatrix(U7, size7);
-	PrintMatrix(L7, size7);
+	std::cout << "TESTING MINIFIED TRIDIAGONALS" << std::endl;
+	double** matrix7 = CreateMinifiedTridiagonal(size7);
+	double** copy7 = CopyMatrix(matrix7, size7);
+	double* vector7 = CreateOnesVector(size7);
+	std::cout << "Tridiagonal matrix before gaussian elimination" << std::endl;
+	PrintMatrix(matrix7, size7, 3);
+	PrintVector(vector7, size7);
+
+	TridiagonalElimination(copy7, vector7, size7);
+	std::cout << "Tridiagonal matrix after gaussian elimination" << std::endl;
+	PrintMatrix(copy7, size7, 3);
+	PrintVector(vector7, size7);
+
+	std::cout << "Solution after back substitution" << std::endl;
+	double* result7 = TridiagonalBackSubstitution(copy7, vector7, size7);
+	PrintVector(result7, size7);
+
+	std::cout << "COMPARING TO FULL TRIDIAGONALS MATRIX OPERATIONS" << std::endl;
+	double** matrix7b = CreateTridiagonalMatrix(size7);
+	PrintMatrix(matrix7b, size7);
+	double* vector7b = CreateOnesVector(size7);
+	GaussianElimination(matrix7b, vector7b, size7);
+	PrintMatrix(matrix7b, size7);
+	PrintVector(vector7b, size7);
+	double* result7b = BackSubstitution(matrix7b, vector7b, size7);
+
+	std::cout << "Solution without minification." << std::endl;
+	PrintVector(result7b, size7);
 
 	int input; 
 	std::cin >> input;

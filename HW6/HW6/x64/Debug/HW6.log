@@ -3,52 +3,52 @@ c:\users\labuser\source\repos\math5610\hw6\hw6\main.cpp(6): warning C4067: unexp
 c:\users\labuser\source\repos\math5610\hw6\hw6\vector.h(44): warning C4018: '<': signed/unsigned mismatch
 c:\users\labuser\source\repos\math5610\hw6\hw6\vector.h(55): warning C4018: '<': signed/unsigned mismatch
 c:\users\labuser\source\repos\math5610\hw6\hw6\vector.h(75): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(194): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(206): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(208): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(212): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(274): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(280): warning C4101: 'e': unreferenced local variable
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(298): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(306): warning C4101: 'e': unreferenced local variable
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(321): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(322): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(324): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(331): warning C4101: 'e': unreferenced local variable
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(347): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(349): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(363): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(365): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(372): warning C4101: 'e': unreferenced local variable
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(388): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(227): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(229): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(233): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(249): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(314): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(320): warning C4101: 'e': unreferenced local variable
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(338): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(346): warning C4101: 'e': unreferenced local variable
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(361): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(362): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(364): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(371): warning C4101: 'e': unreferenced local variable
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(387): warning C4018: '<': signed/unsigned mismatch
 c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(389): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(392): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(399): warning C4101: 'e': unreferenced local variable
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(414): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(416): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(433): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(436): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(459): warning C4101: 'e': unreferenced local variable
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(469): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(403): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(405): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(412): warning C4101: 'e': unreferenced local variable
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(428): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(429): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(432): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(439): warning C4101: 'e': unreferenced local variable
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(454): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(456): warning C4018: '<': signed/unsigned mismatch
 c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(473): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(474): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(501): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(503): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(508): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(576): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(577): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(580): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(583): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(589): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(591): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(603): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(604): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(609): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(613): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(476): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(499): warning C4101: 'e': unreferenced local variable
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(509): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(513): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(514): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(541): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(543): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(548): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(616): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(617): warning C4018: '<': signed/unsigned mismatch
 c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(620): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(622): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(657): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(658): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(623): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(629): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(631): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(643): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(644): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(649): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(653): warning C4018: '<': signed/unsigned mismatch
 c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(660): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(662): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(697): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(698): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw6\hw6\matrix.h(700): warning C4018: '<': signed/unsigned mismatch
   HW6.vcxproj -> C:\Users\labuser\Source\Repos\Math5610\HW6\x64\Debug\HW6.exe
   HW6.vcxproj -> C:\Users\labuser\Source\Repos\Math5610\HW6\x64\Debug\HW6.pdb (Partial PDB)

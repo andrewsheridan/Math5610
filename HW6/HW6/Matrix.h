@@ -10,6 +10,43 @@
 #include <random>
 #include "Vector.h"
 
+#pragma region Printing
+
+///Outputs an nxn matrix to the console
+void PrintMatrix(double** matrix, unsigned size) {
+	for (unsigned i = 0; i < size; i++) {
+		for (unsigned j = 0; j < size; j++) {
+			std::cout << std::setw(13) << std::left << matrix[i][j];
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+}
+
+
+///Outputs an n x m matrix to the console
+void PrintMatrix(double** matrix, unsigned int n, unsigned int m) {
+	for (unsigned i = 0; i < n; i++) {
+		for (unsigned j = 0; j < m; j++) {
+			std::cout << std::setw(13) << std::left << matrix[i][j];
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+}
+
+///Outputs an augmented coefficient matrix to the console
+void PrintAugmentedMatrix(double** matrix, double* vector, unsigned size) {
+	for (unsigned i = 0; i < size; i++) {
+		for (unsigned j = 0; j < size; j++) {
+			std::cout << std::setw(13) << std::left << matrix[i][j];
+		}
+		std::cout << "| " << vector[i] << std::endl;
+	}
+	std::cout << std::endl;
+}
+#pragma endregion
+
 #pragma region Initalization Operations
 ///Creates the identity matrix of size n
 double** CreateIdentityMatrix(unsigned n) {
@@ -185,22 +222,6 @@ double** CreateSymmetricMatrix(unsigned n) {
 	return matrix;
 }
 
-double** CreateMinifiedTridiagonalMatrix(unsigned n) {
-	double** newMatrix = new double*[3];
-	newMatrix[0] = new double[n - 1];
-	newMatrix[1] = new double[n];
-	newMatrix[2] = new double[n - 1];
-
-	for (int i = 0; i < n - 1; i++) {
-		newMatrix[0][i] = 1;
-		newMatrix[1][i] = -2;
-		newMatrix[2][i] = 1;
-	}
-	newMatrix[1][n - 1] = -2;
-	
-	return newMatrix;
-}
-
 double** CreateTridiagonalMatrix(unsigned n) {
 	double** newMatrix = new double*[n];
 	for (int i = 0; i < n; i++) {
@@ -216,6 +237,25 @@ double** CreateTridiagonalMatrix(unsigned n) {
 	}
 	newMatrix[n - 1][n - 1] = -2;
 
+	return newMatrix;
+}
+
+double** CreateMinifiedTridiagonal(unsigned n) {
+	double** newMatrix = new double*[n];
+	newMatrix[0] = new double[3];
+	newMatrix[0][0] = 0;
+	newMatrix[0][1] = -2;
+	newMatrix[0][2] = 1;
+	for (int i = 1; i < n - 1; i++) {
+		newMatrix[i] = new double[3];
+		newMatrix[i][0] = 1;
+		newMatrix[i][1] = -2;
+		newMatrix[i][2] = 1;
+	}
+	newMatrix[n - 1] = new double[3];
+	newMatrix[n - 1][0] = 1;
+	newMatrix[n - 1][1] = -2;
+	newMatrix[n - 1][2] = 0;
 	return newMatrix;
 }
 #pragma endregion
@@ -665,32 +705,64 @@ double** BandedMatrixLUDecomposition(double** A, unsigned int n, unsigned int p,
 	return L;
 }
 
-#pragma endregion
-
-#pragma region Printing
-
-///Outputs an nxn matrix to the console
-void PrintMatrix(double** matrix, unsigned size) {
-	for (unsigned i = 0; i < size; i++) {
-		for (unsigned j = 0; j < size; j++) {
-			std::cout << std::setw(13) << std::left << matrix[i][j];
-		}
-		std::cout << std::endl;
+///Does Gaussian Elimination on a minified tridiagonal matrix
+void TridiagonalElimination(double** A, unsigned int n) {
+	for (unsigned int i = 0; i < n - 1; i++) {
+		double factor = A[i + 1][0] / A[i][1];
+		A[i + 1][0] = 0;
+		A[i + 1][1] -= (A[i][2] * factor);
 	}
-	std::cout << std::endl;
 }
 
-
-
-///Outputs an augmented coefficient matrix to the console
-void PrintAugmentedMatrix(double** matrix, double* vector, unsigned size) {
-	for (unsigned i = 0; i < size; i++) {
-		for (unsigned j = 0; j < size; j++) {
-			std::cout << std::setw(13) << std::left << matrix[i][j];
-		}
-		std::cout << "| " << vector[i] << std::endl;
+///Does Gaussian Elimination on a minified tridiagonal matrix and right-hand-side b
+void TridiagonalElimination(double** A, double* b, unsigned int n) {
+	for (unsigned int i = 0; i < n - 1; i++) {
+		double factor = A[i + 1][0] / A[i][1];
+		A[i + 1][0] = 0;
+		A[i + 1][1] -= (A[i][2] * factor);
+		b[i + 1] -= b[i] * factor;
 	}
-	std::cout << std::endl;
 }
+
+///Does Back Substitution on a minified tridiagonal matrix and right-hand-side b
+double* TridiagonalBackSubstitution(double** A, double* b, unsigned int n) {
+	double* x = new double[n];
+	x[n - 1] = b[n - 1] / A[n - 1][1];
+	for (int k = n-2; k >= 0; k--) {
+		x[k] = b[k];
+		x[k] -= A[k][2] * x[k + 1];
+		x[k] /= A[k][1];
+	}
+	return x;
+}
+
+///// Solves an nxn set of linear equations using back substitution
+//// A: The nxn upper-triangular coefficient matrix
+//// b: Right-Hand-Side
+//// n: The size of the matrices
+//double* BackSubstitution(double **A, double *b, unsigned n) {
+//
+//	double* x;
+//	x = new double[n];
+//	try {
+//		x[n - 1] = b[n - 1] / A[n - 1][n - 1];
+//		for (int k = n - 2; k >= 0; k--) {
+//			x[k] = b[k];
+//			for (int i = k + 1; i < n; i++) {
+//				x[k] -= A[k][i] * x[i];
+//			}
+//			x[k] /= A[k][k];
+//		}
+//	}
+//	catch (std::exception& e)
+//	{
+//		std::cout << "These matrices are not the correct size." << std::endl;
+//		return new double[n];
+//	}
+//
+//	return x;
+//}
 #pragma endregion
+
+
 
