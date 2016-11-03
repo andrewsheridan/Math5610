@@ -120,7 +120,7 @@ double** CreateDiagonallyDominantMatrix(unsigned n) {
 }
 
 /// Generates a random diagonally dominant square matrix of size n.
-// n: The size of the matrix
+/// n: The size of the matrix
 double** CreateDiagonallyDominantSymmetricMatrix(unsigned n) {
 	std::mt19937 generator(123); //Random number generator
 	std::uniform_real_distribution<double> dis(0.0, 1.0); //Desired distribution
@@ -223,7 +223,7 @@ bool CompareMatrices(double** A, double** B, unsigned n) {
 	return true;
 }
 
-//Checks to see if nxn matrix A is symmetric
+///Checks to see if nxn matrix A is symmetric
 bool IsMatrixSymmetric(double** A, unsigned n) {
 	for (unsigned int i = 0; i < n; i++) {
 		for (unsigned int j = 0; j <= i; j++) {
@@ -442,7 +442,7 @@ double* VectorMatrixMultiply(double** A, double* x, unsigned n) {
 #pragma endregion
 
 #pragma region HW6
-
+/// Returns the transpose of the n by n matrix A
 double** Transpose(double** A, unsigned int n) {
 	double** matrix = new double*[n];
 	for (int i = 0; i < n; i++) {
@@ -457,6 +457,7 @@ double** Transpose(double** A, unsigned int n) {
 	return matrix;
 }
 
+/// Computes the dot product of matrices A (m x n) and B (n x p)
 double** DotProduct(double**A, double** B, unsigned int m, unsigned int n, unsigned int p) {
 	double** matrix = new double*[m];
 	double** bTranspose = Transpose(B, n);
@@ -492,6 +493,9 @@ double** CholeskyDecomposition(double** A, unsigned int n) {
 			double sqrtValue = A[i][i] - entry;
 			if (sqrtValue < 0)
 				return NULL;
+
+			// Conditional assignment. If the entry is diagonal, assign to the sqare root of the previous value. 
+			// Otherwise, Do computation for a nondiagonal entry.
 			L[i][j] = i == j ? std::sqrt(sqrtValue) : (1.0 / L[j][j] * (A[i][j] - entry));
 		}
 	}
@@ -526,6 +530,19 @@ double InfinityNorm(double** A, unsigned int n) {
 	}
 	return rowMax;
 }
+
+
+double** TridiagonalSimplification(double** A, unsigned int n) {
+	double** L = new double*[n];
+	for (int k = 0; k < n; k++) {
+		L[k] = new double[3];
+	}
+	for (int k = 0; k < n; k++) {
+		L[k + 1][k] = A[k + 1][k] / A[k][k];
+		for(int )
+	}
+}
+
 #pragma endregion
 
 #pragma region Printing

@@ -33,6 +33,7 @@ int main()
 	//Test with a diagonally dominant symmetric matrix. 
 	double** matrix2a = CreateDiagonallyDominantSymmetricMatrix(size2);
 	double** cholesky2a = CholeskyDecomposition(matrix2a, size2);
+	std::cout << "Diagonally Dominant Symmetric Matrix Test" << std::endl;
 	if (cholesky2a == NULL)
 		std::cout << "This matrix is not symmetric and positive definite." << std::endl;
 	else
@@ -41,6 +42,7 @@ int main()
 	//Test with a diagonally dominant asymmetric matrix
 	double** matrix2b = CreateDiagonallyDominantMatrix(size2);
 	double** cholesky2b = CholeskyDecomposition(matrix2b, size2);
+	std::cout << "Diagonally Dominant Matrix Test" << std::endl;
 	if (cholesky2b == NULL)
 		std::cout << "This matrix is not symmetric and positive definite." << std::endl;
 	else
@@ -49,6 +51,7 @@ int main()
 	//Test with a symmetric matrix
 	double** matrix2c = CreateSymmetricMatrix(size2);
 	double** cholesky2c = CholeskyDecomposition(matrix2c, size2);
+	std::cout << "Symmetric Matrix Test" << std::endl;
 	if (cholesky2c == NULL)
 		std::cout << "This matrix is not symmetric and positive definite." << std::endl;
 	else
@@ -57,6 +60,7 @@ int main()
 	//Test with a matrix
 	double** matrix2d = CreateMatrix(size2);
 	double** cholesky2d = CholeskyDecomposition(matrix2d, size2);
+	std::cout << "Matrix Test" << std::endl;
 	if (cholesky2d == NULL)
 		std::cout << "This matrix is not symmetric and positive definite." << std::endl;
 	else
