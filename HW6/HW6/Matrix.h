@@ -735,33 +735,6 @@ double* TridiagonalBackSubstitution(double** A, double* b, unsigned int n) {
 	}
 	return x;
 }
-
-///// Solves an nxn set of linear equations using back substitution
-//// A: The nxn upper-triangular coefficient matrix
-//// b: Right-Hand-Side
-//// n: The size of the matrices
-//double* BackSubstitution(double **A, double *b, unsigned n) {
-//
-//	double* x;
-//	x = new double[n];
-//	try {
-//		x[n - 1] = b[n - 1] / A[n - 1][n - 1];
-//		for (int k = n - 2; k >= 0; k--) {
-//			x[k] = b[k];
-//			for (int i = k + 1; i < n; i++) {
-//				x[k] -= A[k][i] * x[i];
-//			}
-//			x[k] /= A[k][k];
-//		}
-//	}
-//	catch (std::exception& e)
-//	{
-//		std::cout << "These matrices are not the correct size." << std::endl;
-//		return new double[n];
-//	}
-//
-//	return x;
-//}
 #pragma endregion
 
 

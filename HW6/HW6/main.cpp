@@ -108,15 +108,15 @@ int main()
 	int size7 = 5;
 
 	std::cout << "TESTING MINIFIED TRIDIAGONALS" << std::endl;
+	std::cout << "Tridiagonal matrix before gaussian elimination" << std::endl;
 	double** matrix7 = CreateMinifiedTridiagonal(size7);
 	double** copy7 = CopyMatrix(matrix7, size7);
 	double* vector7 = CreateOnesVector(size7);
-	std::cout << "Tridiagonal matrix before gaussian elimination" << std::endl;
 	PrintMatrix(matrix7, size7, 3);
 	PrintVector(vector7, size7);
 
-	TridiagonalElimination(copy7, vector7, size7);
 	std::cout << "Tridiagonal matrix after gaussian elimination" << std::endl;
+	TridiagonalElimination(copy7, vector7, size7);
 	PrintMatrix(copy7, size7, 3);
 	PrintVector(vector7, size7);
 
@@ -125,9 +125,12 @@ int main()
 	PrintVector(result7, size7);
 
 	std::cout << "COMPARING TO FULL TRIDIAGONALS MATRIX OPERATIONS" << std::endl;
+	std::cout << "Tridiagonal matrix before gaussian elimination" << std::endl;
 	double** matrix7b = CreateTridiagonalMatrix(size7);
 	PrintMatrix(matrix7b, size7);
 	double* vector7b = CreateOnesVector(size7);
+
+	std::cout << "Tridiagonal matrix after gaussian elimination" << std::endl;
 	GaussianElimination(matrix7b, vector7b, size7);
 	PrintMatrix(matrix7b, size7);
 	PrintVector(vector7b, size7);
