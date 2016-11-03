@@ -24,12 +24,29 @@ double** CreateIdentityMatrix(unsigned n) {
 	return matrix;
 }
 
-
 /// Generates a random  square matrix of size n.
 // n: The size of the matrix
 double** CreateMatrix(unsigned n) {
 	std::mt19937 generator(123); //Random number generator
 	std::uniform_real_distribution<double> dis(0.0, 1.0); //Desired distribution
+
+	double** matrix;
+	matrix = new double *[n];
+	for (unsigned i = 0; i < n; i++) {
+		matrix[i] = new double[n];
+		for (unsigned j = 0; j < n; j++) {
+			matrix[i][j] = dis(generator); //Assign each entry in matrix to random number between 0 and 1
+		}
+	}
+
+	return matrix;
+}
+
+/// Generates a random  square matrix of size n.
+// n: The size of the matrix
+double** CreateMatrixWithRange(unsigned n, int maxValue, int minValue) {
+	std::mt19937 generator(123); //Random number generator
+	std::uniform_real_distribution<double> dis(minValue, maxValue); //Desired distribution
 
 	double** matrix;
 	matrix = new double *[n];
@@ -547,6 +564,7 @@ double InfinityNormOperations(double** A, unsigned int n, long& counter) {
 	return rowMax;
 }
 
+//Computes the inverse of n by n matrix A
 double** Inverse(double** A, unsigned int n) {
 	double** matrix = CreateIdentityMatrix(n);
 	double ratio, a;
@@ -573,6 +591,7 @@ double** Inverse(double** A, unsigned int n) {
 	return matrix;
 }
 
+//Computes the inverse of n by n matrix A, incrementing the passed in counter
 double** InverseOperations(double** A, unsigned int n, long& counter) {
 	double** matrix = CreateIdentityMatrix(n);
 	double ratio, a;
@@ -604,6 +623,7 @@ double** InverseOperations(double** A, unsigned int n, long& counter) {
 	return matrix;
 }
 
+//Estimates the condition number of n by n matrix A
 double ConditionNumber(double** A, unsigned int n) {
 	long counter = 0;
 	double** aCopy = CopyMatrix(A, n);
