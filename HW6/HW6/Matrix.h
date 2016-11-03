@@ -531,17 +531,101 @@ double InfinityNorm(double** A, unsigned int n) {
 	return rowMax;
 }
 
-
-double** TridiagonalSimplification(double** A, unsigned int n) {
-	double** L = new double*[n];
-	for (int k = 0; k < n; k++) {
-		L[k] = new double[3];
+///Computes the inifinity norm of an n by n matrix A
+double InfinityNormOperations(double** A, unsigned int n, long& counter) {
+	double rowMax = 0;
+	for (unsigned int j = 0; j < n; j++) {
+		double rowSum = 0;
+		for (unsigned int i = 0; i < n; i++) {
+			counter++;
+			rowSum += std::abs(A[i][j]);
+		}
+		if (rowSum > rowMax)
+			rowMax = rowSum;
+		counter++;
 	}
-	for (int k = 0; k < n; k++) {
-		L[k + 1][k] = A[k + 1][k] / A[k][k];
-		for(int )
-	}
+	return rowMax;
 }
+
+double** Inverse(double** A, unsigned int n) {
+	double** matrix = CreateIdentityMatrix(n);
+	double ratio, a;
+	int i, j, k;
+	for (i = 0; i < n; i++) {
+		for (j = 0; j < n; j++) {
+			if (i != j) {
+				ratio = A[j][i] / A[i][i];
+				for (k = 0; k < n; k++) {
+					A[j][k] -= ratio * A[i][k];
+				}
+				for (k = 0; k < n; k++) {
+					matrix[j][k] -= ratio * matrix[i][k];
+				}
+			}
+		}
+	}
+	for (i = 0; i < n; i++) {
+		a = A[i][i];
+		for (j = 0; j < n; j++) {
+			matrix[i][j] /= a;
+		}
+	}
+	return matrix;
+}
+
+double** InverseOperations(double** A, unsigned int n, long& counter) {
+	double** matrix = CreateIdentityMatrix(n);
+	double ratio, a;
+	int i, j, k;
+	for (i = 0; i < n; i++) {
+		for (j = 0; j < n; j++) {
+			counter++;
+			if (i != j) {
+				ratio = A[j][i] / A[i][i];
+				counter++;
+				for (k = 0; k < n; k++) {
+					A[j][k] -= ratio * A[i][k];
+					counter++;
+				}
+				for (k = 0; k < n; k++) {
+					matrix[j][k] -= ratio * matrix[i][k];
+					counter++;
+				}
+			}
+		}
+	}
+	for (i = 0; i < n; i++) {
+		a = A[i][i];
+		for (j = 0; j < n; j++) {
+			counter++;
+			matrix[i][j] /= a;
+		}
+	}
+	return matrix;
+}
+
+double ConditionNumber(double** A, unsigned int n) {
+	long counter = 0;
+	double** aCopy = CopyMatrix(A, n);
+	double** inverse = InverseOperations(aCopy, n, counter);
+
+	double aNorm = InfinityNormOperations(A, n, counter);
+	double inverseNorm = InfinityNormOperations(inverse, n, counter);
+
+	std::cout << "The operations required to estimate CN for size " << n << ": " << counter << std::endl;
+	return aNorm * inverseNorm;
+}
+
+//double** TridiagonalSimplification(double** A, unsigned int n) {
+//	double** L = new double*[n];
+//	for (int k = 0; k < n; k++) {
+//		L[k] = new double[3];
+//	}
+//	for (int k = 0; k < n; k++) {
+//		L[k + 1][k] = A[k + 1][k] / A[k][k];
+//		for(int )
+//	}
+//}
 
 #pragma endregion
 

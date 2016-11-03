@@ -86,6 +86,24 @@ int main()
 	PrintMatrix(matrix4, size4);
 	std::cout << result4 << std::endl << std::endl;
 
+
+	//Problem 5: Condition Number
+	int size5 = 5;
+	double** matrix5 = CreateMatrix(size5);
+	matrix5[size5 - 2][size5 - 1] *= 10;
+	double result5 = InfinityNorm(matrix5, size5);
+
+	std::cout << "Our test matrix and the result of computing the Infinity-Norm of the matrix." << std::endl;
+	PrintMatrix(matrix5, size5);
+	std::cout << result5 << std::endl << std::endl;
+
+	//Problem 6: Condition Number Operation Counts
+	for (int size6 = 5; size6 <= 160; size6 *= 2) {
+		double** matrix6 = CreateMatrix(size6);
+		double conditionNumber = ConditionNumber(matrix6, size6);
+		std::cout << conditionNumber << std::endl << std::endl;
+	}
+
 	int input; 
 	std::cin >> input;
 
