@@ -103,6 +103,17 @@ int main()
 		//std::cout << "Condition Number: " << conditionNumber << std::endl << std::endl;
 	}
 
+	int size7 = 4;
+	double** matrix7 = CreateTridiagonalMatrix(size7);
+	double** U7 = CopyMatrix(matrix7, size7);
+	double** L7 = BandedMatrixLUDecomposition(U7, size7, 2, 2);
+
+	std::cout << "Tridiagonal matrix and LU Decomposition" << std::endl;
+
+	PrintMatrix(matrix7, size7);
+	PrintMatrix(U7, size7);
+	PrintMatrix(L7, size7);
+
 	int input; 
 	std::cin >> input;
 

@@ -203,9 +203,13 @@ double** CreateMinifiedTridiagonalMatrix(unsigned n) {
 
 double** CreateTridiagonalMatrix(unsigned n) {
 	double** newMatrix = new double*[n];
-
-	for (int i = 0; i < n - 1; i++) {
+	for (int i = 0; i < n; i++) {
 		newMatrix[i] = new double[n];
+		for (int j = 0; j < n; j++) {
+			newMatrix[i][j] = 0;
+		}
+	}
+	for (int i = 0; i < n - 1; i++) {
 		newMatrix[i][i] = -2;
 		newMatrix[i][i + 1] = 1;
 		newMatrix[i + 1][i] = 1;
@@ -646,6 +650,20 @@ double ConditionNumber(double** A, unsigned int n) {
 //		for(int )
 //	}
 //}
+
+//Finds the LU decomposition of n by n matrix A, with lower bandwitdh p and upper bandwith q
+double** BandedMatrixLUDecomposition(double** A, unsigned int n, unsigned int p, unsigned int q) {
+	double** L = CreateIdentityMatrix(n);
+	for (int k = 0; k < n - 1; k++) {
+		for (int i = k + 1; i < k + p; i++) {
+			L[i][k] = A[i][k] / A[k][k]; 
+			for (int j = k + 1; j < k + q; j++) {
+				A[i][j] = A[i][j] - L[i][k] * A[k][j];
+			}
+		}
+	}
+	return L;
+}
 
 #pragma endregion
 
