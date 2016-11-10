@@ -504,13 +504,13 @@ double* VectorMatrixMultiply(double** A, double* x, unsigned n) {
 
 #pragma region HW6
 /// Returns the transpose of the n by n matrix A
-double** Transpose(double** A, unsigned int n) {
-	double** matrix = new double*[n];
-	for (int i = 0; i < n; i++) {
+double** Transpose(double** A, unsigned int m, unsigned int n) {
+	double** matrix = new double*[m];
+	for (int i = 0; i < m; i++) {
 		matrix[i] = new double[n];
 	}
 
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < m; i++) {
 		for (int j = 0; j < n; j++) {
 			matrix[j][i] = A[i][j];
 		}
@@ -737,5 +737,18 @@ double* TridiagonalBackSubstitution(double** A, double* b, unsigned int n) {
 }
 #pragma endregion
 
+#pragma region HW7
 
+//double* LeastSquaresNormalEquations(double** A, double* b, unsigned int m, unsigned int n) {
+//	double** At = Transpose(A, m, n);
+//	double** B = DotProduct(A, At, n, m, n);
+//	double* y = VectorMatrixMultiply(At, b, )
+//
+//	double** G = CholeskyDecomposition(B, n);
+//	double** Gt = Transpose(G, n, n);
+//
+//	double** GEliminated = GaussianEliminationWithScaledPivoting(G, b, )
+//}
+
+#pragma endregion
 

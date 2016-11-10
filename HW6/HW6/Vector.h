@@ -70,6 +70,7 @@ void PrintVector(double* vector, unsigned size) {
 	std::cout << std::endl << std::endl;
 }
 
+///Computes the Dot Product of vector A with vector B (each size n)
 double DotProduct(double* A, double* B, unsigned int n) {
 	double sum = 0;
 	for (int i = 0; i < n; i++) {
