@@ -101,12 +101,13 @@ void GaussianEliminationWithScaledPivoting(Matrix A, Vector b) {
 	for (int k = 0; k < n; k++) {
 		double* ratios = new double[n - k]; // New vector of size n - k to store the ratios
 		for (int i = k; i < n; i++) {
-			double rowMax = FindArrayMax(A[i], k, n);
+			//double rowMax = FindArrayMax(A[i], k, n);
+			double rowMax = A[i].FindMaxMagnitudeStartingAt(k);
 			ratios[i - k] = rowMax / A[i][k];
 		}
 		int newPivot = FindMaxIndex(ratios, n - k) + k; //Find the best row for this iteration
 
-		double* temp = A[k]; //
+		Vector temp = A[k]; //
 		A[k] = A[newPivot];  // Switch the current row with the best row for this iteration
 		A[newPivot] = temp;  //
 
@@ -160,12 +161,13 @@ Matrix ScaledLUFactorization(Matrix A, Vector b) {
 	for (unsigned k = 0; k < A.rows; k++) {
 		Vector ratios(A.rows - k); // New vector of size A.rows - k to store the ratios
 		for (unsigned i = k; i < A.rows; i++) {
-			double rowMax = FindArrayMax(A[i], k, A.columns);
+			//double rowMax = FindArrayMax(A[i], k, A.columns);
+			double rowMax = A[i].FindMaxMagnitudeStartingAt(k);
 			ratios[i - k] = rowMax / A[i][k];
 		}
 		unsigned newPivot = ratios.FindMaxIndex() + k; //Find the best row for this iteration
 
-		double* temp = A[k]; //
+		Vector temp = A[k]; //
 		A[k] = A[newPivot];  // Switch the current row with the best row for this iteration
 		A[newPivot] = temp;  //
 
@@ -294,7 +296,7 @@ double* CopyArray(double* v, unsigned n) {
 	return newArray;
 }
 
-double* MultiplyByConstant(double* v, unsigned n, double multiplier) {
+void MultiplyByConstant(double* v, unsigned n, double multiplier) {
 	for (int i = 0; i < n; i++) {
 		v[i] *= multiplier;
 	}
@@ -302,9 +304,11 @@ double* MultiplyByConstant(double* v, unsigned n, double multiplier) {
 
 //Subtracts every entry in a by the corresponding entry in b
 double* VectorSubtraction(double*a, double* b, unsigned size) {
+	double* returnValue = new double[size];
 	for (int i = 0; i < size; i++) {
-		a[i] -= b[i];
+		returnValue[i] = a[i] - b[i];
 	}
+	return returnValue;
 }
 
 Vector GramSchmidt(Matrix A) {
@@ -314,8 +318,8 @@ Vector GramSchmidt(Matrix A) {
 	for (int j = 0; j < A.rows; j++) {
 		q[j] = A[j];
 		for (int i = 0; i < j - 1; j++) {
-			r[i][j] = DotProduct(q[j], q[i], A.rows);
-			q[j] = VectorSubtraction(q[j], MultiplyByConstant(q[i], A.rows, r[i][j]), A.rows);
+			//r[i][j] = DotProduct(q[j], q[i], A.rows);
+			//q[j] = VectorSubtraction(q[j], MultiplyByConstant(q[i], A.rows, r[i][j]), A.rows);
 		}
 		//TODO: write vector norms.
 		//r[j][j] = norm

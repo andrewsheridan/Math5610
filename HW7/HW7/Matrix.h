@@ -29,7 +29,7 @@ public:
 	void Print();
 	void PrintAugmented(Vector v);
 
-	double* &operator[] (unsigned row) { return entries[row]; }
+	Vector &operator[] (unsigned row) { return entries[row]; }
 	friend bool operator == (const Matrix& A, const Matrix& B);
 	friend bool operator != (const Matrix& A, const Matrix& B);
 	friend Vector operator * (const Matrix& A, Vector& x);
@@ -41,7 +41,7 @@ public:
 	double InfinityNorm();
 
 private:
-	double** entries;
+	Vector* entries;
 };
 
 double DotProduct(double* A, double* B, int size);

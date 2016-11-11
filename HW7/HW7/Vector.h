@@ -15,11 +15,12 @@ public:
 	~Vector();
 
 	double& operator[] (unsigned x) { return entries[x]; }
+	friend double operator*( Vector& a, Vector& b);
 
 	void InitializeRandomEntries();
 	void InitializeAllOnes();
 
-	double FindMaxMagnitude(unsigned start);
+	double FindMaxMagnitudeStartingAt(unsigned start);
 	unsigned FindMaxIndex();
 
 	void Print();

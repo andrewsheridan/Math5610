@@ -16,24 +16,30 @@ double DotProduct(double* A, double* B, int size) {
 #pragma region Constructors and Initialization
 Matrix::Matrix(unsigned size) : rows(size), columns(size)
 {
-	entries = new double*[size];
+	//entries = new double*[size];
+	entries = new Vector[size];
 	for (unsigned i = 0; i < size; i++) {
-		entries[i] = new double[size];
+		//entries[i] = new double[size];
+		entries[i] = Vector(size);
 	}
 }
 
 Matrix::Matrix(unsigned rowCount, unsigned columnCount) : rows(rowCount), columns(columnCount) {
-	entries = new double*[rowCount];
+	//entries = new double*[rowCount];
+	entries = new Vector[rowCount];
 	for (unsigned i = 0; i < rowCount; i++) {
-		entries[i] = new double[columnCount];
+		//entries[i] = new double[columnCount];
+		entries[i] = Vector(columnCount);
 	}
 }
 
 ///Copy Constructor
 Matrix::Matrix(const Matrix &m) : rows(m.rows), columns(m.columns) {
-	entries = new double*[rows];
+	//entries = new double*[rows];
+	entries = new Vector[rows];
 	for (unsigned int i = 0; i < rows; i++) {
-		entries[i] = new double[columns];
+		//entries[i] = new double[columns];
+		entries[i] = Vector(columns);
 		for (unsigned int j = 0; j < columns; j++) {
 			entries[i][j] = m.entries[i][j];
 		}
@@ -212,7 +218,8 @@ Matrix operator* (Matrix A, Matrix B) {
 
 	for (unsigned i = 0; i < A.rows; i++) {
 		for (unsigned j = 0; j < B.columns; j++) {
-			matrix[i][j] = DotProduct(A[i], bTranspose[j], A.columns);
+			//matrix[i][j] = DotProduct(A[i], bTranspose[j], A.columns);
+			matrix[i][j] = A[i] * bTranspose[j];
 		}
 	}
 	return matrix;

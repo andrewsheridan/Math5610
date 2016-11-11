@@ -24,25 +24,36 @@ Vector::Vector(const Vector &v) : size(v.size) {
 	}
 }
 
-Vector::Vector(double* v, unsigned size) {
+Vector::Vector(double* v, unsigned n) :size(n) {
 	entries = new double[size];
 	for (unsigned i = 0; i < size; i++) {
 		entries[i] = v[i];
 	}
 }
 
-// Copy Assignment Operator
-Vector Vector::operator= (const Vector& v) {
-	Vector newVector(v.size);
-	for (unsigned i = 0; i < size; i++) {
-		newVector[i] = v.entries[i];
-	}
-	return newVector;
-}
+//// Copy Assignment Operator
+//Vector Vector::operator= (const Vector& v) {
+//	Vector newVector(v.size);
+//	for (unsigned i = 0; i < v.size; i++) {
+//		newVector[i] = v.entries[i];
+//	}
+//	return newVector;
+//}
+//
+//Vector Vector::operator= (const Vector& v) = default;
 
 //Destructor
 Vector::~Vector()
 {
+}
+
+//Dot Product
+double operator* (Vector& a, Vector& b) {
+	if (a.size != b.size) return NULL;
+	double sum = 0;
+	for (int i = 0; i < a.size; i++) {
+		sum += a[i] * b[i];
+	}
 }
 
 /// Initializes the entries to values between 0 and 1
@@ -63,7 +74,7 @@ void Vector::InitializeAllOnes() {
 }
 
 //Finds the entry with the largest magnitude, starting with entry "start".
-double Vector::FindMaxMagnitude(unsigned start) {
+double Vector::FindMaxMagnitudeStartingAt(unsigned start) {
 	double max = 0;
 	for (unsigned i = start; i < size; i++) {
 		double value = std::abs(entries[i]);
