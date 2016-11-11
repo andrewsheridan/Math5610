@@ -1,0 +1,10 @@
+﻿  Main.cpp
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(9): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(20): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(45): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(137): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(138): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(141): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\main.cpp(9): warning C4101: 'MF': unreferenced local variable
+  HW7.vcxproj -> C:\Users\labuser\Source\Repos\Math5610\HW7\x64\Debug\HW7.exe
+  HW7.vcxproj -> C:\Users\labuser\Source\Repos\Math5610\HW7\x64\Debug\HW7.pdb (Partial PDB)

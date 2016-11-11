@@ -34,6 +34,7 @@ int main() {
 	matrix1.PrintAugmented(blah);
 
 	Vector result1 = LeastSquares(matrix1, blah);
+
 	
 	int input;
 	std::cin >> input;

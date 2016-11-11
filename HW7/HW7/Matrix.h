@@ -33,7 +33,7 @@ public:
 	friend bool operator == (const Matrix& A, const Matrix& B);
 	friend bool operator != (const Matrix& A, const Matrix& B);
 	friend Vector operator * (const Matrix& A, Vector& x);
-	friend Matrix operator * (Matrix& A, Matrix& B);
+	friend Matrix operator * (Matrix A, Matrix B);
 
 	bool IsSymmetric();
 	Matrix Transpose();

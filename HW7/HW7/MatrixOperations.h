@@ -39,15 +39,15 @@ Vector BackSubstitution(Matrix A, Vector b) {
 
 	Vector x(b.size);
 
-	x[b.size - 1] = b[b.size - 1] / A[A.rows - 1][A.columns - 1];
-	for (int k = A.rows - 2; k >= 0; k--) {
-		x[k] = b[k];
-		for (unsigned i = k + 1; i < A.columns; i++) {
-			x[k] -= A[k][i] * x[i];
+	for(int i = b.size - 1; i >= 0; i--)
+	{
+		x[i] = b[i];
+		for (int j = i + 1; j < b.size; j++) {
+			x[i] -= A[i][j] * x[j];
 		}
-		x[k] /= A[k][k];
+		x[i] /= A[i][i];
+		x.Print();
 	}
-
 	return x;
 }
 
@@ -256,19 +256,35 @@ Matrix Inverse(Matrix A) {
 #pragma endregion
 
 #pragma region HW7
+
+//Todo: Check this.
 Vector LeastSquares(Matrix A, Vector b) {
 	Matrix AT = A.Transpose();
 	Matrix B = AT * A;
+	Vector y = AT * b;
+	std::cout << "A:" << std::endl;
 	A.Print();
 	AT.Print();
+	std::cout << "B: " << std::endl;
 	B.Print();
 	B.Transpose().Print();
-	if (B == B.Transpose()) {
-		std::cout << "It worked!" << std::endl;
-	}
-	else {
-		return 0;
-	}
+	y.Print();
+
+	Vector X = BackSubstitution(B, y);
+	std::cout << "X" << std::endl;
+	X.Print();
+	Matrix G = CholeskyDecomposition(B);
+	std::cout << "Cholesky: " << std::endl;
+	G.Print();
+
+	Vector z = BackSubstitution(G, y);
+	std::cout << "Z:" << std::endl;
+	z.Print();
+	Vector x = BackSubstitution(G.Transpose(), z);
+	std::cout << "X: " << std::endl;
+	x.Print();
+	return x;
 }
+
 
 #pragma endregion

@@ -170,7 +170,7 @@ bool Matrix::IsSymmetric() {
 
 ///Multiplies an nxn matrix A by the vector x
 Vector operator *(const Matrix& A, Vector& x) {
-	if (A.rows != x.size) return NULL;
+	if (A.columns != x.size) return NULL;
 
 	Vector result(A.rows);
 	for (unsigned i = 0; i < A.rows; i++) {
@@ -197,15 +197,22 @@ Matrix Matrix::Transpose() {
 }
 
 ///Multiplies an matrix A by matrix B
-Matrix operator* (Matrix& A, Matrix& B) {
+Matrix operator* (Matrix A, Matrix B) {
 	if (A.columns != B.rows) throw "Incompatible sizes";
 	
 	Matrix matrix(A.rows, B.columns);
-	Matrix aTranspose = A.Transpose();
+	Matrix bTranspose = B.Transpose();
+	std::cout << "Starting multiplication. A:" << std::endl;
+	
+	A.Print();
+	std::cout << "B: " << std::endl;
+	B.Print();
+	std::cout << "Bt: " << std::endl;
+	bTranspose.Print();
 
 	for (unsigned i = 0; i < A.rows; i++) {
 		for (unsigned j = 0; j < B.columns; j++) {
-			matrix[i][j] = DotProduct(aTranspose[i], B[j], A.columns);
+			matrix[i][j] = DotProduct(A[i], bTranspose[j], A.columns);
 		}
 	}
 	return matrix;
