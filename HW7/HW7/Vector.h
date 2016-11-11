@@ -17,12 +17,14 @@ public:
 	friend double operator*( Vector& a, Vector& b);
 	friend Vector& operator*(Vector& a, double constant);
 	friend Vector& operator-(Vector& a, Vector& b);
+	friend Vector& operator/(Vector& a, double constant);
 
 	void InitializeRandomEntries();
 	void InitializeAllOnes();
 
 	double FindMaxMagnitudeStartingAt(unsigned start);
 	unsigned FindMaxIndex();
+	double L2Norm();
 
 	void Print();
 	unsigned GetSize() { return size; }

@@ -65,10 +65,19 @@ Vector& operator* (Vector& a, double constant) {
 
 //Subtracts the elements of vector a from the elements of vector b
 Vector& operator- (Vector& a, Vector& b) {
-	if (a.size != b.size) return;
+	if (a.size != b.size) return a;
 	Vector newVector(a.size);
 	for (int i = 0; i < a.size; i++) {
 		newVector[i] = a[i] - b[i];
+	}
+	return newVector;
+}
+
+//Divides the entries of the vector by a constant
+Vector& operator/ (Vector& a, double constant) {
+	Vector newVector(a.GetSize());
+	for (int i = 0; i < a.GetSize(); i++) {
+		newVector[i] = a[i] / constant;
 	}
 	return newVector;
 }
@@ -112,6 +121,15 @@ unsigned Vector::FindMaxIndex() {
 		}
 	}
 	return index;
+}
+
+///Computes the L2 norm of the vector
+double Vector::L2Norm() {
+	double sum = 0;
+	for (int i = 0; i < size; i++) {
+		sum += entries[i] * entries[i];
+	}
+	return std::sqrt(sum);
 }
 
 ///Outputs the vector's entries to the console

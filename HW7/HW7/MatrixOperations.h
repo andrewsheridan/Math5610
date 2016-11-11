@@ -311,8 +311,8 @@ double* VectorSubtraction(double*a, double* b, unsigned size) {
 	return returnValue;
 }
 
-Vector GramSchmidt(Matrix A) {
-	if (A.GetRows() != A.GetColumns()) return NULL;
+Matrix& GramSchmidt(Matrix A) {
+	if (A.GetRows() != A.GetColumns()) return A;
 	Matrix q(A.GetRows());
 	Matrix r(A.GetRows());
 	for (int j = 0; j < A.GetRows(); j++) {
@@ -322,9 +322,9 @@ Vector GramSchmidt(Matrix A) {
 			q[j] = q[j] - (q[i] * r[i][j]);
 		}
 
-		//TODO: write vector norms.
-		//r[j][j] = norm
-		// qj = qj/ rjj
+		r[j][j] = q[j].L2Norm();
+		q[j] = q[j] / r[j][j];
 	}
+	return q;
 }
 #pragma endregion
