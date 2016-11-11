@@ -318,9 +318,10 @@ Vector GramSchmidt(Matrix A) {
 	for (int j = 0; j < A.GetRows(); j++) {
 		q[j] = A[j];
 		for (int i = 0; i < j - 1; j++) {
-			//r[i][j] = DotProduct(q[j], q[i], A.GetRows());
-			//q[j] = VectorSubtraction(q[j], MultiplyByConstant(q[i], A.GetRows(), r[i][j]), A.GetRows());
+			r[i][j] = q[j] * q[i];
+			q[j] = q[j] - (q[i] * r[i][j]);
 		}
+
 		//TODO: write vector norms.
 		//r[j][j] = norm
 		// qj = qj/ rjj

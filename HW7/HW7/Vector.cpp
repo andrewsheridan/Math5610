@@ -55,6 +55,24 @@ double operator* (Vector& a, Vector& b) {
 	}
 }
 
+//Multiply each entry by a constant
+Vector& operator* (Vector& a, double constant) {
+	for (int i = 0; i < a.size; i++) {
+		a[i] *= constant;
+	}
+	return a;
+}
+
+//Subtracts the elements of vector a from the elements of vector b
+Vector& operator- (Vector& a, Vector& b) {
+	if (a.size != b.size) return;
+	Vector newVector(a.size);
+	for (int i = 0; i < a.size; i++) {
+		newVector[i] = a[i] - b[i];
+	}
+	return newVector;
+}
+
 /// Initializes the entries to values between 0 and 1
 void Vector::InitializeRandomEntries() {
 	std::mt19937 generator(123); //Random number generator
