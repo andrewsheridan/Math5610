@@ -286,5 +286,40 @@ Vector LeastSquares(Matrix A, Vector b) {
 	return x;
 }
 
+double* CopyArray(double* v, unsigned n) {
+	double* newArray = new double[n];
+	for (int i = 0; i < n; i++) {
+		newArray[i] = v[i];
+	}
+	return newArray;
+}
 
+double* MultiplyByConstant(double* v, unsigned n, double multiplier) {
+	for (int i = 0; i < n; i++) {
+		v[i] *= multiplier;
+	}
+}
+
+//Subtracts every entry in a by the corresponding entry in b
+double* VectorSubtraction(double*a, double* b, unsigned size) {
+	for (int i = 0; i < size; i++) {
+		a[i] -= b[i];
+	}
+}
+
+Vector GramSchmidt(Matrix A) {
+	if (A.rows != A.columns) return NULL;
+	Matrix q(A.rows);
+	Matrix r(A.rows);
+	for (int j = 0; j < A.rows; j++) {
+		q[j] = A[j];
+		for (int i = 0; i < j - 1; j++) {
+			r[i][j] = DotProduct(q[j], q[i], A.rows);
+			q[j] = VectorSubtraction(q[j], MultiplyByConstant(q[i], A.rows, r[i][j]), A.rows);
+		}
+		//TODO: write vector norms.
+		//r[j][j] = norm
+		// qj = qj/ rjj
+	}
+}
 #pragma endregion

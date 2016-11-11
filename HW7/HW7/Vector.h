@@ -10,6 +10,7 @@ public:
 	Vector();
 	Vector(unsigned n);
 	Vector(const Vector &v);
+	Vector(double* v, unsigned size);
 	Vector operator=(const Vector& v);
 	~Vector();
 

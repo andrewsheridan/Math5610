@@ -24,6 +24,13 @@ Vector::Vector(const Vector &v) : size(v.size) {
 	}
 }
 
+Vector::Vector(double* v, unsigned size) {
+	entries = new double[size];
+	for (unsigned i = 0; i < size; i++) {
+		entries[i] = v[i];
+	}
+}
+
 // Copy Assignment Operator
 Vector Vector::operator= (const Vector& v) {
 	Vector newVector(v.size);
