@@ -6,12 +6,11 @@
 //Vector.h
 class Vector {
 public:
-	const unsigned size; //Size of the vector
 	Vector();
 	Vector(unsigned n);
 	Vector(const Vector &v);
 	Vector(double* v, unsigned size);
-	Vector operator=(const Vector& v);
+	Vector& operator=(const Vector& v);
 	~Vector();
 
 	double& operator[] (unsigned x) { return entries[x]; }
@@ -24,7 +23,12 @@ public:
 	unsigned FindMaxIndex();
 
 	void Print();
+	unsigned GetSize() { return size; }
+	void SetSize(unsigned newSize) { size = newSize; }
 	
+protected:
+	unsigned size;
+
 private:
 	double* entries;
 };

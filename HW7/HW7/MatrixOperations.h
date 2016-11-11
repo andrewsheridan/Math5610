@@ -35,14 +35,14 @@ int FindMaxIndex(double* V, unsigned n) {
 //A: The matrix to be reduced
 // b: Right-Hand-Side
 Vector BackSubstitution(Matrix A, Vector b) {
-	if (A.rows != b.size) return NULL;
+	if (A.GetRows() != b.GetSize()) return NULL;
 
-	Vector x(b.size);
+	Vector x(b.GetSize());
 
-	for(int i = b.size - 1; i >= 0; i--)
+	for(int i = b.GetSize() - 1; i >= 0; i--)
 	{
 		x[i] = b[i];
-		for (int j = i + 1; j < b.size; j++) {
+		for (int j = i + 1; j < b.GetSize(); j++) {
 			x[i] -= A[i][j] * x[j];
 		}
 		x[i] /= A[i][i];
@@ -56,14 +56,14 @@ Vector BackSubstitution(Matrix A, Vector b) {
 //A: The matrix to be reduced
 //b: right-hand-side
 Vector ForwardSubstitution(Matrix A, Vector b) {
-	if (A.rows != b.size) return NULL;
+	if (A.GetRows() != b.GetSize()) return NULL;
 
-	Vector x(b.size);
+	Vector x(b.GetSize());
 
 	x[0] = b[0];
-	for (unsigned k = 0; k < A.rows; k++) {
+	for (unsigned k = 0; k < A.GetRows(); k++) {
 		x[k] = b[k];
-		for (unsigned j = 0; j < A.columns; j++) {
+		for (unsigned j = 0; j < A.GetColumns(); j++) {
 			x[k] = x[k] - A[k][j] * x[j];
 		}
 		x[k] = x[k] / A[k][k];
@@ -76,10 +76,10 @@ Vector ForwardSubstitution(Matrix A, Vector b) {
 //A: The matrix to be reduced
 // b: Right-Hand-Side
 void GaussianElimination(Matrix& A, Vector& b) {
-	for (unsigned k = 0; k < A.rows; k++) {
-		for (unsigned i = k + 1; i < A.rows; i++) {
+	for (unsigned k = 0; k < A.GetRows(); k++) {
+		for (unsigned i = k + 1; i < A.GetRows(); i++) {
 			double factor = A[i][k] / A[k][k];
-			for (unsigned j = 0; j < A.columns; j++) {
+			for (unsigned j = 0; j < A.GetColumns(); j++) {
 				A[i][j] = A[i][j] - factor*A[k][j];
 			}
 			A[i][k] = 0;
@@ -94,9 +94,9 @@ void GaussianElimination(Matrix& A, Vector& b) {
 // A: The coefficient matrix
 // b: Right-Hand-Side
 void GaussianEliminationWithScaledPivoting(Matrix A, Vector b) {
-	if (A.rows != b.size) return;
+	if (A.GetRows() != b.GetSize()) return;
 
-	int n = b.size;
+	int n = b.GetSize();
 
 	for (int k = 0; k < n; k++) {
 		double* ratios = new double[n - k]; // New vector of size n - k to store the ratios
@@ -130,16 +130,16 @@ void GaussianEliminationWithScaledPivoting(Matrix A, Vector b) {
 // A: The nxn coefficient matrix
 // b: Right-Hand-Side
 Matrix LUFactorization(Matrix A, Vector b) {
-	if (A.rows != b.size) return NULL;
+	if (A.GetRows() != b.GetSize()) return NULL;
 
-	Matrix L(A.rows, A.columns);
+	Matrix L(A.GetRows(), A.GetColumns());
 	L.InitializeIdentityMatrix();
 
-	for (int k = 0; k < A.rows; k++) {
-		for (int i = k + 1; i < A.rows; i++) {
+	for (int k = 0; k < A.GetRows(); k++) {
+		for (int i = k + 1; i < A.GetRows(); i++) {
 			double factor = A[i][k] / A[k][k];
 			L[i][k] = factor;
-			for (int j = 0; j < A.columns; j++) {
+			for (int j = 0; j < A.GetColumns(); j++) {
 				A[i][j] = A[i][j] - factor*A[k][j];
 			}
 			b[i] = b[i] - factor*b[k];
@@ -154,14 +154,14 @@ Matrix LUFactorization(Matrix A, Vector b) {
 // b: Right-Hand-Side
 // n: The size of the matrices
 Matrix ScaledLUFactorization(Matrix A, Vector b) {
-	if (A.rows != b.size) return NULL;
-	Matrix L(A.rows, A.columns);
+	if (A.GetRows() != b.GetSize()) return NULL;
+	Matrix L(A.GetRows(), A.GetColumns());
 	L.InitializeIdentityMatrix();
 
-	for (unsigned k = 0; k < A.rows; k++) {
-		Vector ratios(A.rows - k); // New vector of size A.rows - k to store the ratios
-		for (unsigned i = k; i < A.rows; i++) {
-			//double rowMax = FindArrayMax(A[i], k, A.columns);
+	for (unsigned k = 0; k < A.GetRows(); k++) {
+		Vector ratios(A.GetRows() - k); // New vector of size A.GetRows() - k to store the ratios
+		for (unsigned i = k; i < A.GetRows(); i++) {
+			//double rowMax = FindArrayMax(A[i], k, A.GetColumns());
 			double rowMax = A[i].FindMaxMagnitudeStartingAt(k);
 			ratios[i - k] = rowMax / A[i][k];
 		}
@@ -178,10 +178,10 @@ Matrix ScaledLUFactorization(Matrix A, Vector b) {
 		std::cout << "Exchanged rows " << k << " and " << newPivot << std::endl;
 		}*/
 
-		for (unsigned i = k + 1; i < A.rows; i++) {
+		for (unsigned i = k + 1; i < A.GetRows(); i++) {
 			double factor = A[i][k] / A[k][k];
 			L[i][k] = factor;
-			for (unsigned j = k + 1; j < A.columns; j++) {
+			for (unsigned j = k + 1; j < A.GetColumns(); j++) {
 				A[i][j] = A[i][j] - factor*A[k][j];
 			}
 			A[i][k] = 0;
@@ -201,14 +201,14 @@ Matrix CholeskyDecomposition(Matrix& A) {
 	if (A.IsSymmetric() == false)
 		return NULL;
 
-	Matrix L(A.rows, A.columns); //Initialize the new matrix
-	for (unsigned i = 0; i < A.rows; i++) {
-		for (unsigned j = 0; j < A.columns; j++) {
+	Matrix L(A.GetRows(), A.GetColumns()); //Initialize the new matrix
+	for (unsigned i = 0; i < A.GetRows(); i++) {
+		for (unsigned j = 0; j < A.GetColumns(); j++) {
 			L[i][j] = 0;
 		}
 	}
 
-	for (unsigned i = 0; i < A.rows; i++) {
+	for (unsigned i = 0; i < A.GetRows(); i++) {
 		for (unsigned j = 0; j < (i + 1); j++) {
 			double entry = 0;
 			for (unsigned k = 0; k < j; k++) {
@@ -229,26 +229,26 @@ Matrix CholeskyDecomposition(Matrix& A) {
 
 //Computes the inverse of matrix A
 Matrix Inverse(Matrix A) {
-	Matrix matrix(A.columns, A.rows);
+	Matrix matrix(A.GetColumns(), A.GetRows());
 	matrix.InitializeIdentityMatrix();
 	double ratio, a;
 	unsigned i, j, k;
-	for (i = 0; i < A.rows; i++) {
-		for (j = 0; j < A.columns; j++) {
+	for (i = 0; i < A.GetRows(); i++) {
+		for (j = 0; j < A.GetColumns(); j++) {
 			if (i != j) {
 				ratio = A[j][i] / A[i][i];
-				for (k = 0; k < A.rows; k++) {
+				for (k = 0; k < A.GetRows(); k++) {
 					A[j][k] -= ratio * A[i][k];
 				}
-				for (k = 0; k < A.rows; k++) {
+				for (k = 0; k < A.GetRows(); k++) {
 					matrix[j][k] -= ratio * matrix[i][k];
 				}
 			}
 		}
 	}
-	for (i = 0; i < A.rows; i++) {
+	for (i = 0; i < A.GetRows(); i++) {
 		a = A[i][i];
-		for (j = 0; j < A.columns; j++) {
+		for (j = 0; j < A.GetColumns(); j++) {
 			matrix[i][j] /= a;
 		}
 	}
@@ -312,14 +312,14 @@ double* VectorSubtraction(double*a, double* b, unsigned size) {
 }
 
 Vector GramSchmidt(Matrix A) {
-	if (A.rows != A.columns) return NULL;
-	Matrix q(A.rows);
-	Matrix r(A.rows);
-	for (int j = 0; j < A.rows; j++) {
+	if (A.GetRows() != A.GetColumns()) return NULL;
+	Matrix q(A.GetRows());
+	Matrix r(A.GetRows());
+	for (int j = 0; j < A.GetRows(); j++) {
 		q[j] = A[j];
 		for (int i = 0; i < j - 1; j++) {
-			//r[i][j] = DotProduct(q[j], q[i], A.rows);
-			//q[j] = VectorSubtraction(q[j], MultiplyByConstant(q[i], A.rows, r[i][j]), A.rows);
+			//r[i][j] = DotProduct(q[j], q[i], A.GetRows());
+			//q[j] = VectorSubtraction(q[j], MultiplyByConstant(q[i], A.GetRows(), r[i][j]), A.GetRows());
 		}
 		//TODO: write vector norms.
 		//r[j][j] = norm

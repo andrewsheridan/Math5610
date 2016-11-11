@@ -31,16 +31,15 @@ Vector::Vector(double* v, unsigned n) :size(n) {
 	}
 }
 
-//// Copy Assignment Operator
-//Vector Vector::operator= (const Vector& v) {
-//	Vector newVector(v.size);
-//	for (unsigned i = 0; i < v.size; i++) {
-//		newVector[i] = v.entries[i];
-//	}
-//	return newVector;
-//}
-//
-//Vector Vector::operator= (const Vector& v) = default;
+// Copy Assignment Operator
+Vector& Vector::operator= (const Vector& v) {
+	size = v.size;
+	entries = new double[v.size];
+	for (unsigned i = 0; i < v.size; i++) {
+		entries[i] = v.entries[i];
+	}
+	return *this;
+}
 
 //Destructor
 Vector::~Vector()

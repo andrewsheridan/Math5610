@@ -24,6 +24,8 @@ Matrix::Matrix(unsigned size) : rows(size), columns(size)
 	}
 }
 
+
+//TODO: Make this work with vectors
 Matrix::Matrix(unsigned rowCount, unsigned columnCount) : rows(rowCount), columns(columnCount) {
 	//entries = new double*[rowCount];
 	entries = new Vector[rowCount];
@@ -44,6 +46,17 @@ Matrix::Matrix(const Matrix &m) : rows(m.rows), columns(m.columns) {
 			entries[i][j] = m.entries[i][j];
 		}
 	}
+}
+
+Matrix& Matrix::operator=(const Matrix& m) {
+	this->rows = m.rows;
+	this->columns = m.columns;
+	this->entries = new Vector[m.rows];
+	for (int i = 0; i < m.rows; i++) {
+		this->entries[i] = m.entries[i];
+	}
+
+	return *this;
 }
 
 
@@ -116,7 +129,7 @@ void Matrix::Print() {
 
 ///Outputs an augmented coefficient matrix to the console
 void Matrix::PrintAugmented(Vector v) {
-	if (v.size != rows) {
+	if (v.GetSize()	 != rows) {
 		std::cout << "Vector and Matrix do not match sizes" << std::endl;
 		return;
 	}
@@ -176,7 +189,7 @@ bool Matrix::IsSymmetric() {
 
 ///Multiplies an nxn matrix A by the vector x
 Vector operator *(const Matrix& A, Vector& x) {
-	if (A.columns != x.size) return NULL;
+	if (A.columns != x.GetSize()) return NULL;
 
 	Vector result(A.rows);
 	for (unsigned i = 0; i < A.rows; i++) {

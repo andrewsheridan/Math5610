@@ -12,14 +12,13 @@
 
 class Matrix{
 public: 
-	const unsigned rows;
-	const unsigned columns;
+	
 
 	Matrix(unsigned size);
 	Matrix(unsigned rowCount, unsigned columnCount);
 	Matrix(const Matrix &m);
-	Matrix(Matrix&&) = default;
-	Matrix& operator=(Matrix&& m) = default;
+	//Matrix(Matrix& m);
+	Matrix& operator = (const Matrix& m);
 	
 	void InitializeIdentityMatrix();
 	void InitializeRandom();
@@ -40,8 +39,17 @@ public:
 	double OneNorm();
 	double InfinityNorm();
 
+	unsigned GetRows() { return rows; }
+	unsigned GetColumns() { return columns; }
+	void SetRows(unsigned r) { rows = r; }
+	void SetColumns(unsigned c) { columns = c; }
+
 private:
 	Vector* entries;
+
+	unsigned rows;
+	unsigned columns;
+
 };
 
 double DotProduct(double* A, double* B, int size);
