@@ -56,7 +56,7 @@ double operator* (Vector& a, Vector& b) {
 }
 
 //Multiply each entry by a constant
-Vector& operator* (Vector& a, double constant) {
+Vector operator* (Vector& a, double constant) {
 	for (int i = 0; i < a.size; i++) {
 		a[i] *= constant;
 	}
@@ -64,7 +64,7 @@ Vector& operator* (Vector& a, double constant) {
 }
 
 //Subtracts the elements of vector a from the elements of vector b
-Vector& operator- (Vector& a, Vector& b) {
+Vector operator- (Vector& a, Vector& b) {
 	if (a.size != b.size) return a;
 	Vector newVector(a.size);
 	for (int i = 0; i < a.size; i++) {
@@ -74,7 +74,7 @@ Vector& operator- (Vector& a, Vector& b) {
 }
 
 //Divides the entries of the vector by a constant
-Vector& operator/ (Vector& a, double constant) {
+Vector operator/ (Vector& a, double constant) {
 	Vector newVector(a.GetSize());
 	for (int i = 0; i < a.GetSize(); i++) {
 		newVector[i] = a[i] / constant;

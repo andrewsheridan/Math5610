@@ -8,7 +8,7 @@ int main() {
 	const unsigned size = 3;
 	MatrixFactory MF;
 	
-	Matrix matrix1(5, 3);
+	/*Matrix matrix1(5, 3);
 	
 	matrix1[0][0] = 1;
 	matrix1[0][1] = 0;
@@ -33,9 +33,15 @@ int main() {
 	blah[4] = 1;
 	matrix1.PrintAugmented(blah);
 
-	Vector result1 = LeastSquares(matrix1, blah);
+	Vector result1 = LeastSquares(matrix1, blah);*/
 
-	
+	Matrix matrix2 = MF.DiagonallyDominant(4, 4);
+	Matrix* QR = GramSchmidt(matrix2);
+	Matrix Q = QR[0];
+	Matrix R = QR[1];
+	matrix2.Print();
+	Q.Print();
+	R.Print();
 	int input;
 	std::cin >> input;
 

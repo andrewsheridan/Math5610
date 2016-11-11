@@ -1,11 +1,4 @@
-﻿  Vector.cpp
-c:\users\labuser\source\repos\math5610\hw7\hw7\vector.cpp(53): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw7\hw7\vector.cpp(60): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw7\hw7\vector.cpp(70): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw7\hw7\vector.cpp(79): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw7\hw7\vector.cpp(83): error C2143: syntax error: missing ';' before '}'
-c:\users\labuser\source\repos\math5610\hw7\hw7\vector.cpp(129): warning C4018: '<': signed/unsigned mismatch
-  Main.cpp
+﻿  Main.cpp
 c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(9): warning C4018: '<': signed/unsigned mismatch
 c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(20): warning C4018: '<': signed/unsigned mismatch
 c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(45): warning C4018: '<': signed/unsigned mismatch
@@ -16,12 +9,5 @@ c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(293): warning 
 c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(300): warning C4018: '<': signed/unsigned mismatch
 c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(308): warning C4018: '<': signed/unsigned mismatch
 c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(318): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw7\hw7\main.cpp(9): warning C4101: 'MF': unreferenced local variable
-  Generating Code...
-c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(329): warning C4715: 'GramSchmidt': not all control paths return a value
-  Compiling...
-  MatrixFactory.cpp
-  Matrix.cpp
-c:\users\labuser\source\repos\math5610\hw7\hw7\matrix.cpp(9): warning C4018: '<': signed/unsigned mismatch
-c:\users\labuser\source\repos\math5610\hw7\hw7\matrix.cpp(55): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+  HW7.vcxproj -> C:\Users\labuser\Source\Repos\Math5610\HW7\x64\Debug\HW7.exe
+  HW7.vcxproj -> C:\Users\labuser\Source\Repos\Math5610\HW7\x64\Debug\HW7.pdb (Partial PDB)

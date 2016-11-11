@@ -311,13 +311,15 @@ double* VectorSubtraction(double*a, double* b, unsigned size) {
 	return returnValue;
 }
 
-Matrix& GramSchmidt(Matrix A) {
-	if (A.GetRows() != A.GetColumns()) return A;
+Matrix* GramSchmidt(Matrix A) {
+	if (A.GetRows() != A.GetColumns()) return NULL;
 	Matrix q(A.GetRows());
 	Matrix r(A.GetRows());
 	for (int j = 0; j < A.GetRows(); j++) {
 		q[j] = A[j];
-		for (int i = 0; i < j - 1; j++) {
+		std::cout << "q[" << j << "]: ";
+		q[j].Print();
+		for (int i = 0; i < j - 1; i++) {
 			r[i][j] = q[j] * q[i];
 			q[j] = q[j] - (q[i] * r[i][j]);
 		}
@@ -325,6 +327,9 @@ Matrix& GramSchmidt(Matrix A) {
 		r[j][j] = q[j].L2Norm();
 		q[j] = q[j] / r[j][j];
 	}
-	return q;
+	Matrix* QR = new Matrix[2];
+	QR[0] = q;
+	QR[1] = r;
+	return QR;
 }
 #pragma endregion

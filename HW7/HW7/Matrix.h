@@ -13,12 +13,13 @@
 class Matrix{
 public: 
 	
-
+	Matrix() = default;
 	Matrix(unsigned size);
 	Matrix(unsigned rowCount, unsigned columnCount);
 	Matrix(const Matrix &m);
 	//Matrix(Matrix& m);
 	Matrix& operator = (const Matrix& m);
+	~Matrix();
 	
 	void InitializeIdentityMatrix();
 	void InitializeRandom();
