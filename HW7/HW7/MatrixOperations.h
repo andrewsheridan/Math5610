@@ -192,6 +192,7 @@ Matrix ScaledLUFactorization(Matrix A, Vector b) {
 
 #pragma endregion
 
+#pragma region HW6
 ///Computes the Cholesky Decomposition of an n by n matrix A
 /// Returns NULL if the matrix is not SPD
 Matrix CholeskyDecomposition(Matrix& A) {
@@ -251,3 +252,23 @@ Matrix Inverse(Matrix A) {
 	}
 	return matrix;
 }
+
+#pragma endregion
+
+#pragma region HW7
+Vector LeastSquares(Matrix A, Vector b) {
+	Matrix AT = A.Transpose();
+	Matrix B = AT * A;
+	A.Print();
+	AT.Print();
+	B.Print();
+	B.Transpose().Print();
+	if (B == B.Transpose()) {
+		std::cout << "It worked!" << std::endl;
+	}
+	else {
+		return 0;
+	}
+}
+
+#pragma endregion

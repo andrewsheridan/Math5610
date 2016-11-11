@@ -197,15 +197,15 @@ Matrix Matrix::Transpose() {
 }
 
 ///Multiplies an matrix A by matrix B
-Matrix operator *(const Matrix& A, Matrix& B) {
-	if (A.columns != B.columns) throw "Incompatible sizes";
-
+Matrix operator* (Matrix& A, Matrix& B) {
+	if (A.columns != B.rows) throw "Incompatible sizes";
+	
 	Matrix matrix(A.rows, B.columns);
-	Matrix bTranspose = B.Transpose();
+	Matrix aTranspose = A.Transpose();
 
 	for (unsigned i = 0; i < A.rows; i++) {
 		for (unsigned j = 0; j < B.columns; j++) {
-			matrix[i][j] = DotProduct(A.entries[i], bTranspose.entries[j], A.columns);
+			matrix[i][j] = DotProduct(aTranspose[i], B[j], A.columns);
 		}
 	}
 	return matrix;

@@ -25,7 +25,7 @@ public:
 	void InitializeRandom();
 	void InitializeRange(double minValue, double maxValue);
 	void InitializeDiagonallyDominant();
-
+	
 	void Print();
 	void PrintAugmented(Vector v);
 
@@ -33,7 +33,7 @@ public:
 	friend bool operator == (const Matrix& A, const Matrix& B);
 	friend bool operator != (const Matrix& A, const Matrix& B);
 	friend Vector operator * (const Matrix& A, Vector& x);
-	friend Matrix operator * (const Matrix&A, Matrix& B);
+	friend Matrix operator * (Matrix& A, Matrix& B);
 
 	bool IsSymmetric();
 	Matrix Transpose();
