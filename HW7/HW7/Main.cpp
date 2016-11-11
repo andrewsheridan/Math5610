@@ -35,7 +35,12 @@ int main() {
 
 	Vector result1 = LeastSquares(matrix1, blah);*/
 
-	Matrix matrix2 = MF.DiagonallyDominant(4, 4);
+	//Matrix matrix2 = MF.DiagonallyDominant(4, 4);
+	Matrix matrix2(2);
+	matrix2[0][0] = 4;
+	matrix2[0][1] = -2;
+	matrix2[1][0] = 3;
+	matrix2[1][1] = 1;
 	Matrix* QR = GramSchmidt(matrix2);
 	Matrix Q = QR[0];
 	Matrix R = QR[1];

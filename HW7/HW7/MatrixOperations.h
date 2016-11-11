@@ -311,15 +311,18 @@ double* VectorSubtraction(double*a, double* b, unsigned size) {
 	return returnValue;
 }
 
-Matrix* GramSchmidt(Matrix A) {
+///Computes the QR factorization of Matrix A
+///Returns a pair of matrices in an array. The first is Q, the second, R. 
+Matrix* (Matrix A) {
 	if (A.GetRows() != A.GetColumns()) return NULL;
-	Matrix q(A.GetRows());
-	Matrix r(A.GetRows());
-	for (int j = 0; j < A.GetRows(); j++) {
-		q[j] = A[j];
+	Matrix AT = A.Transpose();
+	Matrix q(AT.GetRows());
+	Matrix r(AT.GetRows());
+	for (int j = 0; j < AT.GetRows(); j++) {
+		q[j] = AT[j];
 		std::cout << "q[" << j << "]: ";
 		q[j].Print();
-		for (int i = 0; i < j - 1; i++) {
+		for (int i = 0; i < j; i++) {
 			r[i][j] = q[j] * q[i];
 			q[j] = q[j] - (q[i] * r[i][j]);
 		}

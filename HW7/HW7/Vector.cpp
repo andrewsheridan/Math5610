@@ -14,6 +14,9 @@ Vector::Vector() :size(0){
 /// Initializes the entries to an empty array of size n
 Vector::Vector(unsigned n) : size(n){
 	entries = new double[size];
+	/*for (unsigned i = 0; i < n; i++) {
+		entries[i] = 0;
+	}*/
 }
 
 ///Copy Constructor
@@ -53,6 +56,7 @@ double operator* (Vector& a, Vector& b) {
 	for (int i = 0; i < a.size; i++) {
 		sum += a[i] * b[i];
 	}
+	return sum;
 }
 
 //Multiply each entry by a constant

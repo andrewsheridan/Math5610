@@ -2,42 +2,45 @@
 #include "Vector.h"
 #include <random>
 
-#pragma region extras
-///Computes the Dot Product of vector A with vector B (each size n)
-double DotProduct(double* A, double* B, int size) {
-	double sum = 0;
-	for (unsigned i = 0; i < size; i++) {
-		sum += A[i] * B[i];
-	}
-	return sum;
-}
-#pragma endregion
+//#pragma region extras
+/////Computes the Dot Product of vector A with vector B (each size n)
+//double DotProduct(double* A, double* B, int size) {
+//	double sum = 0;
+//	for (unsigned i = 0; i < size; i++) {
+//		sum += A[i] * B[i];
+//	}
+//	return sum;
+//}
+//#pragma endregion
 
 #pragma region Constructors and Initialization
 Matrix::Matrix(unsigned size) : rows(size), columns(size)
 {
-	//entries = new double*[size];
 	entries = new Vector[size];
 	for (unsigned i = 0; i < size; i++) {
-		//entries[i] = new double[size];
 		entries[i] = Vector(size);
+		for (unsigned j = 0; j < size; j++) {
+			entries[i][j] = 0;
+		}
 	}
 }
 
 
-//TODO: Make this work with vectors
 Matrix::Matrix(unsigned rowCount, unsigned columnCount) : rows(rowCount), columns(columnCount) {
 	//entries = new double*[rowCount];
 	entries = new Vector[rowCount];
 	for (unsigned i = 0; i < rowCount; i++) {
 		//entries[i] = new double[columnCount];
 		entries[i] = Vector(columnCount);
+		for (unsigned j = 0; j < columnCount; j++) {
+			entries[i][j] = 0;
+		}
 	}
 }
 
 ///Copy Constructor
 Matrix::Matrix(const Matrix &m) : rows(m.rows), columns(m.columns) {
-	//entries = new double*[rows];
+	//entries = new double*[rowsgram];
 	entries = new Vector[rows];
 	for (unsigned int i = 0; i < rows; i++) {
 		//entries[i] = new double[columns];
