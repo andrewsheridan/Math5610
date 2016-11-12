@@ -53,7 +53,7 @@ private:
 
 };
 
-double DotProduct(double* A, double* B, int size);
+//double DotProduct(double* A, double* B, int size);
 #pragma region Initalization Operations
 
 ///// Generates a random upper triangular square matrix of size n

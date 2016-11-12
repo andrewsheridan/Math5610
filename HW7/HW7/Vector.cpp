@@ -6,6 +6,7 @@
 #include <random>
 #include <iostream>
 #include <iomanip>
+#pragma once
 
 Vector::Vector() :size(0){
 

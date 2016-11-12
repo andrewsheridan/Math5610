@@ -310,10 +310,10 @@ double* VectorSubtraction(double*a, double* b, unsigned size) {
 	}
 	return returnValue;
 }
-
-///Computes the QR factorization of Matrix A
-///Returns a pair of matrices in an array. The first is Q, the second, R. 
-Matrix* (Matrix A) {
+//
+//Computes the QR factorization of Matrix A
+//Returns a pair of matrices in an array. The first is Q, the second, R. 
+Matrix* GramSchmidt(Matrix A) {
 	if (A.GetRows() != A.GetColumns()) return NULL;
 	Matrix AT = A.Transpose();
 	Matrix q(AT.GetRows());
