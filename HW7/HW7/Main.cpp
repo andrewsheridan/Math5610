@@ -1,3 +1,8 @@
+//Andrew Sheridan
+//Math 5610 
+//Written in C++
+//main.cpp
+
 #include "Matrix.h"
 #include "Vector.h"
 #include "MatrixOperations.h"
@@ -8,7 +13,8 @@ int main() {
 	const unsigned size = 3;
 	MatrixFactory MF;
 	
-	/*Matrix matrix1(5, 3);
+	//Problem 1
+	Matrix matrix1(5, 3);
 	
 	matrix1[0][0] = 1;
 	matrix1[0][1] = 0;
@@ -33,20 +39,44 @@ int main() {
 	blah[4] = 1;
 	matrix1.PrintAugmented(blah);
 
-	Vector result1 = LeastSquares(matrix1, blah);*/
+	Vector result1 = LeastSquares(matrix1, blah);
 
-	//Matrix matrix2 = MF.DiagonallyDominant(4, 4);
-	Matrix matrix2(2);
-	matrix2[0][0] = 4;
-	matrix2[0][1] = -2;
-	matrix2[1][0] = 3;
-	matrix2[1][1] = 1;
-	Matrix* QR = GramSchmidt(matrix2);
-	Matrix Q = QR[0];
-	Matrix R = QR[1];
-	matrix2.Print();
-	Q.Print();
-	R.Print();
+	//Problem 2 and 3
+	//Matrix matrix2(2);
+	//matrix2[0][0] = 4;
+	//matrix2[0][1] = -2;
+	//matrix2[1][0] = 3;
+	//matrix2[1][1] = 1;
+	//Matrix* QR = GramSchmidt(matrix2);
+	//Matrix Q = QR[0];
+	//Matrix R = QR[1];
+	//matrix2.Print();
+	//Q.Print();
+	//R.Print();
+
+	//Matrix Product = Q * R;
+	//Product.Print();
+
+	//Matrix matrix2b(3);
+	//matrix2b[0][0] = 1;
+	//matrix2b[0][1] = 1;
+	//matrix2b[0][2] = 0;
+	//matrix2b[1][0] = 1;
+	//matrix2b[1][1] = 0;
+	//matrix2b[1][2] = 1;
+	//matrix2b[2][0] = 0;
+	//matrix2b[2][1] = 1;
+	//matrix2b[2][2] = 1;
+
+	//Matrix* QRb = GramSchmidt(matrix2b);
+	//Matrix Qb = QRb[0];
+	//Matrix Rb = QRb[1];
+	//Qb.Print();
+	//Rb.Print();
+
+
+
+
 	int input;
 	std::cin >> input;
 

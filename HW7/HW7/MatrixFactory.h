@@ -1,4 +1,8 @@
 #pragma once
+//Andrew Sheridan
+//Math 5610 
+//Written in C++
+//MatrixFactory.h
 #include "Matrix.h"
 
 class MatrixFactory {

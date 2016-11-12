@@ -18,7 +18,7 @@ public:
 	Matrix(unsigned rowCount, unsigned columnCount);
 	Matrix(const Matrix &m);
 	//Matrix(Matrix& m);
-	Matrix& operator = (const Matrix& m);
+	Matrix operator = (const Matrix& m);
 	~Matrix();
 	
 	void InitializeIdentityMatrix();
@@ -53,7 +53,6 @@ private:
 
 };
 
-//double DotProduct(double* A, double* B, int size);
 #pragma region Initalization Operations
 
 ///// Generates a random upper triangular square matrix of size n

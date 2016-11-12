@@ -1,3 +1,8 @@
+//Andrew Sheridan
+//Math 5610 
+//Written in C++
+//MatrixFactory.cpp
+
 #include "MatrixFactory.h"
 
 Matrix MatrixFactory::Identity(unsigned rows, unsigned columns) {

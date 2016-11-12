@@ -1,17 +1,11 @@
+//Andrew Sheridan
+//Math 5610 
+//Written in C++
+//Matrix.cpp
+
 #include "Matrix.h"
 #include "Vector.h"
 #include <random>
-
-//#pragma region extras
-/////Computes the Dot Product of vector A with vector B (each size n)
-//double DotProduct(double* A, double* B, int size) {
-//	double sum = 0;
-//	for (unsigned i = 0; i < size; i++) {
-//		sum += A[i] * B[i];
-//	}
-//	return sum;
-//}
-//#pragma endregion
 
 #pragma region Constructors and Initialization
 Matrix::Matrix(unsigned size) : rows(size), columns(size)
@@ -48,8 +42,8 @@ Matrix::Matrix(const Matrix &m) : rows(m.rows), columns(m.columns) {
 		for (unsigned int j = 0; j < columns; j++) {
 			entries[i][j] = m.entries[i][j];
 		}
-		std::cout << i << ": ";
-		entries[i].Print();
+		//std::cout << i << ": ";
+		//entries[i].Print();
 	}
 }
 
@@ -58,7 +52,7 @@ Matrix::~Matrix() {
 
 }
 
-Matrix& Matrix::operator=(const Matrix& m) {
+Matrix Matrix::operator=(const Matrix& m) {
 	this->rows = m.rows;
 	this->columns = m.columns;
 	this->entries = new Vector[m.rows];

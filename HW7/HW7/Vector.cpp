@@ -1,6 +1,7 @@
 //Andrew Sheridan
 //Math 5610 
 //Written in C++
+//Vector.cpp
 
 #include "Vector.h"
 #include <random>
@@ -15,9 +16,9 @@ Vector::Vector() :size(0){
 /// Initializes the entries to an empty array of size n
 Vector::Vector(unsigned n) : size(n){
 	entries = new double[size];
-	/*for (unsigned i = 0; i < n; i++) {
+	for (unsigned i = 0; i < n; i++) {
 		entries[i] = 0;
-	}*/
+	}
 }
 
 ///Copy Constructor
@@ -36,7 +37,7 @@ Vector::Vector(double* v, unsigned n) :size(n) {
 }
 
 // Copy Assignment Operator
-Vector& Vector::operator= (const Vector& v) {
+Vector Vector::operator= (const Vector& v) {
 	size = v.size;
 	entries = new double[v.size];
 	for (unsigned i = 0; i < v.size; i++) {
@@ -132,7 +133,7 @@ unsigned Vector::FindMaxIndex() {
 double Vector::L2Norm() {
 	double sum = 0;
 	for (int i = 0; i < size; i++) {
-		sum += entries[i] * entries[i];
+		sum += (entries[i] * entries[i]);
 	}
 	return std::sqrt(sum);
 }

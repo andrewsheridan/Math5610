@@ -1,4 +1,9 @@
 #pragma once
+//Andrew Sheridan
+//Math 5610 
+//Written in C++
+//MatrixOperations.h
+
 #include "Matrix.h"
 #include "Vector.h"
 
@@ -61,12 +66,12 @@ Vector ForwardSubstitution(Matrix A, Vector b) {
 	Vector x(b.GetSize());
 
 	x[0] = b[0];
-	for (unsigned k = 0; k < A.GetRows(); k++) {
-		x[k] = b[k];
-		for (unsigned j = 0; j < A.GetColumns(); j++) {
-			x[k] = x[k] - A[k][j] * x[j];
+	for (unsigned i = 0; i < A.GetRows(); i++) {
+		x[i] = b[i];
+		for (unsigned j = 0; j < i; j++) {
+			x[i] = x[i] - (A[i][j] * x[j]);
 		}
-		x[k] = x[k] / A[k][k];
+		x[i] = x[i] / A[i][i];
 	}
 
 	return x;
@@ -259,80 +264,56 @@ Matrix Inverse(Matrix A) {
 
 #pragma region HW7
 
-//Todo: Check this.
+/// A Least Squares algorithm via Normal Equations
 Vector LeastSquares(Matrix A, Vector b) {
 	Matrix AT = A.Transpose();
 	Matrix B = AT * A;
 	Vector y = AT * b;
 	std::cout << "A:" << std::endl;
 	A.Print();
-	AT.Print();
 	std::cout << "B: " << std::endl;
 	B.Print();
-	B.Transpose().Print();
+	std::cout << "Y: " << std::endl;
 	y.Print();
 
-	Vector X = BackSubstitution(B, y);
-	std::cout << "X" << std::endl;
-	X.Print();
 	Matrix G = CholeskyDecomposition(B);
-	std::cout << "Cholesky: " << std::endl;
-	G.Print();
-
-	Vector z = BackSubstitution(G, y);
-	std::cout << "Z:" << std::endl;
-	z.Print();
+	Vector z = ForwardSubstitution(G, y);
 	Vector x = BackSubstitution(G.Transpose(), z);
-	std::cout << "X: " << std::endl;
-	x.Print();
+
 	return x;
 }
 
-double* CopyArray(double* v, unsigned n) {
-	double* newArray = new double[n];
-	for (int i = 0; i < n; i++) {
-		newArray[i] = v[i];
-	}
-	return newArray;
-}
-
-void MultiplyByConstant(double* v, unsigned n, double multiplier) {
-	for (int i = 0; i < n; i++) {
-		v[i] *= multiplier;
-	}
-}
-
-//Subtracts every entry in a by the corresponding entry in b
-double* VectorSubtraction(double*a, double* b, unsigned size) {
-	double* returnValue = new double[size];
-	for (int i = 0; i < size; i++) {
-		returnValue[i] = a[i] - b[i];
-	}
-	return returnValue;
-}
-//
-//Computes the QR factorization of Matrix A
-//Returns a pair of matrices in an array. The first is Q, the second, R. 
+///Computes the QR factorization of Matrix A
+///Returns a pair of matrices in an array. The first is Q, the second, R. 
 Matrix* GramSchmidt(Matrix A) {
 	if (A.GetRows() != A.GetColumns()) return NULL;
-	Matrix AT = A.Transpose();
-	Matrix q(AT.GetRows());
-	Matrix r(AT.GetRows());
-	for (int j = 0; j < AT.GetRows(); j++) {
-		q[j] = AT[j];
-		std::cout << "q[" << j << "]: ";
-		q[j].Print();
-		for (int i = 0; i < j; i++) {
-			r[i][j] = q[j] * q[i];
-			q[j] = q[j] - (q[i] * r[i][j]);
+
+	Matrix r(A.GetRows(), A.GetColumns());
+	Matrix q(A.GetRows(), A.GetColumns());
+
+	for (int k = 0; k < A.GetRows(); k++) {
+		r[k][k] = 0; 
+		for (int i = 0; i < A.GetRows(); i++)
+			r[k][k] = r[k][k] + A[i][k] * A[i][k];
+		r[k][k] = sqrt(r[k][k]);
+
+		for (int i = 0; i < A.GetRows(); i++) {
+			q[i][k] = A[i][k] / r[k][k];
 		}
 
-		r[j][j] = q[j].L2Norm();
-		q[j] = q[j] / r[j][j];
+		for (int j = k + 1; j < A.GetColumns(); j++) {
+			r[k][j] = 0;
+			for (int i = 0; i < A.GetRows(); i++) 
+				r[k][j] += q[i][k] * A[i][j];
+
+			for (int i = 0; i < A.GetRows(); i++)
+				A[i][j] = A[i][j] - r[k][j] * q[i][k];
+		}
 	}
 	Matrix* QR = new Matrix[2];
 	QR[0] = q;
 	QR[1] = r;
 	return QR;
 }
+
 #pragma endregion

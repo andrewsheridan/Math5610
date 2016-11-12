@@ -10,7 +10,7 @@ public:
 	Vector(unsigned n);
 	Vector(const Vector &v);
 	Vector(double* v, unsigned size);
-	Vector& operator=(const Vector& v);
+	Vector operator=(const Vector& v);
 	~Vector();
 
 	double& operator[] (unsigned x) { return entries[x]; }
