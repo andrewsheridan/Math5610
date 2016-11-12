@@ -10,11 +10,8 @@
 #include <iostream>
 
 int main() {
-	const unsigned size = 3;
-	MatrixFactory MF;
-	
 	//Problem 1
-	Matrix matrix1(5, 3);
+	/*Matrix matrix1(5, 3);
 	
 	matrix1[0][0] = 1;
 	matrix1[0][1] = 0;
@@ -31,50 +28,68 @@ int main() {
 	matrix1[4][0] = -1;
 	matrix1[4][1] = 6;
 	matrix1[4][2] = 3;
-	Vector blah = Vector(5);	
-	blah[0] = 4;
-	blah[1] = -2;
-	blah[2] = 5;
-	blah[3] = -2;
-	blah[4] = 1;
-	matrix1.PrintAugmented(blah);
+	Vector vector1 = Vector(5);	
+	vector1[0] = 4;
+	vector1[1] = -2;
+	vector1[2] = 5;
+	vector1[3] = -2;
+	vector1[4] = 1;
 
-	Vector result1 = LeastSquares(matrix1, blah);
+	Vector result1 = LeastSquares(matrix1, vector1);
+	result1.Print();*/
 
-	//Problem 2 and 3
-	//Matrix matrix2(2);
-	//matrix2[0][0] = 4;
-	//matrix2[0][1] = -2;
-	//matrix2[1][0] = 3;
-	//matrix2[1][1] = 1;
-	//Matrix* QR = GramSchmidt(matrix2);
-	//Matrix Q = QR[0];
-	//Matrix R = QR[1];
-	//matrix2.Print();
-	//Q.Print();
-	//R.Print();
+	//Problem 2 
+	Matrix matrix2 = MatrixFactory::Instance()->DiagonallyDominant(5, 5);
+	Matrix* QR = GramSchmidt(matrix2);
+	Matrix Q = QR[0];
+	Matrix R = QR[1];
+	
+	std::cout << "Starting Matrix: " << std::endl;
+	matrix2.Print();
+	std::cout << "Q: " << std::endl;
+	Q.Print();
+	std::cout << "R: " << std::endl;
+	R.Print();
+	
+	std::cout << "Q * R" << std::endl;
+	Matrix TestResult = Q * R;
+	TestResult.Print();
 
-	//Matrix Product = Q * R;
-	//Product.Print();
+	Matrix Norm = matrix2 - TestResult;
+	double normValue = Norm.OneNorm();
+	std::cout << "||A - (Q * R)|| : " << normValue << std::endl;
+	//Problem 3
+	/*Matrix matrix3(2);
+	matrix3[0][0] = 4;
+	matrix3[0][1] = -2;
+	matrix3[1][0] = 3;
+	matrix3[1][1] = 1;
+	Matrix* QR = GramSchmidt(matrix3);
+	Matrix Q = QR[0];
+	Matrix R = QR[1];
+	matrix3.Print();
+	Q.Print();
+	R.Print();
 
-	//Matrix matrix2b(3);
-	//matrix2b[0][0] = 1;
-	//matrix2b[0][1] = 1;
-	//matrix2b[0][2] = 0;
-	//matrix2b[1][0] = 1;
-	//matrix2b[1][1] = 0;
-	//matrix2b[1][2] = 1;
-	//matrix2b[2][0] = 0;
-	//matrix2b[2][1] = 1;
-	//matrix2b[2][2] = 1;
+	Matrix Product = Q * R;
+	Product.Print();
 
-	//Matrix* QRb = GramSchmidt(matrix2b);
-	//Matrix Qb = QRb[0];
-	//Matrix Rb = QRb[1];
-	//Qb.Print();
-	//Rb.Print();
+	Matrix matrix3b(3);
+	matrix3b[0][0] = 1;
+	matrix3b[0][1] = 1;
+	matrix3b[0][2] = 0;
+	matrix3b[1][0] = 1;
+	matrix3b[1][1] = 0;
+	matrix3b[1][2] = 1;
+	matrix3b[2][0] = 0;
+	matrix3b[2][1] = 1;
+	matrix3b[2][2] = 1;
 
-
+	Matrix* QRb = GramSchmidt(matrix3b);
+	Matrix Qb = QRb[0];
+	Matrix Rb = QRb[1];
+	Qb.Print();
+	Rb.Print();*/
 
 
 	int input;

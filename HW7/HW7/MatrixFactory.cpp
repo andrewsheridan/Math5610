@@ -4,6 +4,16 @@
 //MatrixFactory.cpp
 
 #include "MatrixFactory.h"
+#include <random>
+
+MatrixFactory* MatrixFactory::Instance() {
+	if (!m_instance)
+		m_instance = new MatrixFactory();
+
+	return m_instance;
+}
+
+MatrixFactory* MatrixFactory::m_instance = nullptr;
 
 Matrix MatrixFactory::Identity(unsigned rows, unsigned columns) {
 	Matrix m(rows, columns);

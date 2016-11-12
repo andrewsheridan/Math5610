@@ -3,15 +3,14 @@
 //Written in C++
 //Vector.cpp
 
+#pragma once
 #include "Vector.h"
 #include <random>
 #include <iostream>
 #include <iomanip>
-#pragma once
 
-Vector::Vector() :size(0){
-
-}
+///Default constructor
+Vector::Vector() :size(0){ }
 
 /// Initializes the entries to an empty array of size n
 Vector::Vector(unsigned n) : size(n){
@@ -29,6 +28,9 @@ Vector::Vector(const Vector &v) : size(v.size) {
 	}
 }
 
+///Copy Constructor
+///v: an array of doubles
+///n: the size of v
 Vector::Vector(double* v, unsigned n) :size(n) {
 	entries = new double[size];
 	for (unsigned i = 0; i < size; i++) {
@@ -36,7 +38,7 @@ Vector::Vector(double* v, unsigned n) :size(n) {
 	}
 }
 
-// Copy Assignment Operator
+/// Copy Assignment Operator
 Vector Vector::operator= (const Vector& v) {
 	size = v.size;
 	entries = new double[v.size];
@@ -46,12 +48,12 @@ Vector Vector::operator= (const Vector& v) {
 	return *this;
 }
 
-//Destructor
+///Destructor
 Vector::~Vector()
 {
 }
 
-//Dot Product
+///Dot Product
 double operator* (Vector& a, Vector& b) {
 	if (a.size != b.size) return NULL;
 	double sum = 0;
@@ -61,7 +63,7 @@ double operator* (Vector& a, Vector& b) {
 	return sum;
 }
 
-//Multiply each entry by a constant
+///Multiply each entry by a constant
 Vector operator* (Vector& a, double constant) {
 	for (int i = 0; i < a.size; i++) {
 		a[i] *= constant;
@@ -69,7 +71,7 @@ Vector operator* (Vector& a, double constant) {
 	return a;
 }
 
-//Subtracts the elements of vector a from the elements of vector b
+///Subtracts the elements of vector a from the elements of vector b
 Vector operator- (Vector& a, Vector& b) {
 	if (a.size != b.size) return a;
 	Vector newVector(a.size);
@@ -79,7 +81,7 @@ Vector operator- (Vector& a, Vector& b) {
 	return newVector;
 }
 
-//Divides the entries of the vector by a constant
+///Divides the entries of the vector by a constant
 Vector operator/ (Vector& a, double constant) {
 	Vector newVector(a.GetSize());
 	for (int i = 0; i < a.GetSize(); i++) {
@@ -105,7 +107,7 @@ void Vector::InitializeAllOnes() {
 	}
 }
 
-//Finds the entry with the largest magnitude, starting with entry "start".
+///Finds the entry with the largest magnitude, starting with entry "start".
 double Vector::FindMaxMagnitudeStartingAt(unsigned start) {
 	double max = 0;
 	for (unsigned i = start; i < size; i++) {
@@ -115,7 +117,7 @@ double Vector::FindMaxMagnitudeStartingAt(unsigned start) {
 	return max;
 }
 
-//Finds the index of the value with the largest magnitude
+///Finds the index of the value with the largest magnitude
 unsigned Vector::FindMaxIndex() {
 	double max = 0;
 	unsigned index = -1;

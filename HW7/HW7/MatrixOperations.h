@@ -1,13 +1,15 @@
-#pragma once
 //Andrew Sheridan
 //Math 5610 
 //Written in C++
 //MatrixOperations.h
 
+#pragma once
 #include "Matrix.h"
 #include "Vector.h"
+#include <iostream>
+#include <cmath>
 
-#pragma region extra functions
+#pragma region Basic Vector Operations
 //Finds the entry in V (a size n vector) with the largest magnitude, starting with entry "start".
 double FindArrayMax(double* V, unsigned start, unsigned size) {
 	double max = 0;
@@ -31,7 +33,6 @@ int FindMaxIndex(double* V, unsigned n) {
 	}
 	return index;
 }
-
 #pragma endregion
 
 #pragma region HW4
@@ -51,7 +52,6 @@ Vector BackSubstitution(Matrix A, Vector b) {
 			x[i] -= A[i][j] * x[j];
 		}
 		x[i] /= A[i][i];
-		x.Print();
 	}
 	return x;
 }
@@ -265,12 +265,12 @@ Matrix Inverse(Matrix A) {
 #pragma region HW7
 
 /// A Least Squares algorithm via Normal Equations
+/// Requires a matrix A and a vector b
 Vector LeastSquares(Matrix A, Vector b) {
 	Matrix AT = A.Transpose();
 	Matrix B = AT * A;
 	Vector y = AT * b;
-	std::cout << "A:" << std::endl;
-	A.Print();
+
 	std::cout << "B: " << std::endl;
 	B.Print();
 	std::cout << "Y: " << std::endl;
@@ -295,11 +295,11 @@ Matrix* GramSchmidt(Matrix A) {
 		r[k][k] = 0; 
 		for (int i = 0; i < A.GetRows(); i++)
 			r[k][k] = r[k][k] + A[i][k] * A[i][k];
+
 		r[k][k] = sqrt(r[k][k]);
 
-		for (int i = 0; i < A.GetRows(); i++) {
+		for (int i = 0; i < A.GetRows(); i++) 
 			q[i][k] = A[i][k] / r[k][k];
-		}
 
 		for (int j = k + 1; j < A.GetColumns(); j++) {
 			r[k][j] = 0;

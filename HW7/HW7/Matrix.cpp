@@ -6,6 +6,9 @@
 #include "Matrix.h"
 #include "Vector.h"
 #include <random>
+#include <iostream>
+#include <iomanip>
+
 
 #pragma region Constructors and Initialization
 Matrix::Matrix(unsigned size) : rows(size), columns(size)
@@ -237,6 +240,18 @@ Matrix operator* (Matrix A, Matrix B) {
 		for (unsigned j = 0; j < B.columns; j++) {
 			//matrix[i][j] = DotProduct(A[i], bTranspose[j], A.columns);
 			matrix[i][j] = A[i] * bTranspose[j];
+		}
+	}
+	return matrix;
+}
+
+///Multiplies an matrix A by matrix B
+Matrix operator - (Matrix A, Matrix B) {
+	if (A.columns != B.columns && A.rows != B.rows) throw "Incompatible sizes";
+	Matrix matrix(A.rows, B.columns);
+	for (unsigned i = 0; i < A.rows; i++) {
+		for (unsigned j = 0; j < A.columns; j++) {
+			matrix[i][j] = A[i][j] - B[i][j];
 		}
 	}
 	return matrix;
