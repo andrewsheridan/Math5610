@@ -10,6 +10,7 @@ class MatrixFactory {
 public:
 	static MatrixFactory* Instance();
 	Matrix Identity(unsigned rows, unsigned columns);
+	Matrix Ones(unsigned rows, unsigned columns);
 	Matrix Random(unsigned rows, unsigned columns);
 	Matrix RandomRange(unsigned rows, unsigned columns, double min, double max);
 	Matrix DiagonallyDominant(unsigned rows, unsigned columns);

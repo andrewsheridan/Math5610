@@ -207,6 +207,21 @@ Vector operator *(const Matrix& A, Vector& x) {
 	}
 	return result;
 }
+
+///Divides an nxn matrix A by the vector x
+Vector operator /(const Matrix& A, Vector& x) {
+	if (A.columns != x.GetSize()) return NULL;
+
+	Vector result(A.rows);
+	for (unsigned i = 0; i < A.rows; i++) {
+		result[i] = 0;
+		for (unsigned j = 0; j < A.columns; j++) {
+			result[i] += A.entries[i][j] / x[j];
+		}
+	}
+	return result;
+}
+
 #pragma endregion
 
 #pragma region operations
@@ -246,7 +261,7 @@ Matrix operator* (Matrix A, Matrix B) {
 }
 
 ///Multiplies an matrix A by matrix B
-Matrix operator - (Matrix A, Matrix B) {
+Matrix operator- (Matrix A, Matrix B) {
 	if (A.columns != B.columns && A.rows != B.rows) throw "Incompatible sizes";
 	Matrix matrix(A.rows, B.columns);
 	for (unsigned i = 0; i < A.rows; i++) {
@@ -257,7 +272,7 @@ Matrix operator - (Matrix A, Matrix B) {
 	return matrix;
 }
 
-///Computes the 1-norm of an n by n matrix A
+///Computes the 1-norm of the matrix
 double Matrix::OneNorm() {
 	double columnMax = 0;
 	for (unsigned i = 0; i < rows; i++) {

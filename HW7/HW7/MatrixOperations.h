@@ -6,6 +6,7 @@
 #pragma once
 #include "Matrix.h"
 #include "Vector.h"
+#include "MatrixFactory.h"
 #include <iostream>
 #include <cmath>
 
@@ -314,6 +315,24 @@ Matrix* GramSchmidt(Matrix A) {
 	QR[0] = q;
 	QR[1] = r;
 	return QR;
+}
+
+///Creates a vector of data which can be used to test least squares methods
+///Takes two vectors, t and b, and an int n (the size of the sample space)
+Vector LSFit(Vector t, Vector b, int n) {
+	int m = t.GetSize();
+
+	Matrix A = MatrixFactory::Instance()->Ones(m, n);
+	for (int j = 0; j < n - 1; j++) {
+		for (int i = 0; i < m; i++) {
+			A[i][j + 1] =  A[i][j] * t[i];
+		}
+	}
+	Matrix AT = A.Transpose();
+	Matrix B = AT * A;
+	Vector y = AT * b;
+
+	return B / y;
 }
 
 #pragma endregion
