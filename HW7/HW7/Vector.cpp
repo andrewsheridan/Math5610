@@ -55,7 +55,8 @@ Vector::~Vector()
 
 ///Dot Product
 double operator* (Vector& a, Vector& b) {
-	if (a.size != b.size) return NULL;
+	if (a.size != b.size) 
+		return NULL;
 	double sum = 0;
 	for (int i = 0; i < a.size; i++) {
 		sum += a[i] * b[i];

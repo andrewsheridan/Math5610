@@ -8,6 +8,8 @@
 #include "MatrixOperations.h"
 #include "MatrixFactory.h"
 #include <iostream>
+#include <fstream>
+#include <iomanip>
 
 int main() {
 	//Problem 1
@@ -158,9 +160,17 @@ int main() {
 	//}
 	
 	///Problem 6
-
+	Vector v6(6);
+	Vector b6(6);
+	for (int i = 0; i < 6; i++) {
+		v6[i] = i * 0.2;
+		b6[i] = std::rand();
+	}
+	LSFit(v6, b6, 4);
 
 	///Problem 7
+	std::ofstream output("output.txt");
+
 	Vector t(11);
 	Vector b(11);
 	t[0] = 0.0;	
@@ -188,11 +198,38 @@ int main() {
 	b[10] = 0;
 
 	const int N = 5;
-	Vector* coefs = new Vector[n];
+	Vector* coefs = new Vector[N];
 	for (int i = 0; i <= N; i++) {
 		coefs[i] = LSFit(t, b, i);
-		coefs[i].Print();
 	}
+	int size = 1 / .01;
+	Vector T(size);
+	for (int i = 0; i < size; i++) {
+		T[i] = .01 * i;
+	}
+
+	Matrix Z = MatrixFactory::Instance()->Ones(N, size);
+	
+	for (int n = 0; n < N; n++) {
+		for (int i = 0; i < size; i++) {
+			Z[n] = Z[n] * coefs[n][n];
+			for (int j = n - 2; j >= 0; j--) {
+				Z[n][j] = (Z[n] * T) + coefs[n][j];
+			}
+		}
+	}
+
+	output << std::setw(13) << "t" << std::setw(13) << "p1" << std::setw(13) << "p2" 
+		<< std::setw(13) << "p1" << std::setw(13) << "p3" << std::setw(13) << "p4" 
+		<< std::setw(13) << "p5" << std::endl;
+	for (int j = 0; j < size; j++) {
+		output << std::setw(13) << T[j];
+		for (int n = 0; n < N; n++) {
+			output << std::setw(13) << Z[n][j];
+		}
+		output << std::endl;
+	}
+	output.close();
 
 	int input;
 	std::cin >> input;

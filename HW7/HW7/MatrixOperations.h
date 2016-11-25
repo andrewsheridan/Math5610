@@ -328,11 +328,42 @@ Vector LSFit(Vector t, Vector b, int n) {
 			A[i][j + 1] =  A[i][j] * t[i];
 		}
 	}
+	A.Print();
 	Matrix AT = A.Transpose();
 	Matrix B = AT * A;
 	Vector y = AT * b;
 
 	return B / y;
+}
+
+#pragma endregion
+
+#pragma region HW9
+///Solves the system of equations using Jacobi Iteration
+///A: The Matrix
+///x0: The initial guess
+///b: The Right-Hand-Side
+Vector JacobiIteration(Matrix A, Vector x0, Vector b, int maxIterations, double tolerance) {
+	int iterations = 0;
+	int n = A.GetRows();
+	Vector newX(x0);
+	double error = 10 * tolerance;
+	while(iterations < maxIterations && tolerance < error){
+		Vector oldX(newX);
+		for (int i = 0; i < n;  i++) {
+			newX[i] = b[i];
+			for (int j = 0; j < i; j++) {
+				newX[i] = newX[i] - A[i][j] * oldX[j];
+			}
+			for (int j = i + 1; j < n; j++) {
+				newX[i] = newX[i] - A[i][j] * oldX[j];
+			}
+			newX[i] = newX[i] / A[i][i];
+			error = (oldX - newX).L2Norm();
+			iterations++;
+		}
+	}
+	return newX;
 }
 
 #pragma endregion
