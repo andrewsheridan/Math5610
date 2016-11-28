@@ -367,3 +367,27 @@ Vector JacobiIteration(Matrix A, Vector x0, Vector b, int maxIterations, double 
 }
 
 #pragma endregion
+
+#pragma region HW10
+//Todo: Seems to flip flop negative and positive. Find a way to keep from doing this. 
+Vector PowerMethod(Matrix A, Vector x0, double tol, int maxIter) {
+	double error = 10 * tol;
+	int k = 0; 
+	Vector y = A * x0;
+	Vector xk = x0;
+	Vector lambda_k(xk.GetSize());
+	while (error > tol && k < maxIter) {
+		Vector xkp1 = y / y.L2Norm();
+		y = A * xkp1;
+		Vector lambda_kp1 = xkp1 + y;
+		error = abs(lambda_kp1[0] - lambda_k[0]);
+		lambda_k.Print();
+		lambda_kp1.Print();
+		std::cout << std::endl;
+		lambda_k = lambda_kp1;
+		k++;
+	}
+	return lambda_k;
+}
+
+#pragma endregion

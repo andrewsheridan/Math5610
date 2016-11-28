@@ -23,6 +23,7 @@ public:
 	friend Vector operator*(Vector& a, double constant);
 	friend Vector operator-(Vector& a, Vector& b);
 	friend Vector operator/(Vector& a, double constant);
+	friend Vector operator+(Vector& a, Vector& b);
 
 	//Basic Algorithms
 	double FindMaxMagnitudeStartingAt(unsigned start);
