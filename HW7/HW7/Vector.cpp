@@ -66,10 +66,20 @@ double operator* (Vector& a, Vector& b) {
 
 ///Multiply each entry by a constant
 Vector operator* (Vector& a, double constant) {
+	Vector newVector(a.size);
 	for (int i = 0; i < a.size; i++) {
-		a[i] *= constant;
+		newVector[i] = a[i] * constant;
 	}
-	return a;
+	return newVector;
+}
+
+///Multiply each entry by a constant
+Vector operator* (double constant, Vector& a) {
+	Vector newVector(a.GetSize());
+	for (int i = 0; i < a.GetSize(); i++) {
+		newVector[i] = a[i] * constant;
+	}
+	return newVector;
 }
 
 ///Subtracts the elements of vector a from the elements of vector b
@@ -78,6 +88,19 @@ Vector operator- (Vector& a, Vector& b) {
 	Vector newVector(a.size);
 	for (int i = 0; i < a.size; i++) {
 		newVector[i] = a[i] - b[i];
+	}
+	return newVector;
+}
+
+///Returns a new vector where each entry is the sum of corresponding entries in a and b
+Vector operator+ (Vector& a, Vector& b) {
+	if (a.size != b.size) {
+		std::cout << "These vectors are not the same size." << std::endl;
+		return a;
+	}
+	Vector newVector(a.size);
+	for (int i = 0; i < a.size; i++) {
+		newVector[i] = a[i] + b[i];
 	}
 	return newVector;
 }

@@ -21,6 +21,8 @@ public:
 	double& operator[] (unsigned x) { return entries[x]; }
 	friend double operator*( Vector& a, Vector& b);
 	friend Vector operator*(Vector& a, double constant);
+	friend Vector operator*(double constant, Vector& a);
+	friend Vector operator+(Vector& a, Vector& b);
 	friend Vector operator-(Vector& a, Vector& b);
 	friend Vector operator/(Vector& a, double constant);
 
