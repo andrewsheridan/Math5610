@@ -133,6 +133,7 @@ void GaussianEliminationWithScaledPivoting(Matrix A, Vector b) {
 
 
 /// Finds the LU factorization of matrix A. A becomes the upper triangular matrix U, and the lower triangular matrix L is returned. 
+/// RHS will also be modified.
 // A: The nxn coefficient matrix
 // b: Right-Hand-Side
 Matrix LUFactorization(Matrix A, Vector b) {
@@ -368,26 +369,45 @@ Vector JacobiIteration(Matrix A, Vector x0, Vector b, int maxIterations, double 
 
 #pragma endregion
 
-#pragma region HW10
-//Todo: Seems to flip flop negative and positive. Find a way to keep from doing this. 
-Vector PowerMethod(Matrix A, Vector x0, double tol, int maxIter) {
+#pragma region HW10 
+///Finds an approximation of the largest Eigenvalue of a matrix
+///A : The square matrix
+///x0 : The initial guess vector
+///tol : The tolerance of the algorithm
+///maxIter : The maximum number of iterations to be executed by the method
+double PowerMethod(Matrix A, Vector x0, double tol, int maxIter) {
 	double error = 10 * tol;
 	int k = 0; 
 	Vector y = A * x0;
 	Vector xk = x0;
-	Vector lambda_k(xk.GetSize());
+	double lambda_k = 0;
 	while (error > tol && k < maxIter) {
 		Vector xkp1 = y / y.L2Norm();
 		y = A * xkp1;
-		Vector lambda_kp1 = xkp1 + y;
-		error = abs(lambda_kp1[0] - lambda_k[0]);
-		lambda_k.Print();
-		lambda_kp1.Print();
-		std::cout << std::endl;
+		double lambda_kp1 = xkp1 * y;
+		error = abs(lambda_kp1 - lambda_k);
+		std::cout << "lambda_k: " << lambda_k << std::endl;
+		std::cout << "lambda_k+1: " << lambda_kp1 << std::endl;
+
 		lambda_k = lambda_kp1;
 		k++;
 	}
+	std::cout << "Eigenvector approximation: " << std::endl;
+	y.Print();
 	return lambda_k;
+}
+
+double InversePowerMethod(Matrix A, Vector x0, double tol, int maxIter) {
+	double error = 10 * tol;
+	int k = 0;
+	Matrix U = A;
+	Matrix L = LUFactorization(U, x0);
+	Vector y = BackSubstitution(U, x0);
+	double lambda_x = 0;
+	while (error > tol && k < maxIter) {
+		Vector x = y / y.L2Norm();
+
+	}
 }
 
 #pragma endregion

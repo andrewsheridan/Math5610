@@ -15,8 +15,8 @@ int main() {
 	x_0[0] = 1;
 	x_0[1] = 1;
 
-	Vector lambda = PowerMethod(A, x_0, 0.0001, 1000);
-	lambda.Print();
+	double lambda = PowerMethod(A, x_0, 0.0001, 1000);
+	std::cout << "Lambda: " << lambda << std::endl;
 
 	int input = 0;
 	std::cin >> input;
