@@ -114,6 +114,19 @@ Vector operator/ (Vector& a, double constant) {
 	return newVector;
 }
 
+///Returns a new vector where its entries are the sum of corresponding entries in a and b
+Vector operator+ (Vector& a, Vector& b) {
+	if (a.size != b.size) {
+		std::cout << "Vectors are not same size. Returning first vector." << std::endl;
+		return a;
+	}
+	Vector newVector(a.size);
+	for (int i = 0; i < a.size; i++) {
+		newVector[i] = a[i] + b[i];
+	}
+	return newVector;
+}
+
 /// Initializes the entries to values between 0 and 1
 void Vector::InitializeRandomEntries() {
 	std::mt19937 generator(123); //Random number generator

@@ -133,28 +133,26 @@ void GaussianEliminationWithScaledPivoting(Matrix A, Vector b) {
 
 
 /// Finds the LU factorization of matrix A. A becomes the upper triangular matrix U, and the lower triangular matrix L is returned. 
+/// RHS will also be modified.
 // A: The nxn coefficient matrix
 // b: Right-Hand-Side
-Matrix LUFactorization(Matrix& A, Vector& b) {
+Matrix LUFactorization(Matrix A, Vector b) {
 	if (A.GetRows() != b.GetSize()) return NULL;
-	int operations = 0;
+
 	Matrix L(A.GetRows(), A.GetColumns());
 	L.InitializeIdentityMatrix();
 
 	for (int k = 0; k < A.GetRows(); k++) {
 		for (int i = k + 1; i < A.GetRows(); i++) {
 			double factor = A[i][k] / A[k][k];
-			operations++;
 			L[i][k] = factor;
 			for (int j = 0; j < A.GetColumns(); j++) {
 				A[i][j] = A[i][j] - factor*A[k][j];
-				operations += 2;
 			}
 			b[i] = b[i] - factor*b[k];
-			operations+=2;
 		}
 	}
-	std::cout << "LU Factorization size " << b.GetSize() << ": "  << operations << std::endl;
+
 	return L;
 }
 
@@ -348,124 +346,68 @@ Vector LSFit(Vector t, Vector b, int n) {
 ///b: The Right-Hand-Side
 Vector JacobiIteration(Matrix A, Vector x0, Vector b, int maxIterations, double tolerance) {
 	int iterations = 0;
-	int operations = 0;
 	int n = A.GetRows();
 	Vector newX(x0);
-	operations++;
 	double error = 10 * tolerance;
 	while(iterations < maxIterations && tolerance < error){
 		Vector oldX(newX);
-		operations++;
 		for (int i = 0; i < n;  i++) {
 			newX[i] = b[i];
-			operations++;
 			for (int j = 0; j < i; j++) {
 				newX[i] = newX[i] - A[i][j] * oldX[j];
-				operations++;
 			}
 			for (int j = i + 1; j < n; j++) {
 				newX[i] = newX[i] - A[i][j] * oldX[j];
-				operations++;
 			}
 			newX[i] = newX[i] / A[i][i];
-			operations++;
 			error = (oldX - newX).L2Norm();
-			operations += n + 2;
 			iterations++;
 		}
 	}
-	//std::cout << "Number of iterations taken in Jacobi Iteration for size " << n << ": "<< iterations << std::endl;
-	std::cout << "Jacobi Iteration size " << n << ": " << operations << std::endl;
 	return newX;
 }
 
-///Solves the system of equations using Gauss-Seidel
-///A: The Matrix
-///x0: The initial guess
-///b: The Right-Hand-Side
-Vector GaussSeidel(Matrix A, Vector x0, Vector b, int maxIterations, double tolerance) {
-	int iterations = 0;
-	int operations = 0;
-	int n = A.GetRows();
-	Vector newX(x0);
-	double error = 10 * tolerance;
-	while (iterations < maxIterations && tolerance < error) {
-		Vector oldX(newX);
-		operations++;
-		for (int i = 0; i < n; i++) {
-			newX[i] = b[i] / A[i][i];
-			operations++;
-			for (int j = 0; j < i; j++) {
-				newX[i] = newX[i] - ((A[i][j] / A[i][i]) * oldX[j]);
-				operations++;
-			}
-			for (int j = i + 1; j < n; j++) {
-				newX[i] = newX[i] - ((A[i][j] / A[i][i]) * oldX[j]);
-				operations++;
-			}
-			error = (oldX - newX).L2Norm();
-			operations += n + 2;
-			iterations++;
-		}
-	}
-	//std::cout << "Number of iterations taken in Gauss Seidel for size " << n << ": " << iterations << std::endl;
-	std::cout << "Gauss Seidel size " << n << ": " << operations << std::endl;
-	return newX;
-}
+#pragma endregion
 
-///Solves a matrix and RHS using Conjugate Gradient Method
-///A : The matrix to be solved
-///b : The RHS vector
+#pragma region HW10 
+///Finds an approximation of the largest Eigenvalue of a matrix
+///A : The square matrix
 ///x0 : The initial guess vector
-///tol : The tolerance of our method
-Vector ConjugateGradient(Matrix A, Vector b, Vector x0, double tol) {
-	Vector rk = b - (A * x0);
-	double dk = rk * rk;
-	double bd = b * b;
-	int k = 0;
-	Vector pk = rk;
+///tol : The tolerance of the algorithm
+///maxIter : The maximum number of iterations to be executed by the method
+double PowerMethod(Matrix A, Vector x0, double tol, int maxIter) {
+	double error = 10 * tol;
+	int k = 0; 
+	Vector y = A * x0;
 	Vector xk = x0;
-	while (dk > tol * tol * bd) {
-		Vector sk = A * pk;
-		double ak = dk / (pk * sk);
-		Vector xkp1 = xk + (ak * pk);
-		Vector rkp1 = rk - (ak * sk);
-		double dkp1 = rkp1 * rkp1;
-		Vector pkp1 = rkp1 + ((dkp1 / dk) * pk);
+	double lambda_k = 0;
+	while (error > tol && k < maxIter) {
+		Vector xkp1 = y / y.L2Norm();
+		y = A * xkp1;
+		double lambda_kp1 = xkp1 * y;
+		error = abs(lambda_kp1 - lambda_k);
+		std::cout << "lambda_k: " << lambda_k << std::endl;
+		std::cout << "lambda_k+1: " << lambda_kp1 << std::endl;
+
+		lambda_k = lambda_kp1;
 		k++;
-		//All values have been computed, set all kth values to equal the k+1 value in preparation for next iteration
-		xk = xkp1;
-		rk = rkp1;
-		pk = pkp1;
-		dk = dkp1;
 	}
-	return xk;
+	std::cout << "Eigenvector approximation: " << std::endl;
+	y.Print();
+	return lambda_k;
 }
 
-Vector PredonditionedConjugateGradient(Matrix A, Vector b, Matrix Pinv, Vector x0, double tol) {
-	Vector rk = b - (A * x0);
-	Vector hk = Pinv * rk;
-	double dk = rk * hk;
-	double bd = b * (Pinv * b);
-	int k = 0; 
-	Vector pk = hk;
-	Vector xk = x0;
-	while (dk > tol * tol * bd) {
-		Vector sk = A * pk;
-		double ak = dk / (pk * sk);
-		Vector xkp1 = xk + (ak * pk);
-		Vector rkp1 = rk - (ak * sk);
-		Vector hkp1 = Pinv * rkp1;
-		double dkp1 = rkp1 * hkp1;
-		Vector pkp1 = hkp1 + ((dkp1 / dk) * pk);
-		k++;
-		//All values have been computed, set all kth values to equal the k+1 value in preparation for next iteration
-		xk = xkp1;
-		rk = rkp1;
-		hk = hkp1;
-		pk = pkp1;
-		dk = dkp1;
+double InversePowerMethod(Matrix A, Vector x0, double tol, int maxIter) {
+	double error = 10 * tol;
+	int k = 0;
+	Matrix U = A;
+	Matrix L = LUFactorization(U, x0);
+	Vector y = BackSubstitution(U, x0);
+	double lambda_x = 0;
+	while (error > tol && k < maxIter) {
+		Vector x = y / y.L2Norm();
+
 	}
-	return xk;
 }
+
 #pragma endregion

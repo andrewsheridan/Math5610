@@ -52,7 +52,6 @@ Matrix::Matrix(const Matrix &m) : rows(m.rows), columns(m.columns) {
 
 //Deconstructor
 Matrix::~Matrix() {
-
 }
 
 Matrix Matrix::operator=(const Matrix& m) {

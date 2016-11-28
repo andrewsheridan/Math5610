@@ -1,0 +1,19 @@
+﻿  main.cpp
+c:\users\labuser\source\repos\math5610\hw10\hw10\main.cpp(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\labuser\source\repos\math5610\hw10\hw10\main.cpp(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\labuser\source\repos\math5610\hw10\hw10\main.cpp(3): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(17): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(28): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(52): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(144): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(145): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(148): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(295): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(297): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(302): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(305): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(307): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(310): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw10\hw10\main.cpp(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  HW10.vcxproj -> C:\Users\labuser\Source\Repos\Math5610\HW10\Debug\HW10.exe
+  HW10.vcxproj -> C:\Users\labuser\Source\Repos\Math5610\HW10\Debug\HW10.pdb (Partial PDB)
