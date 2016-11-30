@@ -53,7 +53,7 @@ Vector::~Vector()
 {
 }
 
-///Dot Product
+///Inner Product
 double operator* (Vector& a, Vector& b) {
 	if (a.size != b.size) 
 		return NULL;

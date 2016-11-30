@@ -11,6 +11,7 @@
 
 
 #pragma region Constructors and Initialization
+///Initializes an nxn matrix of size "size". All entries are zeroes.
 Matrix::Matrix(unsigned size) : rows(size), columns(size)
 {
 	entries = new Vector[size];
@@ -22,12 +23,10 @@ Matrix::Matrix(unsigned size) : rows(size), columns(size)
 	}
 }
 
-
+///Initializes an nxm matrix. All entries are zeroes.
 Matrix::Matrix(unsigned rowCount, unsigned columnCount) : rows(rowCount), columns(columnCount) {
-	//entries = new double*[rowCount];
 	entries = new Vector[rowCount];
 	for (unsigned i = 0; i < rowCount; i++) {
-		//entries[i] = new double[columnCount];
 		entries[i] = Vector(columnCount);
 		for (unsigned j = 0; j < columnCount; j++) {
 			entries[i][j] = 0;
@@ -37,16 +36,12 @@ Matrix::Matrix(unsigned rowCount, unsigned columnCount) : rows(rowCount), column
 
 ///Copy Constructor
 Matrix::Matrix(const Matrix &m) : rows(m.rows), columns(m.columns) {
-	//entries = new double*[rowsgram];
 	entries = new Vector[rows];
 	for (unsigned int i = 0; i < rows; i++) {
-		//entries[i] = new double[columns];
 		entries[i] = Vector(columns);
 		for (unsigned int j = 0; j < columns; j++) {
 			entries[i][j] = m.entries[i][j];
 		}
-		//std::cout << i << ": ";
-		//entries[i].Print();
 	}
 }
 
@@ -54,6 +49,7 @@ Matrix::Matrix(const Matrix &m) : rows(m.rows), columns(m.columns) {
 Matrix::~Matrix() {
 }
 
+///Assignment operator overload
 Matrix Matrix::operator=(const Matrix& m) {
 	this->rows = m.rows;
 	this->columns = m.columns;
@@ -151,6 +147,7 @@ void Matrix::PrintAugmented(Vector v) {
 #pragma endregion
 
 #pragma region Comparison Operations
+///Compares two matrices. Returns true if all corresponding entries are equal, and false if any are not equal.
 bool operator == (const Matrix& A, const Matrix& B) {
 	if (A.columns != B.columns) return false;
 	if (A.rows != B.rows) return false;
@@ -165,6 +162,7 @@ bool operator == (const Matrix& A, const Matrix& B) {
 	return true;
 }
 
+///Compares two matrices. Returns true if any corresponding entries are not equal, and false if all are equal.
 bool operator != (const Matrix& A, const Matrix& B) {
 	if (A.columns != B.columns) return true;
 	if (A.rows != B.rows) return true;
@@ -192,6 +190,19 @@ bool Matrix::IsSymmetric() {
 
 #pragma endregion
 
+
+#pragma region operations
+/// Returns the transpose of the n by n matrix A
+Matrix Matrix::Transpose() {
+	Matrix matrix(columns, rows);
+
+	for (unsigned i = 0; i < rows; i++) {
+		for (unsigned j = 0; j < columns; j++) {
+			matrix[j][i] = entries[i][j];
+		}
+	}
+	return matrix;
+}
 
 ///Multiplies an nxn matrix A by the vector x
 Vector operator *(const Matrix& A, Vector& x) {
@@ -221,20 +232,6 @@ Vector operator /(const Matrix& A, Vector& x) {
 	return result;
 }
 
-#pragma endregion
-
-#pragma region operations
-/// Returns the transpose of the n by n matrix A
-Matrix Matrix::Transpose() {
-	Matrix matrix(columns, rows);
-
-	for (unsigned i = 0; i < rows; i++) {
-		for (unsigned j = 0; j < columns; j++) {
-			matrix[j][i] = entries[i][j];
-		}
-	}
-	return matrix;
-}
 
 ///Multiplies an matrix A by matrix B
 Matrix operator* (Matrix A, Matrix B) {
@@ -298,10 +295,5 @@ double Matrix::InfinityNorm() {
 	}
 	return rowMax;
 }
-
-
-
-#pragma endregion
-
 
 #pragma endregion

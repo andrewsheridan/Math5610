@@ -210,11 +210,6 @@ Matrix CholeskyDecomposition(Matrix& A) {
 		return NULL;
 
 	Matrix L(A.GetRows(), A.GetColumns()); //Initialize the new matrix
-	for (unsigned i = 0; i < A.GetRows(); i++) {
-		for (unsigned j = 0; j < A.GetColumns(); j++) {
-			L[i][j] = 0;
-		}
-	}
 
 	for (unsigned i = 0; i < A.GetRows(); i++) {
 		for (unsigned j = 0; j < (i + 1); j++) {
