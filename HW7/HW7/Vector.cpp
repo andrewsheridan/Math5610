@@ -92,19 +92,6 @@ Vector operator- (Vector& a, Vector& b) {
 	return newVector;
 }
 
-///Returns a new vector where each entry is the sum of corresponding entries in a and b
-Vector operator+ (Vector& a, Vector& b) {
-	if (a.size != b.size) {
-		std::cout << "These vectors are not the same size." << std::endl;
-		return a;
-	}
-	Vector newVector(a.size);
-	for (int i = 0; i < a.size; i++) {
-		newVector[i] = a[i] + b[i];
-	}
-	return newVector;
-}
-
 ///Divides the entries of the vector by a constant
 Vector operator/ (Vector& a, double constant) {
 	Vector newVector(a.GetSize());

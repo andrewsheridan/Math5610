@@ -120,6 +120,10 @@
     <ClInclude Include="..\..\HW7\HW7\MatrixFactory.h" />
     <ClInclude Include="..\..\HW7\HW7\MatrixOperations.h" />
     <ClInclude Include="..\..\HW7\HW7\Vector.h" />
+    <ClInclude Include="Complex.h" />
+    <ClInclude Include="Error.h" />
+    <ClInclude Include="ErrorTest.h" />
+    <ClInclude Include="Math.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

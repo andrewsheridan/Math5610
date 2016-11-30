@@ -8,6 +8,7 @@
 #include "Vector.h"
 #include "MatrixFactory.h"
 #include <iostream>
+#include <fstream>
 #include <cmath>
 
 #pragma region Basic Vector Operations
@@ -370,6 +371,12 @@ Vector JacobiIteration(Matrix A, Vector x0, Vector b, int maxIterations, double 
 #pragma endregion
 
 #pragma region HW10 
+
+Vector SolveSystem(Matrix A, Vector b) {
+	GaussianElimination(A, b);
+	return BackSubstitution(A, b);
+}
+
 ///Finds an approximation of the largest Eigenvalue of a matrix
 ///A : The square matrix
 ///x0 : The initial guess vector
@@ -381,33 +388,67 @@ double PowerMethod(Matrix A, Vector x0, double tol, int maxIter) {
 	Vector y = A * x0;
 	Vector xk = x0;
 	double lambda_k = 0;
+
+	//Output for problem 10.2. Comment out if not needed.
+	std::ofstream output("powerMethod.txt");
+	output << "Iterations \t Error " << std::endl;
+	
 	while (error > tol && k < maxIter) {
 		Vector xkp1 = y / y.L2Norm();
 		y = A * xkp1;
 		double lambda_kp1 = xkp1 * y;
 		error = abs(lambda_kp1 - lambda_k);
-		std::cout << "lambda_k: " << lambda_k << std::endl;
-		std::cout << "lambda_k+1: " << lambda_kp1 << std::endl;
+		/*std::cout << "lambda_k: " << lambda_k << std::endl;
+		std::cout << "lambda_k+1: " << lambda_kp1 << std::endl;*/
 
+		//Output for problem 10.2. Comment out if not needed.
+		output << k << "\t" << error << std::endl;
+			
 		lambda_k = lambda_kp1;
 		k++;
 	}
-	std::cout << "Eigenvector approximation: " << std::endl;
-	y.Print();
+
+	output.close();
+
+	/*std::cout << "Eigenvector approximation: " << std::endl;
+	y.Print();*/
+
 	return lambda_k;
 }
 
+///Finds an approximation of the smallest Eigenvalue of a matrix
+///A : The square matrix
+///x0 : The initial guess vector
+///tol : The tolerance of the algorithm
+///maxIter : The maximum number of iterations to be executed by the method
 double InversePowerMethod(Matrix A, Vector x0, double tol, int maxIter) {
+
+	//Output for problem 10.5. Comment out if not needed.
+	std::ofstream output("inversePowerMethod.txt");
+	output << "Iterations \t Error " << std::endl;
+
 	double error = 10 * tol;
 	int k = 0;
 	Matrix U = A;
-	Matrix L = LUFactorization(U, x0);
-	Vector y = BackSubstitution(U, x0);
+	Matrix L = LUFactorization(U, x0);// L is returned, U is modified to be upper triangular
+	Vector y = BackSubstitution(U, x0);// Solve for y by doing back substitution.
 	double lambda_x = 0;
 	while (error > tol && k < maxIter) {
 		Vector x = y / y.L2Norm();
+		y = SolveSystem(A, x); //Does Gaussian Elimination then Back Substitution
+		double lambda_xp1 = x * y;
+		error = abs(lambda_xp1 - lambda_x);
+		/*std::cout << "lambda_k: " << lambda_x << std::endl;
+		std::cout << "lambda_k+1: " << lambda_xp1 << std::endl;*/
+		//std::cout  << std::endl;
+		output << k << "\t" << error << std::endl;
 
+		lambda_x = lambda_xp1;
+		k++;
 	}
+
+	output.close();
+	return lambda_x;
 }
 
 #pragma endregion
