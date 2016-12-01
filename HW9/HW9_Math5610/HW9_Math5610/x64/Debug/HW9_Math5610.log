@@ -1,0 +1,29 @@
+﻿  Main.cpp
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(18): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(29): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(53): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(146): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(147): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(150): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(292): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(294): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(299): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(302): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(304): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(307): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw9\hw9_math5610\hw9_math5610\main.cpp(154): error C3861: 'ConjugateGradient': identifier not found
+c:\users\labuser\source\repos\math5610\hw9\hw9_math5610\hw9_math5610\main.cpp(165): error C3861: 'ConjugateGradient': identifier not found
+  Vector.cpp
+c:\users\labuser\source\repos\math5610\hw7\hw7\vector.cpp(61): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\vector.cpp(70): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\vector.cpp(79): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\vector.cpp(89): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\vector.cpp(98): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\vector.cpp(111): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\vector.cpp(161): warning C4018: '<': signed/unsigned mismatch
+  MatrixFactory.cpp
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixfactory.cpp(29): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixfactory.cpp(30): warning C4018: '<': signed/unsigned mismatch
+  Matrix.cpp
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrix.cpp(57): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...

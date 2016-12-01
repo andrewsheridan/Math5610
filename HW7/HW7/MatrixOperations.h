@@ -363,6 +363,34 @@ Vector JacobiIteration(Matrix A, Vector x0, Vector b, int maxIterations, double 
 	return newX;
 }
 
+///Solves a matrix and RHS using Conjugate Gradient Method
+///A : The matrix to be solved
+///b : The RHS vector
+///x0 : The initial guess vector
+///tol : The tolerance of our method
+Vector ConjugateGradient(Matrix A, Vector b, Vector x0, double tol) {
+	Vector rk = b - (A * x0);
+	double dk = rk * rk;
+	double bd = b * b;
+	int k = 0;
+	Vector pk = rk;
+	Vector xk = x0;
+	while (dk > tol * tol * bd) {
+		Vector sk = A * pk;
+		double ak = dk / (pk * sk);
+		Vector xkp1 = xk + (ak * pk);
+		Vector rkp1 = rk - (ak * sk);
+		double dkp1 = rkp1 * rkp1;
+		Vector pkp1 = rkp1 + ((dkp1 / dk) * pk);
+		k++;
+		//All values have been computed, set all kth values to equal the k+1 value in preparation for next iteration
+		xk = xkp1;
+		rk = rkp1;
+		pk = pkp1;
+		dk = dkp1;
+	}
+	return xk;
+}
 #pragma endregion
 
 #pragma region HW10 

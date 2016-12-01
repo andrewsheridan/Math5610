@@ -10,37 +10,37 @@
 
 int main() {
 	//Problem 1 : Jacobi Iteration
-	//Matrix m1(3);
-	//m1[0][0] = 7;
-	//m1[0][1] = 3;
-	//m1[0][2] = 1;
-	//m1[1][0] = -3;
-	//m1[1][1] = 10;
-	//m1[1][2] = 2;
-	//m1[2][0] = 1;
-	//m1[2][1] = 7;
-	//m1[2][2] = -15;
+	Matrix m1(3);
+	m1[0][0] = 7;
+	m1[0][1] = 3;
+	m1[0][2] = 1;
+	m1[1][0] = -3;
+	m1[1][1] = 10;
+	m1[1][2] = 2;
+	m1[2][0] = 1;
+	m1[2][1] = 7;
+	m1[2][2] = -15;
 
-	//Vector b1(3);
-	//b1[0] = 3;
-	//b1[1] = 4;
-	//b1[2] = 2;
+	Vector b1(3);
+	b1[0] = 3;
+	b1[1] = 4;
+	b1[2] = 2;
 
-	//Vector x1(3);
+	Vector x1(3);
 
-	//int maxIter = 10000;
-	//double tolerance = 0.00001;
-	//std::cout << "The example matrix given on page 175 of the textbook: " << std::endl;
-	//m1.PrintAugmented(b1);
+	int maxIter = 10000;
+	double tolerance = 0.00001;
+	std::cout << "The example matrix given on page 175 of the textbook: " << std::endl;
+	m1.PrintAugmented(b1);
 
-	//std::cout << "The results of Jacobi Iteration with max iterations of " << maxIter << " and tolerance of" << tolerance << std::endl;
-	//Vector result1 = JacobiIteration(m1, x1, b1, maxIter, tolerance);
-	//result1.Print();
+	std::cout << "The results of Jacobi Iteration with max iterations of " << maxIter << " and tolerance of" << tolerance << std::endl;
+	Vector result1 = JacobiIteration(m1, x1, b1, maxIter, tolerance);
+	result1.Print();
 
-	//std::cout << "The results of Gaussian Elimination and Back Substitution" << std::endl;
-	//GaussianElimination(m1, b1);
-	//Vector actual1 = BackSubstitution(m1, b1);
-	//actual1.Print();
+	std::cout << "The results of Gaussian Elimination and Back Substitution" << std::endl;
+	GaussianElimination(m1, b1);
+	Vector actual1 = BackSubstitution(m1, b1);
+	actual1.Print();
 
 	////Problem 2 : Gauss-Seidel
 	//Matrix m2(3);
@@ -131,7 +131,7 @@ int main() {
 	}*/
 
 	//Problem 5 : Conjugate Gradient Method
-	Matrix m5(3);
+	/*Matrix m5(3);
 	m5[0][0] = 7;
 	m5[0][1] = 3;
 	m5[0][2] = 1;
@@ -165,7 +165,7 @@ int main() {
 		Vector result5 = ConjugateGradient(m5, v5, zeroes, 0.0000001);
 		result5.Print();
 	}
-	
+	*/
 
 	int input;
 	std::cin >> input;
