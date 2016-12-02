@@ -5,7 +5,23 @@
 #include "Error.h";
 
 int main() {
-	
+	int size = 4;
+
+	Matrix matrix = MatrixFactory::Instance()->Random(size, size);
+	Vector vector(size);
+	vector.InitializeAllOnes();
+	vector = matrix * vector;
+	Vector resultVector = vector;
+	Matrix reducedMatrix = GaussianEliminationWithScaledPivoting(matrix, resultVector);
+
+	std::cout << "Gaussian Elimination With Scaled Pivoting" << std::endl;
+	std::cout << "Test Matrix" << std::endl;
+	matrix.Print();
+	std::cout << "Test vector " << std::endl;
+	vector.Print();
+	std::cout << "Result of gaussian elimination " << std::endl;
+	reducedMatrix.PrintAugmented(resultVector);
+
 	//problem 1: Power Method
 	Matrix A(2);
 	A[0][0] = 2;

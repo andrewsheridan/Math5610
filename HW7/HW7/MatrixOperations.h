@@ -100,15 +100,14 @@ void GaussianElimination(Matrix& A, Vector& b) {
 /// Reduces an matrix A and right-hand-side b to upper-triangular form using Gaussian Elimination
 // A: The coefficient matrix
 // b: Right-Hand-Side
-void GaussianEliminationWithScaledPivoting(Matrix A, Vector b) {
-	if (A.GetRows() != b.GetSize()) return;
+Matrix GaussianEliminationWithScaledPivoting(Matrix A, Vector& b) {
+	if (A.GetRows() != b.GetSize()) return NULL;
 
 	int n = b.GetSize();
 
 	for (int k = 0; k < n; k++) {
 		double* ratios = new double[n - k]; // New vector of size n - k to store the ratios
 		for (int i = k; i < n; i++) {
-			//double rowMax = FindArrayMax(A[i], k, n);
 			double rowMax = A[i].FindMaxMagnitudeStartingAt(k);
 			ratios[i - k] = rowMax / A[i][k];
 		}
@@ -127,17 +126,18 @@ void GaussianEliminationWithScaledPivoting(Matrix A, Vector b) {
 			for (int j = 0; j < n; j++) {
 				A[i][j] = A[i][j] - factor*A[k][j];
 			}
-			b[i] = b[i] - factor*b[k];
+			b[i] = b[i] - (factor*b[k]);
 		}
 	}
+	return A;
 }
 
 
-/// Finds the LU factorization of matrix A. A becomes the upper triangular matrix U, and the lower triangular matrix L is returned. 
-/// RHS will also be modified.
+/// Finds the LU factorization of matrix A.
+/// RHS b will be modified
 // A: The nxn coefficient matrix
 // b: Right-Hand-Side
-Matrix LUFactorization(Matrix A, Vector b) {
+Matrix* LUFactorization(Matrix A, Vector& b) {
 	if (A.GetRows() != b.GetSize()) return NULL;
 
 	Matrix L(A.GetRows(), A.GetColumns());
@@ -154,14 +154,15 @@ Matrix LUFactorization(Matrix A, Vector b) {
 		}
 	}
 
-	return L;
+	Matrix* LU = new Matrix[2]{ L, A };
+	return LU;
 }
 
 /// Finds the LU factorization of matrix A. A becomes the upper triangular matrix U, and the lower triangular matrix L is returned. 
 // A: The nxn coefficient matrix
 // b: Right-Hand-Side
 // n: The size of the matrices
-Matrix ScaledLUFactorization(Matrix A, Vector b) {
+Matrix* ScaledLUFactorization(Matrix A, Vector b) {
 	if (A.GetRows() != b.GetSize()) return NULL;
 	Matrix L(A.GetRows(), A.GetColumns());
 	L.InitializeIdentityMatrix();
@@ -197,7 +198,7 @@ Matrix ScaledLUFactorization(Matrix A, Vector b) {
 		}
 	}
 
-	return L;
+	return new Matrix[2]{ L, A };
 }
 
 #pragma endregion
@@ -452,8 +453,9 @@ double InversePowerMethod(Matrix A, Vector x0, double tol, int maxIter) {
 
 	double error = 10 * tol;
 	int k = 0;
-	Matrix U = A;
-	Matrix L = LUFactorization(U, x0);// L is returned, U is modified to be upper triangular
+	Matrix* LU = LUFactorization(A, x0);
+	Matrix U = LU[1];
+	Matrix L = LU[0];
 	Vector y = BackSubstitution(U, x0);// Solve for y by doing back substitution.
 	double lambda_x = 0;
 	while (error > tol && k < maxIter) {
