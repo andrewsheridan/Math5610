@@ -48,6 +48,38 @@ Matrix MatrixFactory::RandomRange(unsigned rows, unsigned columns, double minVal
 	return m;
 }
 
+///Creates an upper-triangular matrix
+Matrix MatrixFactory::UpperTriangular(unsigned rows, unsigned columns) {
+	Matrix m(rows, columns);
+	std::mt19937 generator(123); //Random number generator
+	std::uniform_real_distribution<double> dis(0.0, 1.0); //Desired distribution
+
+	for (unsigned i = 0; i < rows; i++) {
+		for (unsigned j = i; j < columns; j++) {
+			m[i][j] = dis(generator); //Assign entry in matrix to random number between 0 and 1
+		}
+		m[i][i] += 10 * rows; //Add 10*n to all diagonal entries
+	}
+
+	return m;
+}
+
+///Creates an upper-triangular matrix
+Matrix MatrixFactory::LowerTriangular(unsigned rows, unsigned columns) {
+	Matrix m(rows, columns);
+	std::mt19937 generator(123); //Random number generator
+	std::uniform_real_distribution<double> dis(0.0, 1.0); //Desired distribution
+
+	for (unsigned i = 0; i < rows; i++) {
+		for (unsigned j = 0; j <= i; j++) {
+			m[i][j] = dis(generator); //Assign entry in matrix to random number between 0 and 1
+		}
+		m[i][i] += 10 * rows; //Add 10*n to all diagonal entries
+	}
+
+	return m;
+}
+
 ///Creates a Diagonally Dominant matrix
 Matrix MatrixFactory::DiagonallyDominant(unsigned rows, unsigned columns) {
 	Matrix m(rows, columns);

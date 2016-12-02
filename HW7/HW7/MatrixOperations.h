@@ -39,8 +39,8 @@ int FindMaxIndex(double* V, unsigned n) {
 
 #pragma region HW4
 /// Solves a set of linear equations using back substitution
-/// Does not reduce matrix A
-//A: The matrix to be reduced
+/// Note: Does not reduce matrix A
+//A: The upper-triangular matrix
 // b: Right-Hand-Side
 Vector BackSubstitution(Matrix A, Vector b) {
 	if (A.GetRows() != b.GetSize()) return NULL;
@@ -60,7 +60,7 @@ Vector BackSubstitution(Matrix A, Vector b) {
 
 /// Solves a set of linear equations using forward substitution
 /// Does not reduce matrix A
-//A: The matrix to be reduced
+//A: The lower-triangular matrix
 //b: right-hand-side
 Vector ForwardSubstitution(Matrix A, Vector b) {
 	if (A.GetRows() != b.GetSize()) return NULL;

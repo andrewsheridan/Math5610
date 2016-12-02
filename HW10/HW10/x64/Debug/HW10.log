@@ -1,2 +1,20 @@
-﻿  HW10.vcxproj -> C:\Users\labuser\Source\Repos\Math5610\HW10\x64\Debug\HW10.exe
+﻿  main.cpp
+c:\users\labuser\source\repos\math5610\hw10\hw10\main.cpp(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\labuser\source\repos\math5610\hw10\hw10\main.cpp(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\labuser\source\repos\math5610\hw10\hw10\main.cpp(3): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(18): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(29): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(53): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(146): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(147): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(150): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(292): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(294): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(299): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(302): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(304): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw7\hw7\matrixoperations.h(307): warning C4018: '<': signed/unsigned mismatch
+c:\users\labuser\source\repos\math5610\hw10\hw10\main.cpp(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\labuser\source\repos\math5610\hw10\hw10\main.cpp(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  HW10.vcxproj -> C:\Users\labuser\Source\Repos\Math5610\HW10\x64\Debug\HW10.exe
   HW10.vcxproj -> C:\Users\labuser\Source\Repos\Math5610\HW10\x64\Debug\HW10.pdb (Partial PDB)

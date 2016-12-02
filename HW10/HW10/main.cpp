@@ -5,6 +5,7 @@
 #include "Error.h";
 
 int main() {
+	
 	//problem 1: Power Method
 	Matrix A(2);
 	A[0][0] = 2;
