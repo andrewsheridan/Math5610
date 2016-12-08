@@ -18,3 +18,18 @@ double imaginaryRelative(Complex a, Complex b) {
 	return complexAbsolute(a - b) / complexAbsolute(a);
 }
 
+float singlePrecision() {
+	float epsilon = 1;
+	while (1 + epsilon != 1) {
+		epsilon /= 2;
+	}
+	return epsilon;
+}
+
+double doublePrecision() {
+	double epsilon = 1;
+	while (1 + epsilon != 1) {
+		epsilon /= 2;
+	}
+	return epsilon;
+}
