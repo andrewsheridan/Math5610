@@ -17,3 +17,4 @@ double realRelative(double number, double approximation) {
 double imaginaryRelative(Complex a, Complex b) {
 	return complexAbsolute(a - b) / complexAbsolute(a);
 }
+

@@ -112,19 +112,21 @@
   <ItemGroup>
     <ClCompile Include="..\..\HW7\HW7\Matrix.cpp" />
     <ClCompile Include="..\..\HW7\HW7\MatrixFactory.cpp" />
-    <ClCompile Include="..\..\HW7\HW7\Vector.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="MatrixFactory.cpp" />
+    <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\HW7\HW7\Matrix.h" />
-    <ClInclude Include="..\..\HW7\HW7\MatrixFactory.h" />
-    <ClInclude Include="..\..\HW7\HW7\MatrixOperations.h" />
-    <ClInclude Include="..\..\HW7\HW7\Vector.h" />
     <ClInclude Include="ApproximationMethods.h" />
     <ClInclude Include="Complex.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="ErrorTest.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="Matrix.h" />
+    <ClInclude Include="MatrixFactory.h" />
+    <ClInclude Include="MatrixOperations.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

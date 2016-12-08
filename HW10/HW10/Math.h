@@ -2,8 +2,8 @@
 #include <iostream>
 #include <cmath>
 
-
-double doRound(double x, int n) {
+///Rounds the number x at the exponent n
+double round(double x, int n) {
 	double result = x * pow(10, n);
 	result += 0.5;
 	result = std::floor(result);
