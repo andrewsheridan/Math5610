@@ -53,5 +53,8 @@
     <ClInclude Include="ErrorTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ApproximationMethods.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
