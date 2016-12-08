@@ -13,9 +13,23 @@ public:
 		imaginary = newImaginary;
 	}
 
+	Complex operator+(Complex c) {
+		double realResult = real + c.real;
+		double imaginaryResult = imaginary + c.imaginary;
+		Complex result(realResult, imaginaryResult);
+		return result;
+	}
+
 	Complex operator-(Complex c) {
 		double realResult = real - c.real;
 		double imaginaryResult = imaginary - c.imaginary;
+		Complex result(realResult, imaginaryResult);
+		return result;
+	}
+
+	Complex operator*(Complex c) {
+		double realResult = real * c.real - (imaginary * c.imaginary);
+		double imaginaryResult = real * c.imaginary + c.real * imaginary;
 		Complex result(realResult, imaginaryResult);
 		return result;
 	}
