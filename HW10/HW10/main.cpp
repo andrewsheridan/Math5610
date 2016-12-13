@@ -11,24 +11,8 @@
 #include "ApproximationMethods.h"
 
 int main() {
-	for (int i = 16; i <= 256; i *= 2) {
-		//Creates a diagonally dominant matrix
-		Matrix matrix = MatrixFactory::Instance()->DiagonallyDominant(i, i);
-		Vector onesVector(i);
-		onesVector.InitializeAllOnes();
-		Vector b = matrix * onesVector;
-
-		//The first entry in this array is Q, the second, R
-		Matrix* QR = GramSchmidt(matrix);
-		Vector QTy = QR[0].Transpose() * b;
-		Vector x = BackSubstitution(QR[1], QTy);
-
-		Vector difference = onesVector - x;
-		std::cout << "Accuracy of formula for system size " << i << std::endl;
-		std::cout << "L2 Norm: " << difference.L2Norm() << std::endl;
-		std::cout << "Manhattan Norm: " << difference.ManhattanNorm() << std::endl;
-		std::cout << "Infinity Norm: " << difference.InfinityNorm() << std::endl <<std::endl;
-	}
+	double rounded = round(11.4, 0);
+	std::cout << "Rounded: " << rounded << std::endl;
 
 	int input = 0;
 	std::cin >> input;
