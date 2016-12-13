@@ -14,7 +14,7 @@ double df(double x) {
 }
 
 int main(void) {
-	double result = hybrid(f, df, 1, 10, 2, 10, std::pow(10, -8));
+	double result = hybrid(f, df, 1, 10, 4, 100, std::pow(10, -8));
 	std::cout << "result: " << result << std::endl;
 
 	std::cin >> result;

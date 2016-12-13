@@ -106,36 +106,36 @@ int main() {
 	std::cout << "QR:" << std::endl;
 	secondProduct.Print();*/
 
-	///Problem 4
-	//const int size4 = 5;
-	////Creates a diagonally dominant matrix
-	//Matrix matrix4 = MatrixFactory::Instance()->DiagonallyDominant(size4, size4);
-	//Vector vector4(size4);
-	//vector4.InitializeRandomEntries();
-	//Vector vector4a = vector4;
-	//Vector vector4b = vector4;
-	//Matrix matrix4a = matrix4;
-	//Matrix matrix4b = matrix4;
+	///Problem 
+	const int size = 5;
+	//Creates a diagonally dominant matrix
+	Matrix matrix = MatrixFactory::Instance()->DiagonallyDominant(size, size);
+	Vector vector(size);
+	vector.InitializeRandomEntries();
+	Vector vectora = vector;
+	Vector vectorb = vector;
+	Matrix matrixa = matrix;
+	Matrix matrixb = matrix;
 
-	////The first entry in this array is Q, the second, R
-	//Matrix* QR4 = GramSchmidt(matrix4a);
-	//Vector QTy = QR4[0].Transpose() * vector4a;
-	//Vector x = BackSubstitution(QR4[1], QTy);
+	//The first entry in this array is Q, the second, R
+	Matrix* QR = GramSchmidt(matrixa);
+	Vector QTy = QR[0].Transpose() * vectora;
+	Vector x = BackSubstitution(QR[1], QTy);
 
-	//GaussianElimination(matrix4b, vector4b);
-	//Vector gaussianEliminationResults = BackSubstitution(matrix4b, vector4b);
+	GaussianElimination(matrixb, vectorb);
+	Vector gaussianEliminationResults = BackSubstitution(matrixb, vectorb);
 
-	//std::cout << "Test System: " << std::endl;
-	//matrix4.PrintAugmented(vector4);
+	std::cout << "Test System: " << std::endl;
+	matrix.PrintAugmented(vector);
 
-	//std::cout << "Results of gaussian elimination and back substitution: " << std::endl;
-	//gaussianEliminationResults.Print();
+	std::cout << "Results of gaussian elimination and back substitution: " << std::endl;
+	gaussianEliminationResults.Print();
 
-	//std::cout << "Results of QR factorization and back substitution: " << std::endl;
-	//x.Print();
+	std::cout << "Results of QR factorization and back substitution: " << std::endl;
+	x.Print();
 
-	//Vector difference = gaussianEliminationResults - x;
-	//std::cout << "L2 norm of the difference:" << difference.L2Norm() << std::endl;
+	Vector difference = gaussianEliminationResults - x;
+	std::cout << "L2 norm of the difference:" << difference.L2Norm() << std::endl;
 
 	///Problem 5
 	//for (int size5 = 10; size5 <= 160; size5 *= 2) {
@@ -160,7 +160,7 @@ int main() {
 	//}
 	
 	///Problem 6
-	Vector v6(6);
+	/*Vector v6(6);
 	Vector b6(6);
 	for (int i = 0; i < 6; i++) {
 		v6[i] = i * 0.2;
@@ -229,7 +229,7 @@ int main() {
 		}
 		output << std::endl;
 	}
-	output.close();
+	output.close();*/
 
 	int input;
 	std::cin >> input;

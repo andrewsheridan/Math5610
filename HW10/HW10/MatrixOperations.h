@@ -13,7 +13,7 @@
 
 #pragma region Basic Vector Operations
 //Finds the entry in V (a size n vector) with the largest magnitude, starting with entry "start".
-double FindArrayMax(double* V, unsigned start, unsigned size) {
+inline double FindArrayMax(double* V, unsigned start, unsigned size) {
 	double max = 0;
 	for (int i = start; i < size; i++) {
 		double value = std::abs(V[i]);
@@ -23,7 +23,7 @@ double FindArrayMax(double* V, unsigned start, unsigned size) {
 }
 
 //Finds the index of the value with the largest magnitude in a vector V with size n
-int FindMaxIndex(double* V, unsigned n) {
+inline int FindMaxIndex(double* V, unsigned n) {
 	double max = 0;
 	int index = -1;
 	for (int i = 0; i < n; i++) {
@@ -42,7 +42,7 @@ int FindMaxIndex(double* V, unsigned n) {
 /// Note: Does not reduce matrix A
 //A: The upper-triangular matrix
 // b: Right-Hand-Side
-Vector BackSubstitution(Matrix A, Vector b) {
+inline Vector BackSubstitution(Matrix A, Vector b) {
 	if (A.GetRows() != b.GetSize()) return NULL;
 
 	Vector x(b.GetSize());
@@ -62,7 +62,7 @@ Vector BackSubstitution(Matrix A, Vector b) {
 /// Does not reduce matrix A
 //A: The lower-triangular matrix
 //b: right-hand-side
-Vector ForwardSubstitution(Matrix A, Vector b) {
+inline Vector ForwardSubstitution(Matrix A, Vector b) {
 	if (A.GetRows() != b.GetSize()) return NULL;
 
 	Vector x(b.GetSize());
@@ -82,7 +82,8 @@ Vector ForwardSubstitution(Matrix A, Vector b) {
 /// Reduces a matrix right-hand-side b to upper-triangular form using Gaussian Elimination
 //A: The matrix to be reduced
 // b: Right-Hand-Side
-void GaussianElimination(Matrix& A, Vector& b) {
+inline Matrix GaussianElimination(Matrix A, Vector* b) {
+	if (A.GetRows() != b->GetSize()) return NULL;
 	for (unsigned k = 0; k < A.GetRows(); k++) {
 		for (unsigned i = k + 1; i < A.GetRows(); i++) {
 			double factor = A[i][k] / A[k][k];
@@ -90,9 +91,10 @@ void GaussianElimination(Matrix& A, Vector& b) {
 				A[i][j] = A[i][j] - factor*A[k][j];
 			}
 			A[i][k] = 0;
-			b[i] = b[i] - factor*b[k];
+			b->entries[i] = b->entries[i] - factor*(b->entries[k]);
 		}
 	}
+	return A;
 }
 #pragma endregion
 
@@ -100,10 +102,10 @@ void GaussianElimination(Matrix& A, Vector& b) {
 /// Reduces an matrix A and right-hand-side b to upper-triangular form using Gaussian Elimination
 // A: The coefficient matrix
 // b: Right-Hand-Side
-Matrix GaussianEliminationWithScaledPivoting(Matrix A, Vector& b) {
-	if (A.GetRows() != b.GetSize()) return NULL;
+inline Matrix GaussianEliminationWithScaledPivoting(Matrix A, Vector* b) {
+	if (A.GetRows() != b->GetSize()) return NULL;
 
-	int n = b.GetSize();
+	int n = b->GetSize();
 
 	for (int k = 0; k < n; k++) {
 		double* ratios = new double[n - k]; // New vector of size n - k to store the ratios
@@ -117,16 +119,16 @@ Matrix GaussianEliminationWithScaledPivoting(Matrix A, Vector& b) {
 		A[k] = A[newPivot];  // Switch the current row with the best row for this iteration
 		A[newPivot] = temp;  //
 
-		double tempEntry = b[k];
-		b[k] = b[newPivot];
-		b[newPivot] = tempEntry;
+		double tempEntry = b->entries[k];
+		b->entries[k] = b->entries[newPivot];
+		b->entries[newPivot] = tempEntry;
 
 		for (int i = k + 1; i < n; i++) {
 			double factor = A[i][k] / A[k][k];
 			for (int j = 0; j < n; j++) {
 				A[i][j] = A[i][j] - factor*A[k][j];
 			}
-			b[i] = b[i] - (factor*b[k]);
+			b->entries[i] = b->entries[i] - (factor*b->entries[k]);
 		}
 	}
 	return A;
@@ -137,8 +139,8 @@ Matrix GaussianEliminationWithScaledPivoting(Matrix A, Vector& b) {
 /// RHS b will be modified
 // A: The nxn coefficient matrix
 // b: Right-Hand-Side
-Matrix* LUFactorization(Matrix A, Vector& b) {
-	if (A.GetRows() != b.GetSize()) return NULL;
+inline Matrix* LUFactorization(Matrix A, Vector* b) {
+	if (A.GetRows() != b->GetSize()) return NULL;
 
 	Matrix L(A.GetRows(), A.GetColumns());
 	L.InitializeIdentityMatrix();
@@ -150,7 +152,7 @@ Matrix* LUFactorization(Matrix A, Vector& b) {
 			for (int j = 0; j < A.GetColumns(); j++) {
 				A[i][j] = A[i][j] - factor*A[k][j];
 			}
-			b[i] = b[i] - factor*b[k];
+			b->entries[i] = b->entries[i] - factor*b->entries[k];
 		}
 	}
 
@@ -158,19 +160,18 @@ Matrix* LUFactorization(Matrix A, Vector& b) {
 	return LU;
 }
 
-/// Finds the LU factorization of matrix A. A becomes the upper triangular matrix U, and the lower triangular matrix L is returned. 
+/// Finds the LU Factorization of matrix A with RHS b. Returns a pair of matrices. The first is L, the second, U.
 // A: The nxn coefficient matrix
 // b: Right-Hand-Side
 // n: The size of the matrices
-Matrix* ScaledLUFactorization(Matrix A, Vector b) {
-	if (A.GetRows() != b.GetSize()) return NULL;
+inline Matrix* ScaledLUFactorization(Matrix A, Vector* b) {
+	if (A.GetRows() != b->GetSize()) return NULL;
 	Matrix L(A.GetRows(), A.GetColumns());
 	L.InitializeIdentityMatrix();
 
 	for (unsigned k = 0; k < A.GetRows(); k++) {
 		Vector ratios(A.GetRows() - k); // New vector of size A.GetRows() - k to store the ratios
 		for (unsigned i = k; i < A.GetRows(); i++) {
-			//double rowMax = FindArrayMax(A[i], k, A.GetColumns());
 			double rowMax = A[i].FindMaxMagnitudeStartingAt(k);
 			ratios[i - k] = rowMax / A[i][k];
 		}
@@ -180,12 +181,9 @@ Matrix* ScaledLUFactorization(Matrix A, Vector b) {
 		A[k] = A[newPivot];  // Switch the current row with the best row for this iteration
 		A[newPivot] = temp;  //
 
-		double tempEntry = b[k];
-		b[k] = b[newPivot];
-		b[newPivot] = tempEntry;
-		/*if (newPivot != k) {
-		std::cout << "Exchanged rows " << k << " and " << newPivot << std::endl;
-		}*/
+		double tempEntry = b->entries[k];
+		b->entries[k] = b->entries[newPivot];
+		b->entries[newPivot] = tempEntry;
 
 		for (unsigned i = k + 1; i < A.GetRows(); i++) {
 			double factor = A[i][k] / A[k][k];
@@ -194,19 +192,40 @@ Matrix* ScaledLUFactorization(Matrix A, Vector b) {
 				A[i][j] = A[i][j] - factor*A[k][j];
 			}
 			A[i][k] = 0;
-			b[i] = b[i] - factor*b[k];
+			b->entries[i] = b->entries[i] - factor*(b->entries[k]);
 		}
 	}
 
 	return new Matrix[2]{ L, A };
 }
 
+/// Finds the LU factorization of matrix A.
+/// RHS b will be modified
+// A: The nxn coefficient matrix
+// b: Right-Hand-Side
+inline Matrix* LUFactorization(Matrix A) {
+	Matrix L(A.GetRows(), A.GetColumns());
+	L.InitializeIdentityMatrix();
+
+	for (int k = 0; k < A.GetRows(); k++) {
+		for (int i = k + 1; i < A.GetRows(); i++) {
+			double factor = A[i][k] / A[k][k];
+			L[i][k] = factor;
+			for (int j = 0; j < A.GetColumns(); j++) {
+				A[i][j] = A[i][j] - factor*A[k][j];
+			}
+		}
+	}
+
+	Matrix* LU = new Matrix[2]{ L, A };
+	return LU;
+}
 #pragma endregion
 
 #pragma region HW6
 ///Computes the Cholesky Decomposition of an n by n matrix A
 /// Returns NULL if the matrix is not SPD
-Matrix CholeskyDecomposition(Matrix& A) {
+inline Matrix CholeskyDecomposition(Matrix& A) {
 	if (A.IsSymmetric() == false)
 		return NULL;
 
@@ -231,32 +250,19 @@ Matrix CholeskyDecomposition(Matrix& A) {
 	return L;
 }
 
-//Computes the inverse of matrix A
-Matrix Inverse(Matrix A) {
-	Matrix matrix(A.GetColumns(), A.GetRows());
-	matrix.InitializeIdentityMatrix();
-	double ratio, a;
-	unsigned i, j, k;
-	for (i = 0; i < A.GetRows(); i++) {
-		for (j = 0; j < A.GetColumns(); j++) {
-			if (i != j) {
-				ratio = A[j][i] / A[i][i];
-				for (k = 0; k < A.GetRows(); k++) {
-					A[j][k] -= ratio * A[i][k];
-				}
-				for (k = 0; k < A.GetRows(); k++) {
-					matrix[j][k] -= ratio * matrix[i][k];
-				}
-			}
-		}
+///Estimates the inverse of matrix A by LU Factorization and Forward/Back Substitution
+inline Matrix Inverse(Matrix A) {
+	Matrix* LU = LUFactorization(A);
+	Matrix L = LU[0];
+	Matrix U = LU[1];
+	Matrix I = MatrixFactory::Instance()->Identity(L.GetRows(), L.GetColumns());
+	Matrix G(L.GetColumns());
+
+	//Calculate the columns of G (currently stored as the rows of G
+	for (int i = 0; i < G.GetColumns(); i++) {
+		G[i] = BackSubstitution(U, ForwardSubstitution(L, I[i])); 
 	}
-	for (i = 0; i < A.GetRows(); i++) {
-		a = A[i][i];
-		for (j = 0; j < A.GetColumns(); j++) {
-			matrix[i][j] /= a;
-		}
-	}
-	return matrix;
+	return G.Transpose(); //Transpose G so the rows become the columns
 }
 
 #pragma endregion
@@ -265,7 +271,7 @@ Matrix Inverse(Matrix A) {
 
 /// A Least Squares algorithm via Normal Equations
 /// Requires a matrix A and a vector b
-Vector LeastSquares(Matrix A, Vector b) {
+inline Vector LeastSquares(Matrix A, Vector b) {
 	Matrix AT = A.Transpose();
 	Matrix B = AT * A;
 	Vector y = AT * b;
@@ -284,7 +290,7 @@ Vector LeastSquares(Matrix A, Vector b) {
 
 ///Computes the QR factorization of Matrix A
 ///Returns a pair of matrices in an array. The first is Q, the second, R. 
-Matrix* GramSchmidt(Matrix A) {
+inline Matrix* GramSchmidt(Matrix A) {
 	if (A.GetRows() != A.GetColumns()) return NULL;
 
 	Matrix r(A.GetRows(), A.GetColumns());
@@ -317,7 +323,7 @@ Matrix* GramSchmidt(Matrix A) {
 
 ///Creates a vector of data which can be used to test least squares methods
 ///Takes two vectors, t and b, and an int n (the size of the sample space)
-Vector LSFit(Vector t, Vector b, int n) {
+inline Vector LSFit(Vector t, Vector b, int n) {
 	int m = t.GetSize();
 
 	Matrix A = MatrixFactory::Instance()->Ones(m, n);
@@ -341,7 +347,7 @@ Vector LSFit(Vector t, Vector b, int n) {
 ///A: The Matrix
 ///x0: The initial guess
 ///b: The Right-Hand-Side
-Vector JacobiIteration(Matrix A, Vector x0, Vector b, int maxIterations, double tolerance) {
+inline Vector JacobiIteration(Matrix A, Vector x0, Vector b, int maxIterations, double tolerance) {
 	int iterations = 0;
 	int n = A.GetRows();
 	Vector newX(x0);
@@ -369,7 +375,7 @@ Vector JacobiIteration(Matrix A, Vector x0, Vector b, int maxIterations, double 
 ///b : The RHS vector
 ///x0 : The initial guess vector
 ///tol : The tolerance of our method
-Vector ConjugateGradient(Matrix A, Vector b, Vector x0, double tol) {
+inline Vector ConjugateGradient(Matrix A, Vector b, Vector x0, double tol) {
 	Vector rk = b - (A * x0);
 	double dk = rk * rk;
 	double bd = b * b;
@@ -396,8 +402,8 @@ Vector ConjugateGradient(Matrix A, Vector b, Vector x0, double tol) {
 
 #pragma region HW10 
 
-Vector SolveSystem(Matrix A, Vector b) {
-	GaussianElimination(A, b);
+inline Vector SolveSystem(Matrix A, Vector b) {
+	GaussianElimination(A, &b);
 	return BackSubstitution(A, b);
 }
 
@@ -406,7 +412,7 @@ Vector SolveSystem(Matrix A, Vector b) {
 ///x0 : The initial guess vector
 ///tol : The tolerance of the algorithm
 ///maxIter : The maximum number of iterations to be executed by the method
-double PowerMethod(Matrix A, Vector x0, double tol, int maxIter) {
+inline double PowerMethod(Matrix A, Vector x0, double tol, int maxIter) {
 	double error = 10 * tol;
 	int k = 0; 
 	Vector y = A * x0;
@@ -445,7 +451,7 @@ double PowerMethod(Matrix A, Vector x0, double tol, int maxIter) {
 ///x0 : The initial guess vector
 ///tol : The tolerance of the algorithm
 ///maxIter : The maximum number of iterations to be executed by the method
-double InversePowerMethod(Matrix A, Vector x0, double tol, int maxIter) {
+inline double InversePowerMethod(Matrix A, Vector x0, double tol, int maxIter) {
 
 	//Output for problem 10.5. Comment out if not needed.
 	std::ofstream output("inversePowerMethod.txt");
@@ -453,7 +459,7 @@ double InversePowerMethod(Matrix A, Vector x0, double tol, int maxIter) {
 
 	double error = 10 * tol;
 	int k = 0;
-	Matrix* LU = LUFactorization(A, x0);
+	Matrix* LU = LUFactorization(A, &x0);
 	Matrix U = LU[1];
 	Matrix L = LU[0];
 	Vector y = BackSubstitution(U, x0);// Solve for y by doing back substitution.
@@ -474,6 +480,18 @@ double InversePowerMethod(Matrix A, Vector x0, double tol, int maxIter) {
 
 	output.close();
 	return lambda_x;
+}
+
+#pragma endregion
+
+#pragma region Homework_Final
+
+///Estimates the condition number of a matrix A using the Infinity Norm
+inline double ConditionNumber(Matrix A){
+	double aNorm = A.InfinityNorm();
+	Matrix aInverse = Inverse(A);
+	double aInverseNorm = aInverse.InfinityNorm();
+	return aNorm * aInverseNorm;
 }
 
 #pragma endregion

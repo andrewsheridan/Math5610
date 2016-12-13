@@ -1,8 +1,8 @@
-#pragma once
 // Andrew Sheridan
 // Math 5610
 // 12/8/16
 
+#pragma once
 #include <iostream>
 #include <cmath>
 
@@ -46,7 +46,7 @@ double bisection(double(*f)(double), double a, double b, double tol, unsigned ma
 }
 
 //From 3.2
-///The Secant Method
+///The Fixed Point Method
 ///g: The function g, which takes a double and returns a double
 ///		Input: double
 ///		Output: double
@@ -164,7 +164,7 @@ double hybrid_method(double(*f)(double), double(*df)(double), double a, double b
 
 		// If we've done the set number of bisections, try newton's method
 		if (bisectionIterationCount == bisection_iterations) {
-			double newtonResult = newton(f, df, p, tol, 1);
+			double newtonResult = newton_method(f, df, p, tol, 1);
 			// If newton's method was more efficient than bisection, start using newton's method. 
 			if (std::abs(newtonResult - p) < std::abs(b - a)) {
 				useNewton = true;
@@ -182,7 +182,78 @@ double hybrid_method(double(*f)(double), double(*df)(double), double a, double b
 		double previous = 999999;
 		while (totalIterationCount < max_iterations && std::abs(p - previous) > tol) {
 			previous = p;
-			p = newton(f, df, p, tol, max_iterations - totalIterationCount);
+			p = newton_method(f, df, p, tol, max_iterations - totalIterationCount);
+			totalIterationCount++;
+		}
+	}
+
+	return p;
+}
+
+///The Hybrid Method, which executes the bisection method until secant method starts to converge
+///f: The function f, which takes a double and returns a double
+///		Input: double
+///		Output: double
+///df: The derivative of function f
+///		Input: double
+///		Output: double
+///a: Left bound of initial guess
+///b: Right bound of initial guess
+///bisection_iterations: The number of bisections executed before attempting secant method
+///tol: The algorithm's tolerance
+///max_iterations: The maximimum number of loops before exit
+double secant_hybrid_method(double(*f)(double), double(*df)(double), double a, double b, unsigned int bisection_iterations, unsigned int max_iterations, double tol) {
+
+	double fa = f(a);
+	double fb = f(b);
+	// Validate input
+	if (a >= b || (fa * fb >= 0) || tol <= 0 || bisection_iterations < 1 || max_iterations < 1)
+	{
+		std::cout << "This input is not valid." << std::endl;
+		return 0;
+	}
+
+	unsigned int totalIterationCount = 0;
+	unsigned int bisectionIterationCount = 0;
+	bool useSecant = false;
+	double p;
+	while (totalIterationCount < max_iterations && !useSecant && (b - a) > tol) {
+		p = (a + b) / 2;
+		double fp = f(p);
+		if (fa * fp < 0) {
+			b = p;
+			fb = fp;
+		}
+		else {
+			a = p;
+			fa = fp;
+		}
+
+		bisectionIterationCount++;
+		totalIterationCount++;
+
+		// If we've done the set number of bisections, try secant method
+		if (bisectionIterationCount == bisection_iterations) {
+			double secantResult = secant_method(f, a, b, tol, 1);
+			// If secant method was more efficient than bisection, start using secant method. 
+			if (std::abs(secantResult - p) < std::abs(b - a)) {
+				useSecant = true;
+				p = secantResult;
+				std::cout << "Switching to secant method after " << totalIterationCount << " iterations." << std::endl;
+				totalIterationCount++;
+			}
+			//Else, start bisection again.
+			else {
+				bisectionIterationCount = 0;
+			}
+		}
+	}
+	// If we have begun using secant method, iterate through secant method until we've reached the max number of iterations or tolerance is met. 
+	if (useSecant) {
+		double previous = 999999;
+		while (totalIterationCount < max_iterations && std::abs(p - previous) > tol) {
+			previous = p;
+			p = secant_method(f, a, b, tol, max_iterations - totalIterationCount);
 			totalIterationCount++;
 		}
 	}

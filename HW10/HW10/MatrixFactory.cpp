@@ -2,7 +2,7 @@
 //Math 5610 
 //Written in C++
 //MatrixFactory.cpp
-
+#pragma once
 #include "MatrixFactory.h"
 #include <random>
 

@@ -1,8 +1,9 @@
-#pragma once
 //Andrew Sheridan
 //Math 5610 
 //Written in C++
 //Vector.h
+
+#pragma once
 
 class Vector {
 public:
@@ -38,10 +39,11 @@ public:
 	void Print();
 	unsigned GetSize() { return size; }
 	void SetSize(unsigned newSize) { size = newSize; }
+
+	double* entries; //The stored values of the vector
 	
 protected:
 	unsigned size;
 
-private:
-	double* entries; //The stored values of the vector
+	
 };

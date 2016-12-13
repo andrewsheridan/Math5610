@@ -309,10 +309,7 @@ Matrix* GramSchmidt(Matrix A) {
 				A[i][j] = A[i][j] - r[k][j] * q[i][k];
 		}
 	}
-	Matrix* QR = new Matrix[2];
-	QR[0] = q;
-	QR[1] = r;
-	return QR;
+	return new Matrix[2]{ q, r };
 }
 
 ///Creates a vector of data which can be used to test least squares methods

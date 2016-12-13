@@ -41,8 +41,8 @@ public:
 
 		return Complex(realNumerator / denominator, imaginaryNumerator / denominator);
 	}
-};
 
-double complexAbsolute(Complex a) {
-	return std::sqrt(std::pow(a.real, 2) + std::pow(a.imaginary, 2));
-}
+	double absoluteError() {
+		return std::sqrt(std::pow(real, 2) + std::pow(imaginary, 2));
+	}
+};

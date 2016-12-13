@@ -2,9 +2,10 @@
 //Math 5610 
 //Written in C++
 //Matrix.cpp
-
+#pragma once
 #include "Matrix.h"
 #include "Vector.h"
+#include "MatrixOperations.h"
 #include <random>
 #include <iostream>
 #include <iomanip>
@@ -239,13 +240,6 @@ Matrix operator* (Matrix A, Matrix B) {
 	
 	Matrix matrix(A.rows, B.columns);
 	Matrix bTranspose = B.Transpose();
-	
-	//std::cout << "Starting multiplication. A:" << std::endl;
-	/*A.Print();
-	std::cout << "B: " << std::endl;
-	B.Print();
-	std::cout << "Bt: " << std::endl;
-	bTranspose.Print();*/
 
 	for (unsigned i = 0; i < A.rows; i++) {
 		for (unsigned j = 0; j < B.columns; j++) {
